@@ -1,0 +1,8 @@
+name: plasma-R
+channels:
+    - conda-forge
+    - bioconda
+    - defaults
+    - R
+dependencies:
+    - r-essentials=4.3.1

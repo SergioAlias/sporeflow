@@ -1,0 +1,9 @@
+name: plasma-main
+channels:
+    - conda-forge
+    - bioconda
+    - defaults
+dependencies:
+    - snakemake=7.32.4
+    - snakefmt=0.9.0
+    - graphviz=2.50.0

@@ -1,0 +1,9 @@
+__default__:
+    jobname: default
+    time: 1-00:00:00 # time limit for each job
+    nodes: 1
+    ncpus: 1
+    ntasks-per-node: 2 #Request n cores be allocated per node
+    memory: 1G
+    output: logs/default/job_default_%j.out
+    error: logs/default/job_default_%j.err

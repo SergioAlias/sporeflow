@@ -1,0 +1,22 @@
+import os
+from snakemake.utils import min_version
+
+min_version("7.32.4")
+
+
+### create log dirs
+
+logdirs = ["print_tagline", "triple_cat"]
+
+for d in logdirs:
+    os.makedirs(os.path.join("logs", d), exist_ok = True)
+
+
+### load rules
+
+rule all:
+    input:
+        "triples.txt"
+
+include: "rules/print_tagline.smk"
+include: "rules/triple_cat.smk"

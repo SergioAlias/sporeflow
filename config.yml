@@ -1,10 +1,14 @@
-name: plasma-main
-channels:
-    - conda-forge
-    - bioconda
-    - defaults
-dependencies:
-    - python=3.11.7
-    - snakemake=7.32.4
-    - snakefmt=0.9.0
-    - graphviz=2.50.0
+proj_name: suelos_cereal
+home: /home/salias
+scratch: /scratch/salias
+outdir: %scratch%/projects/suelos_cereal
+raw_data: /home/salias/data/Suelos_cereal_ecologico/fastq
+manifest: manifest.tsv
+
+# FASTQ file suffix
+suffix: _001.fastq.gz
+
+# Single or paired-end suffixes
+end: paired
+r1_suf: R1
+r2_suf: R2

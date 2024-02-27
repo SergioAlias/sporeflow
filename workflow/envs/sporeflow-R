@@ -1,4 +1,4 @@
-name: plasma-R
+name: sporeflow-R
 channels:
     - conda-forge
     - bioconda

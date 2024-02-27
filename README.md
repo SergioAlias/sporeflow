@@ -1,1 +1,1 @@
-# PLASMA: PipeLine Across Snakemake for Metataxonomics/Metagenomics Analysis
+# SporeFlow: Snakemake Pipeline For Metataxonomics/Metagenomics Workflows

@@ -4,7 +4,7 @@ rule create_manifest:
     output:
         config["outdir"] + "/" + config["proj_name"] + "/manifest.tsv" # TODO AÑADIR CONDA ENV
     conda:
-        "envs/sporeflow-R.yml"
+        "../envs/sporeflow-R.yml"
     params:
         outdir = config["outdir"] + "/" + config["proj_name"],
         end = config["end"],

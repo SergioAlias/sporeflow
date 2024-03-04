@@ -1,11 +1,16 @@
 rule create_manifest:
     input:
-        fastq_dir = config["raw_data"]
+        config["raw_data"]
     output:
-        manifest = config["outdir"] + "/" + config["proj_name"] + "/my_fastq.txt" # TODO AÑADIR CONDA ENV
+        config["outdir"] + "/" + config["proj_name"] + "/manifest.tsv" # TODO AÑADIR CONDA ENV
+    conda:
+        "envs/sporeflow-R.yml"
     params:
-        suffix = config["suffix"]
+        outdir = config["outdir"] + "/" + config["proj_name"],
+        end = config["end"],
+        frw = config["r1_suf"],
+        rev = config["r2_suf"]
     shell:
         """
-        time find {input.fastq_dir} -type f -name "*{params.suffix}" > {output.manifest}
+        time Rscript workflow/scripts/manifest.R {input} {params.outdir} {params.end} {params.frw} {params.rev}
         """

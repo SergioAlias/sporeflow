@@ -7,16 +7,19 @@ configfile: "config.yml"
 
 ### create log dirs
 
-logdirs = ["default", "create_manifest"]
+logdirs = ["default", "all", "create_manifest"]
 
 for d in logdirs:
     os.makedirs(os.path.join("logs", d), exist_ok = True)
 
+## create outdir
+
+os.makedirs(os.path.join(config["outdir"], config["proj_name"]), exist_ok = True)
 
 ### load rules
 
 rule all:
     input:
-        config["outdir"] + "/" + config["proj_name"] + "/my_fastq.txt"
+        config["outdir"] + "/" + config["proj_name"] + "/manifest.tsv"
 
 include: "rules/create_manifest.smk"

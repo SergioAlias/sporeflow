@@ -4,9 +4,6 @@ outdir: /scratch/salias/projects
 raw_data: /home/salias/data/Suelos_cereal_ecologico/fastq
 manifest: manifest.tsv
 
-# FASTQ file suffix
-suffix: _001.fastq.gz
-
 # Single or paired-end suffixes
 end: paired
 r1_suf: R1

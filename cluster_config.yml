@@ -7,3 +7,23 @@ __default__:
     memory: 1G
     output: logs/default/job_default_%j.out
     error: logs/default/job_default_%j.err
+
+all:
+    jobname: all
+    time: 0-00:05:00 # time limit for each job
+    nodes: 1
+    ncpus: 1
+    ntasks-per-node: 1 #Request n cores be allocated per node
+    memory: 50
+    output: logs/all/all_%j.out
+    error: logs/all/all_%j.err
+
+create_manifest:
+    jobname: create_manifest
+    time: 0-00:05:00 # time limit for each job
+    nodes: 1
+    ncpus: 1
+    ntasks-per-node: 1 #Request n cores be allocated per node
+    memory: 200
+    output: logs/create_manifest/create_manifest_%j.out
+    error: logs/create_manifest/create_manifest_%j.err

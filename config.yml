@@ -1,7 +1,6 @@
 proj_name: suelos_cereal
 home: /home/salias
-scratch: /scratch/salias
-outdir: %scratch%/projects/suelos_cereal
+outdir: /scratch/salias/projects
 raw_data: /home/salias/data/Suelos_cereal_ecologico/fastq
 manifest: manifest.tsv
 

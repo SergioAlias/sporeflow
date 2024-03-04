@@ -3,10 +3,11 @@ from snakemake.utils import min_version
 
 min_version("7.32.4")
 
+configfile: "config.yml"
 
 ### create log dirs
 
-logdirs = ["print_tagline", "triple_cat"]
+logdirs = ["default", "create_manifest"]
 
 for d in logdirs:
     os.makedirs(os.path.join("logs", d), exist_ok = True)
@@ -16,7 +17,6 @@ for d in logdirs:
 
 rule all:
     input:
-        "triples.txt"
+        config["outdir"] + "/" + config["proj_name"] + "/my_fastq.txt"
 
-include: "rules/print_tagline.smk"
-include: "rules/triple_cat.smk"
+include: "rules/create_manifest.smk"

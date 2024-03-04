@@ -1,9 +1,11 @@
 rule create_manifest:
     input:
-        fastq_dir = "AÑADIR VAR CON EL PATH"
+        fastq_dir = config["raw_data"]
     output:
-        "MANIFEST-FILE"
-    params: # TODO AÑADIR CONDA ENV
-        tagline = "tagline"
+        manifest = config["outdir"] + "/" + config["proj_name"] + "/my_fastq.txt" # TODO AÑADIR CONDA ENV
+    params:
+        suffix = config["suffix"]
     shell:
-        "time workflow/scripts/tagliner.sh {input.file} {output} {params.tagline}"
+        """
+        time find {input.fastq_dir} -type f -name "*{params.suffix}" > {output.manifest}
+        """

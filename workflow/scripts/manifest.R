@@ -2,3 +2,5 @@
 
 # Sergio Alías, 20240227
 # Last modified 20240227
+
+args <- commandArgs(trailingOnly = TRUE)

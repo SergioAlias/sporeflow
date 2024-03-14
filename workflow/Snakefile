@@ -18,8 +18,15 @@ os.makedirs(os.path.join(config["outdir"], config["proj_name"]), exist_ok = True
 
 ### load rules
 
+alloutput = list()
+
+if config["exp_type"] == "t":
+    alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/manifest.tsv")
+if config["exp_type"] == "m":
+    alloutput.append("TODO add output")
+
 rule all:
     input:
-        config["outdir"] + "/" + config["proj_name"] + "/manifest.tsv"
+        alloutput
 
 include: "rules/create_manifest.smk"

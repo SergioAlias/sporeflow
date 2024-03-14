@@ -1,10 +1,19 @@
 proj_name: suelos_cereal
 home: /home/salias
 outdir: /scratch/salias/projects
-raw_data: /home/salias/data/Suelos_cereal_ecologico/fastq
-manifest: manifest.tsv
+raw_data: /home/salias/data/Genomas
 
-# Single or paired-end suffixes
+# Expermient
+
+exp_type: t # t for metataxonomics, g for metagenomics
 end: paired
 r1_suf: R1
 r2_suf: R2
+
+## Metatatoxomics
+
+manifest: manifest.tsv
+
+## Metagenomics
+
+

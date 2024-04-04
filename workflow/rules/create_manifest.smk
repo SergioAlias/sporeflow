@@ -4,7 +4,7 @@ rule create_manifest:
     output:
         config["outdir"] + "/" + config["proj_name"] + "/manifest.tsv" # TODO AÑADIR CONDA ENV
     conda:
-        "../envs/sporeflow-R.yml"
+        "qiime2-amplicon-2024.2" # TODO: CAMBIAR POR EL YAML DE QIIME2
     params:
         outdir = config["outdir"] + "/" + config["proj_name"],
         end = config["end"],

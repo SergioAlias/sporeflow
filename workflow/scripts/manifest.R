@@ -18,9 +18,9 @@ end <- args[3]
 if (end == "paired"){
   forward <- args[4]
   reverse <- args[5]
-  cols <- c("sample_id", "forward_absolute_filepath", "reverse_absolute_filepath")
+  cols <- c("sample-id", "forward-absolute-filepath", "reverse-absolute-filepath")
 } else if (end == "single"){
-  cols <- c("sample_id", "absolute_filepath")
+  cols <- c("sample-id", "absolute-filepath")
 }
 
 #--- Main ---#
@@ -38,9 +38,9 @@ for (i in seq_along(samples)){
   sample <- samples[i]
   row_to_add <- data.frame(matrix(ncol = length(cols), nrow = 1))
   colnames(row_to_add) <- cols
-  row_to_add$sample_id <- sample # TODO ADD SINGLE END HANDLING
-  row_to_add$forward_absolute_filepath <- paste0(fastq_dir, "/", grep(paste0("^", sample, "_.*_", forward, ".*$"), fastq, value = TRUE))
-  row_to_add$reverse_absolute_filepath <- paste0(fastq_dir, "/", grep(paste0("^", sample, "_.*_", reverse, ".*$"), fastq, value = TRUE))
+  row_to_add$`sample-id` <- sample # TODO ADD SINGLE END HANDLING
+  row_to_add$`forward-absolute-filepath` <- paste0(fastq_dir, "/", grep(paste0("^", sample, "_.*_", forward, ".*$"), fastq, value = TRUE))
+  row_to_add$`reverse-absolute-filepath` <- paste0(fastq_dir, "/", grep(paste0("^", sample, "_.*_", reverse, ".*$"), fastq, value = TRUE))
   manifest <- rbind(manifest, row_to_add)
 }
 

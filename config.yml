@@ -9,7 +9,3 @@ end: paired
 r1_suf: R1
 r2_suf: R2
 
-## Metatatoxomics
-
-manifest: manifest.tsv
-

@@ -1,7 +1,7 @@
-proj_name: suelos_cereal
+proj_name: cereal_fungi
 home: /home/salias
 outdir: /scratch/salias/projects
-raw_data: /home/salias/data/suelos_cereal_ecologico/fastq
+raw_data: /home/salias/data/cereal_fungi
 
 # Expermient
 

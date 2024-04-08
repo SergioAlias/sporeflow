@@ -2,8 +2,8 @@ rule import_fastq:
     input:
         config["outdir"] + "/" + config["proj_name"] + "/manifest.tsv"
     output:
-        fastq_qza = config["outdir"] + "/" + config["proj_name"] + "/reads/paired-end-demux.qza",
-        fastq_qzv = config["outdir"] + "/" + config["proj_name"] + "/reads/paired-end-demux.qzv"
+        fastq_qza = config["outdir"] + "/" + config["proj_name"] + "/reads_raw/demux.qza",
+        fastq_qzv = config["outdir"] + "/" + config["proj_name"] + "/reads_raw/demux.qzv"
     conda:
         "../envs/qiime2-amplicon-2024.2-py38-linux-conda.yml"
     shell:

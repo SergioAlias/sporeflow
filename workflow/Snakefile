@@ -19,8 +19,8 @@ os.makedirs(os.path.join(config["outdir"], config["proj_name"]), exist_ok = True
 ## output handling
 
 alloutput = list()
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/reads/paired-end-demux.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/reads/paired-end-demux.qzv")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/reads_raw/demux.qza")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/reads_raw/demux.qzv")
 
 rule all:
     input:

@@ -16,11 +16,17 @@ for d in logdirs:
 
 os.makedirs(os.path.join(config["outdir"], config["proj_name"]), exist_ok = True)
 
+## sample names
+
+SAMPLES = [s[:-len(".fastq.gz")] for s in os.listdir(config["raw_data"])]
+
 ## output handling
 
 alloutput = list()
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/reads_raw/demux.qza")
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/reads_raw/demux.qzv")
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}.html", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_fastqc.zip", sample = SAMPLES))
 
 rule all:
     input:
@@ -30,3 +36,4 @@ rule all:
 
 include: "rules/create_manifest.smk"
 include: "rules/import_fastq.smk"
+include: "rules/fastqc.smk"

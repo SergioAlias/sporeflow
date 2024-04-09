@@ -13,16 +13,23 @@ home: /home/salias                          #-------#    Home directory TODO: is
 outdir: /scratch/salias/projects            #-------#    Directory with all projects
 raw_data: /home/salias/data/cereal_fungi    #-------#    Directory with FASTQ files
 
-### Sequencing ###
+
+### Import sequences ###
 
 end: paired    #-------#    Options: single or paired (end)
 r1_suf: R1     #-------#    Forward read suffix (ignored if end: single)
 r2_suf: R2     #-------#    Reverse read suffix (ignored if end: single)
-trim: True     #-------#    To trim (True) or not to trim (False) TODO: use in trim step
-primer_f: GATGAAGAACGYAGYRAA                      #-------#    Forward primer sequence
-primer_r: TCCTCCGCTTWTTGWTWTGC                    #-------#    Reverse primer sequence
+
+
+### Cutadapt ###
+
+trim_primers: True                                #-------#    To trim (True) or not to trim (False) PCR primers
+primer_f: GATGAAGAACGYAGYRAA                      #-------#    Forward primer sequence (ignored if trim_primers: False)
+primer_r: TCCTCCGCTTWTTGWTWTGC                    #-------#    Reverse primer sequence (ignored if trim_primers: False)
+trim_adapters: True                               #-------#    To trim (True) or not to trim (False) Illumina adapters
 illumina_f: TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG     #-------#    Illumina forward adapter
 illumina_r: GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG    #-------#    Illumina reverse adapter
+
 
 ### DADA2 ###
 

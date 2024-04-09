@@ -1,7 +1,0 @@
-channels:
-- bioconda
-- conda-forge
-- defaults
-dependencies:
-- fastqc=0.12.1
-- multiqc=1.21

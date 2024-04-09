@@ -7,7 +7,7 @@ configfile: "config.yml"
 
 ### create log dirs
 
-logdirs = ["default", "all", "create_manifest", "import_fastq"]
+logdirs = ["default", "all", "create_manifest", "import_fastq", "dada2"]
 
 for d in logdirs:
     os.makedirs(os.path.join("logs", d), exist_ok = True)
@@ -34,3 +34,4 @@ rule all:
 
 include: "rules/create_manifest.smk"
 include: "rules/import_fastq.smk"
+include: "rules/dada2.smk"

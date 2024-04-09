@@ -1,12 +1,33 @@
-proj_name: cereal_fungi
-home: /home/salias
-outdir: /scratch/salias/projects
-raw_data: /home/salias/data/cereal_fungi
+########################
+# IMPORTANT INFORMATION:
+#
+# Variables commented with [ #cluster# ] must be
+# changed accordingly in cluster_config.yml
+########################
 
-# Expermient
 
-end: paired
-r1_suf: R1
-r2_suf: R2
-primer_f: TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG GATGAAGAACGYAGYRAA
-primer_r: GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG TCCTCCGCTTWTTGWTWTGC
+### General ###
+
+proj_name: cereal_fungi                     #-------#    Project name
+home: /home/salias                          #-------#    Home directory TODO: is it useful at all?
+outdir: /scratch/salias/projects            #-------#    Directory with all projects
+raw_data: /home/salias/data/cereal_fungi    #-------#    Directory with FASTQ files
+
+### Sequencing ###
+
+end: paired    #-------#    Options: single or paired (end)
+r1_suf: R1     #-------#    Forward read suffix (ignored if end: single)
+r2_suf: R2     #-------#    Reverse read suffix (ignored if end: single)
+trim: True     #-------#    To trim (True) or not to trim (False) TODO: use in trim step
+primer_f: GATGAAGAACGYAGYRAA                      #-------#    Forward primer sequence
+primer_r: TCCTCCGCTTWTTGWTWTGC                    #-------#    Reverse primer sequence
+illumina_f: TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG     #-------#    Illumina forward adapter
+illumina_r: GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG    #-------#    Illumina reverse adapter
+
+### DADA2 ###
+
+dada2_trim_left_f: 0    #-------#    Position at which forward read sequences should be trimmed due to low quality
+dada2_trim_left_r: 0    #-------#    Position at which reverse read sequences should be trimmed due to low quality
+dada2_trunc_len_f: 0    #-------#    Position at which forward read sequences should be truncated due to decrease in quality
+dada2_trunc_len_r: 0    #-------#    Position at which reverse read sequences should be truncated due to decrease in quality
+dada2_n_threads: 4      #cluster#    Number of threads to use for multithreaded processing

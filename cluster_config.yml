@@ -3,7 +3,7 @@ __default__:
     time: 1-00:00:00 # time limit for each job
     nodes: 1
     ncpus: 1
-    ntasks-per-node: 2 #Request n cores be allocated per node
+    ntasks-per-node: 2 # Request n cores be allocated per node
     memory: 2G
     output: logs/default/job_default_%j.out
     error: logs/default/job_default_%j.err
@@ -37,3 +37,13 @@ import_fastq:
     memory: 4G # Should be more than the FASTQ files total size
     output: logs/import_fastq/import_fastq_%j.out
     error: logs/import_fastq/import_fastq_%j.err
+
+dada2:
+    jobname: dada2
+    time: 0-02:00:00
+    nodes: 1
+    ncpus: 4 #cluster# Change dada2_n_threads accordingly in config.yml
+    ntasks-per-node: 1
+    memory: 4G
+    output: logs/dada2/dada2_%j.out
+    error: logs/dada2/dada2_%j.err

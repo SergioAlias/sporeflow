@@ -30,8 +30,8 @@ job_properties = read_job_properties(jobscript)
 # collect all command-line options in an array
 cmdline = ["sbatch"]
 
-# set all the slurm submit options as before
-slurm_args = " -N {nodes} --mem {memory} -c {ncpus} -t {time} -J {jobname} -o {output} -e {error} ".format(**job_properties["cluster"])
+# set all the slurm submit options as before (MODIFIED BY SERGIO)
+slurm_args = " --mem {memory} -c {ncpus} -t {time} -J {jobname} -o {output} -e {error} ".format(**job_properties["cluster"])
 
 cmdline.append(slurm_args)
 

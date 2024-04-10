@@ -1,9 +1,7 @@
 __default__:
     jobname: default
     time: 1-00:00:00 # time limit for each job
-    nodes: 1
     ncpus: 1
-    ntasks-per-node: 2 # Request n cores be allocated per node
     memory: 2G
     output: logs/default/job_default_%j.out
     error: logs/default/job_default_%j.err
@@ -11,9 +9,7 @@ __default__:
 all:
     jobname: all
     time: 0-00:05:00
-    nodes: 1
     ncpus: 1
-    ntasks-per-node: 1
     memory: 50
     output: logs/all/all_%j.out
     error: logs/all/all_%j.err
@@ -21,9 +17,7 @@ all:
 create_manifest:
     jobname: create_manifest
     time: 0-00:10:00
-    nodes: 1
     ncpus: 1
-    ntasks-per-node: 1
     memory: 200
     output: logs/create_manifest/create_manifest_%j.out
     error: logs/create_manifest/create_manifest_%j.err
@@ -31,19 +25,23 @@ create_manifest:
 import_fastq:
     jobname: import_fastq
     time: 0-01:00:00
-    nodes: 1
     ncpus: 1
-    ntasks-per-node: 1
     memory: 4G # Should be more than the FASTQ files total size
     output: logs/import_fastq/import_fastq_%j.out
     error: logs/import_fastq/import_fastq_%j.err
 
+fastqc:
+    jobname: fastqc
+    time: 0-01:00:00
+    ncpus: 1
+    memory: 3G
+    output: logs/fastqc/fastqc_%j.out
+    error: logs/fastqc/fastqc_%j.err
+
 dada2:
     jobname: dada2
     time: 0-02:00:00
-    nodes: 1
     ncpus: 4 #cluster# Change dada2_n_threads accordingly in config.yml
-    ntasks-per-node: 1
     memory: 4G
     output: logs/dada2/dada2_%j.out
     error: logs/dada2/dada2_%j.err

@@ -1,4 +1,4 @@
-rule cutadapt: # TODO: change everything, add shell QZV geberation
+rule cutadapt: # TODO: change everything, add shell QZV generation
     input:
         config["outdir"] + "/" + config["proj_name"] + "/reads_raw/demux.qza"
     output:

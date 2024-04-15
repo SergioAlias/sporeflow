@@ -26,7 +26,7 @@ r2_suf: R2     #-------#    Reverse read suffix (ignored if end: single)
 trim_primers: True                                #-------#    To trim (True) or not to trim (False) PCR primers
 primer_f: GATGAAGAACGYAGYRAA                      #-------#    Forward primer sequence (ignored if trim_primers: False)
 primer_r: TCCTCCGCTTWTTGWTWTGC                    #-------#    Reverse primer sequence (ignored if trim_primers: False)
-trim_adapters: True                               #-------#    To trim (True) or not to trim (False) Illumina adapters
+trim_adapters: False                               #-------#    To trim (True) or not to trim (False) Illumina adapters
 illumina_f: TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG     #-------#    Illumina forward adapter
 illumina_r: GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG    #-------#    Illumina reverse adapter
 

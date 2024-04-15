@@ -5,6 +5,16 @@ min_version("7.32.4")
 
 configfile: "config.yml"
 
+### helper functions
+
+def complementary(gen):
+    """ Returns the reverse complementary of a DNA sequence
+        All IUPAC codes included
+    """
+    trans_dict = {"A":"T","C":"G","G":"C","T":"A","N":"N","R":"Y","Y":"R","S":"S","W":"W","K":"M","M":"K","B":"V","V":"B","D":"H","H":"D"}
+    return "".join([trans_dict[nt] for nt in gen[::-1]])
+
+
 ### create log dirs
 
 logdirs = ["default", "all", "create_manifest", "import_fastq", "fastqc", "dada2"]

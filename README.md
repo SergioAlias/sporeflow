@@ -6,3 +6,4 @@ Steps working for now:
 
 - Create manifest file for QIIME2 (rule `create_manifest`)
 - Import FASTQ files to QIIME2 (rule `import_fastq`)
+- Run FastQC on the raw FASTQ files (rule `fastqc`)

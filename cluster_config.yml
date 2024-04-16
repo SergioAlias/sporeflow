@@ -33,8 +33,8 @@ import_fastq:
 fastqc:
     jobname: fastqc
     time: 0-01:00:00
-    ncpus: 1
-    memory: 3G
+    ncpus: 2 # one for each FASTQ file, forward and reverse
+    memory: 500
     output: logs/fastqc/fastqc_%j.out
     error: logs/fastqc/fastqc_%j.err
 

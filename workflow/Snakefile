@@ -17,7 +17,7 @@ def complementary(gen):
 
 ### create log dirs
 
-logdirs = ["default", "all", "create_manifest", "import_fastq", "fastqc", "dada2"]
+logdirs = ["default", "all", "create_manifest", "import_fastq", "fastqc", "cutadapt", "dada2"]
 
 for d in logdirs:
     os.makedirs(os.path.join("logs", d), exist_ok = True)
@@ -33,8 +33,8 @@ SAMPLES = list(set([s[:-len("_RX_001.fastq.gz")] for s in os.listdir(config["raw
 ## output handling
 
 alloutput = list()
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/reads_raw/demux.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/reads_raw/demux.qzv")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed/trimmed.qza")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed/trimmed.qzv")
 alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_" + config["r1_suf"] + "_001_fastqc.html", sample = SAMPLES))
 alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_" + config["r2_suf"] + "_001_fastqc.html", sample = SAMPLES))
 alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_" + config["r1_suf"] + "_001_fastqc.zip", sample = SAMPLES))
@@ -49,4 +49,5 @@ rule all:
 include: "rules/create_manifest.smk"
 include: "rules/import_fastq.smk"
 include: "rules/fastqc.smk"
+include: "rules/cutadapt.smk"
 # include: "rules/dada2.smk"

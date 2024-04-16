@@ -23,9 +23,10 @@ r2_suf: R2     #-------#    Reverse read suffix (ignored if end: single)
 
 ### Cutadapt ###
 
-trim_primers: True                                #-------#    To trim (True) or not to trim (False) PCR primers
-cutadapt_primer_f: GATGAAGAACGYAGYRAA             #-------#    Forward primer sequence (ignored if trim_primers: False)
-cutadapt_primer_r: TCCTCCGCTTWTTGWTWTGC           #-------#    Reverse primer sequence (ignored if trim_primers: False)
+trim_primers: True                         #-------#    To trim (True) or not to trim (False) PCR primers
+cutadapt_primer_f: GATGAAGAACGYAGYRAA      #-------#    Forward primer sequence (ignored if trim_primers: False)
+cutadapt_primer_r: TCCTCCGCTTWTTGWTWTGC    #-------#    Reverse primer sequence (ignored if trim_primers: False)
+cutadapt_n_threads: 2                      #cluster#    Number of threads to use for multithreaded processing
 
 ### DADA2 ###
 

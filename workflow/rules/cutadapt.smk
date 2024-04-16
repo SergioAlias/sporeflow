@@ -1,30 +1,34 @@
-rule cutadapt: # TODO: change everything, add shell QZV generation
+rule cutadapt:
     input:
         config["outdir"] + "/" + config["proj_name"] + "/reads_raw/demux.qza"
     output:
-        table_qza = config["outdir"] + "/" + config["proj_name"] + "/dada2/table.qza",
-        seqs_qza = config["outdir"] + "/" + config["proj_name"] + "/dada2/rep-seqs.qza",
-        stats_qza = config["outdir"] + "/" + config["proj_name"] + "/dada2/denoising-stats.qza",
-        table_qzv = config["outdir"] + "/" + config["proj_name"] + "/dada2/table.qzv",
-        seqs_qzv = config["outdir"] + "/" + config["proj_name"] + "/dada2/rep-seqs.qzv",
-        stats_qzv = config["outdir"] + "/" + config["proj_name"] + "/dada2/denoising-stats.qzv"
+        trimmed_qza = config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed/trimmed.qza",
+        trimmed_qzv = config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed/trimmed.qzv"
     conda:
         "../envs/qiime2-amplicon-2024.2-py38-linux-conda.yml"
     params:
-        primer_f = config["dada2_trim_left_f"],
-        primer_r = config["dada2_trim_left_r"],
-        trunclen_f = config["dada2_trunc_len_f"],
-        trunclen_r = config["dada2_trunc_len_r"],
-        nthreads = config["dada2_n_threads"]
+        outdir = config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed",
+        primer_f = config["cutadapt_primer_f"],
+        primer_r = config["cutadapt_primer_r"],
+        revcom_f = complementary(config["cutadapt_primer_f"]),
+        revcom_r = complementary(config["cutadapt_primer_r"]),
+        nthreads = config["cutadapt_n_threads"]
     shell:
         """
-        time qiime cutadapt trim-paired
-          --demultiplexed-sequences demux.qza \
-          --p-front-f CCTACGGGNGGCWGCAG \
-          --p-front-r GACTACHVGGGTATCTAATCC \
+        mkdir -p {params.outdir}
+        time qiime cutadapt trim-paired \
+          --i-demultiplexed-sequences {input} \
+          --p-front-f {params.primer_f} \
+          --p-front-r {params.primer_r} \
+          --p-adapter-f {params.revcom_r} \
+          --p-adapter-r {params.revcom_f} \
           --p-match-adapter-wildcards \
           --p-match-read-wildcards \
           --p-discard-untrimmed \
-          --o-trimmed-sequences trimmed.qza
-        time 
+          --p-cores {params.nthreads} \
+          --o-trimmed-sequences {output.trimmed_qza} \
+          --verbose
+        time qiime demux summarize \
+          --i-data {output.trimmed_qza} \
+          --o-visualization {output.trimmed_qzv}
         """

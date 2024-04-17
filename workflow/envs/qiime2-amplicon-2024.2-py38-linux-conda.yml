@@ -705,3 +705,5 @@ dependencies:
 - zlib=1.2.13
 - zstandard=0.22.0
 - zstd=1.5.5
+- pyzstd=0.15.9
+- itsxpress=2.1.0

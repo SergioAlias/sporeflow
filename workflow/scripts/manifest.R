@@ -31,7 +31,7 @@ colnames(manifest) <- cols
 
 ## We get FASTQ filenames and sample names
 fastq <- list.files(fastq_dir)
-samples <- unique(gsub("_S.*_R\\d+_001.fastq.gz", "", fastq))
+samples <- unique(gsub("_R\\d+.fastq.gz", "", fastq))
 
 ## Iterate and get sample names and absolute paths, add them to manifest
 for (i in seq_along(samples)){

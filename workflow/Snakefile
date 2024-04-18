@@ -28,7 +28,7 @@ os.makedirs(os.path.join(config["outdir"], config["proj_name"]), exist_ok = True
 
 ## sample names
 
-SAMPLES = list(set([s[:-len("_RX_001.fastq.gz")] for s in os.listdir(config["raw_data"])]))
+SAMPLES = list(set([s[:-len("_RX.fastq.gz")] for s in os.listdir(config["raw_data"])]))
 
 ## output handling
 

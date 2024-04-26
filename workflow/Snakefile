@@ -33,12 +33,13 @@ SAMPLES = list(set([s[:-len("_RX.fastq.gz")] for s in os.listdir(config["raw_dat
 ## output handling
 
 alloutput = list()
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed/trimmed.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed/trimmed.qzv")
-alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_" + config["r1_suf"] + "_001_fastqc.html", sample = SAMPLES))
-alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_" + config["r2_suf"] + "_001_fastqc.html", sample = SAMPLES))
-alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_" + config["r1_suf"] + "_001_fastqc.zip", sample = SAMPLES))
-alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_" + config["r2_suf"] + "_001_fastqc.zip", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed" + "/{sample}_" + config["r1_suf"] + "_cutadapt.fastq.gz", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed" + "/{sample}_" + config["r2_suf"] + "_cutadapt.fastq.gz", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/cutadapt_logs" + "/{sample}_cutadapt.log", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_" + config["r1_suf"] + "_fastqc.html", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_" + config["r2_suf"] + "_fastqc.html", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_" + config["r1_suf"] + "_fastqc.zip", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_" + config["r2_suf"] + "_fastqc.zip", sample = SAMPLES))
 
 rule all:
     input:

@@ -42,7 +42,7 @@ cutadapt:
     jobname: cutadapt
     time: 0-01:00:00
     ncpus: 2 #cluster# Change cutadapt_n_threads accordingly in config.yml
-    memory: 4G
+    memory: 500
     output: logs/cutadapt/cutadapt_%j.out
     error: logs/cutadapt/cutadapt_%j.err
 

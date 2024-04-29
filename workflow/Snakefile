@@ -17,7 +17,7 @@ def complementary(gen):
 
 ### create log dirs
 
-logdirs = ["default", "all", "create_manifest", "import_fastq", "fastqc", "cutadapt", "dada2"]
+logdirs = ["default", "all", "create_manifest", "import_fastq", "fastqc_before", "cutadapt", "fastqc_after", "dada2"]
 
 for d in logdirs:
     os.makedirs(os.path.join("logs", d), exist_ok = True)
@@ -33,13 +33,15 @@ SAMPLES = list(set([s[:-len("_RX.fastq.gz")] for s in os.listdir(config["raw_dat
 ## output handling
 
 alloutput = list()
-alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed" + "/{sample}_" + config["r1_suf"] + "_cutadapt.fastq.gz", sample = SAMPLES))
-alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed" + "/{sample}_" + config["r2_suf"] + "_cutadapt.fastq.gz", sample = SAMPLES))
 alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/cutadapt_logs" + "/{sample}_cutadapt.log", sample = SAMPLES))
-alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_" + config["r1_suf"] + "_fastqc.html", sample = SAMPLES))
-alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_" + config["r2_suf"] + "_fastqc.html", sample = SAMPLES))
-alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_" + config["r1_suf"] + "_fastqc.zip", sample = SAMPLES))
-alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc/{sample}_" + config["r2_suf"] + "_fastqc.zip", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_before/{sample}_" + config["r1_suf"] + "_fastqc.html", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_before/{sample}_" + config["r2_suf"] + "_fastqc.html", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_before/{sample}_" + config["r1_suf"] + "_fastqc.zip", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_before/{sample}_" + config["r2_suf"] + "_fastqc.zip", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_after/{sample}_" + config["r1_suf"] + "_cutadapt_fastqc.html", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_after/{sample}_" + config["r2_suf"] + "_cutadapt_fastqc.html", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_after/{sample}_" + config["r1_suf"] + "_cutadapt_fastqc.zip", sample = SAMPLES))
+alloutput.append(expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_after/{sample}_" + config["r2_suf"] + "_cutadapt_fastqc.zip", sample = SAMPLES))
 
 rule all:
     input:
@@ -49,6 +51,7 @@ rule all:
 
 include: "rules/create_manifest.smk"
 include: "rules/import_fastq.smk"
-include: "rules/fastqc.smk"
+include: "rules/fastqc_before.smk"
 include: "rules/cutadapt.smk"
+include: "rules/fastqc_after.smk"
 # include: "rules/dada2.smk"

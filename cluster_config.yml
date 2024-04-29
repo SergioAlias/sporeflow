@@ -30,13 +30,13 @@ import_fastq:
     output: logs/import_fastq/import_fastq_%j.out
     error: logs/import_fastq/import_fastq_%j.err
 
-fastqc:
-    jobname: fastqc
+fastqc_before:
+    jobname: fastqc_before
     time: 0-01:00:00
     ncpus: 2 # one for each FASTQ file, forward and reverse
     memory: 500
-    output: logs/fastqc/fastqc_%j.out
-    error: logs/fastqc/fastqc_%j.err
+    output: logs/fastqc_before/fastqc_before_%j.out
+    error: logs/fastqc_before/fastqc_before_%j.err
 
 cutadapt:
     jobname: cutadapt
@@ -45,6 +45,14 @@ cutadapt:
     memory: 500
     output: logs/cutadapt/cutadapt_%j.out
     error: logs/cutadapt/cutadapt_%j.err
+
+fastqc_after:
+    jobname: fastqc_after
+    time: 0-01:00:00
+    ncpus: 2 # one for each FASTQ file, forward and reverse
+    memory: 500
+    output: logs/fastqc_after/fastqc_after_%j.out
+    error: logs/fastqc_after/fastqc_after_%j.err
 
 dada2:
     jobname: dada2

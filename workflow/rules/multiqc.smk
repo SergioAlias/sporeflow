@@ -1,10 +1,10 @@
 rule multiqc:
     input:
-        html_f = expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_before/{sample}_" + config["r1_suf"] + "_fastqc.html", sample = SAMPLES),
-        html_r = expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_before/{sample}_" + config["r2_suf"] + "_fastqc.html", sample = SAMPLES),
+        zip_f = expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_before/{sample}_" + config["r1_suf"] + "_fastqc.zip", sample = SAMPLES),
+        zip_r = expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_before/{sample}_" + config["r2_suf"] + "_fastqc.zip", sample = SAMPLES),
         trim_log = expand(config["outdir"] + "/" + config["proj_name"] + "/cutadapt_logs" + "/{sample}_cutadapt.log", sample = SAMPLES),
-        html_trim_f = expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_after/{sample}_" + config["r1_suf"] + "_cutadapt_fastqc.html", sample = SAMPLES),
-        html_trim_r = expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_after/{sample}_" + config["r2_suf"] + "_cutadapt_fastqc.html", sample = SAMPLES)
+        zip_trim_f = expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_after/{sample}_" + config["r1_suf"] + "_cutadapt_fastqc.zip", sample = SAMPLES),
+        zip_trim_r = expand(config["outdir"] + "/" + config["proj_name"] + "/fastqc_after/{sample}_" + config["r2_suf"] + "_cutadapt_fastqc.zip", sample = SAMPLES)
     output:
         report = config["outdir"] + "/" + config["proj_name"] + "/multiqc/multiqc_report.html"
     conda:

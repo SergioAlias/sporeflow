@@ -3,7 +3,7 @@ from snakemake.utils import min_version
 
 min_version("7.32.4")
 
-configfile: "config.yml"
+configfile: "config/config.yml"
 
 ### helper functions
 

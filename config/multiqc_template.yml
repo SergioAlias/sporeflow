@@ -1,0 +1,14 @@
+module_order:
+  - fastqc:
+      name: "FastQC (trimmed)"
+      anchor: "fastqc_trimmed"
+      info: "This section of the report shows FastQC results after adapter trimming with Cutadapt. To check FastQC results before trimming, check section FastQC (raw)."
+      target: ""
+      path_filters:
+        - "*_cutadapt_fastqc.zip"
+  - cutadapt
+  - fastqc:
+      name: "FastQC (raw)"
+      anchor: "fastqc_raw"
+      path_filters_exclude:
+        - "*_cutadapt_fastqc.zip"

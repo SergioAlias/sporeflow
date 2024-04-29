@@ -18,8 +18,10 @@ rule multiqc:
         """
         mkdir -p {params.outdir}
         time multiqc \
+          --force \
           {params.fastqc_before_dir} \
           {params.cutadapt_dir} \
           {params.fastqc_after_dir} \
+          --config /home/salias/projects/sporeflow/config/multiqc_template.yml \
           --outdir {params.outdir}
         """

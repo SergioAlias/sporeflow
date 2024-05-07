@@ -15,20 +15,25 @@ rule cutadapt:
         primer_r = config["cutadapt_primer_r"],
         revcom_f = complementary(config["cutadapt_primer_f"]),
         revcom_r = complementary(config["cutadapt_primer_r"]),
-        nthreads = config["cutadapt_n_threads"]
+        nthreads = config["cutadapt_n_threads"],
+        trim_3_prime = config["cutadapt_trim_3_prime"]
     shell:
         """
+        adapters=()
+        adapters+=(--front Primer_F=^{params.primer_f})
+        adapters+=(-G Primer_R=^{params.primer_r})
+        if [[ {params.trim_3_prime} == "True" ]]; then
+          adapters+=(--adapter Rev_com_primer_R={params.revcom_r})
+          adapters+=(-A Rev_com_primer_F={params.revcom_f})
+        fi
         mkdir -p {params.outdir} {params.log_outdir}
         time cutadapt \
           {input.fq_f} \
           {input.fq_r} \
-          --front Primer_F=^{params.primer_f} \
-          -G Primer_R=^{params.primer_r} \
-          --adapter Rev_com_primer_R={params.revcom_r} \
-          -A Rev_com_primer_F={params.revcom_f} \
           --discard-untrimmed \
           --cores {params.nthreads} \
           --output {output.fq_trim_f} \
           --paired-output {output.fq_trim_r} \
+          "${{adapters[@]}}" \
           | tee {output.trim_log}
         """

@@ -31,7 +31,7 @@ colnames(manifest) <- cols
 
 ## We get FASTQ filenames and sample names
 fastq <- list.files(fastq_dir)
-samples <- unique(gsub("_R\\d+.fastq.gz", "", fastq))
+samples <- unique(gsub("_R\\d+_cutadapt.fastq.gz", "", fastq))
 
 ## Iterate and get sample names and absolute paths, add them to manifest
 for (i in seq_along(samples)){
@@ -39,8 +39,8 @@ for (i in seq_along(samples)){
   row_to_add <- data.frame(matrix(ncol = length(cols), nrow = 1))
   colnames(row_to_add) <- cols
   row_to_add$`sample-id` <- sample # TODO ADD SINGLE END HANDLING
-  row_to_add$`forward-absolute-filepath` <- paste0(fastq_dir, "/", grep(paste0("^", sample, "_.*_", forward, ".*$"), fastq, value = TRUE))
-  row_to_add$`reverse-absolute-filepath` <- paste0(fastq_dir, "/", grep(paste0("^", sample, "_.*_", reverse, ".*$"), fastq, value = TRUE))
+  row_to_add$`forward-absolute-filepath` <- paste0(fastq_dir, "/", grep(paste0("^", sample, "_", forward, ".*$"), fastq, value = TRUE))
+  row_to_add$`reverse-absolute-filepath` <- paste0(fastq_dir, "/", grep(paste0("^", sample, "_", reverse, ".*$"), fastq, value = TRUE))
   manifest <- rbind(manifest, row_to_add)
 }
 

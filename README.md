@@ -11,15 +11,20 @@ Steps working for now:
 - Run [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) on the raw FASTQ files (rule `fastqc_before`)
 - Run [Cutadapt](https://cutadapt.readthedocs.io/en/v4.6/) on the raw FASTQ files (rule `cutadapt`)
 - Run [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) on the trimmed FASTQ files (rule `fastqc_after`)
+- Aggregate QC results (FastQC before trimming, Cutadapt, FastQC after trimming) with [MultiQC](https://multiqc.info/) (rule `multiqc`)
+- Create manifest file for QIIME2 (rule `create_manifest`)
 
 Steps working but not integrated yet:
 
-- Create manifest file for QIIME2 (rule `create_manifest`)
 - Import FASTQ files to QIIME2 (rule `import_fastq`)
+
+Steps under active development:
+
+- Denoise, dereplicate and cluster sequences in QIIME2 with [DADA2 plugin](https://docs.qiime2.org/2024.2/plugins/available/dada2/) (rule `dada2`)
 
 ## Requisites
 
-The only prerequisite is having Conda installed. In this regard, we recommend using Miniconda and Mamba for a lightweight and fast experience, although Sporeflow works on any Conda installation.
+The only prerequisite is having Conda installed. In this regard, we **highly recommend** installing [Miniconda](https://docs.anaconda.com/free/miniconda/index.html) and then installing [Mamba](https://anaconda.org/conda-forge/mamba) (used by default by Snakemake) for a lightweight and fast experience.
 
 ## Usage
 
@@ -29,11 +34,11 @@ The only prerequisite is having Conda installed. In this regard, we recommend us
 4. If needed, modify `time`, `ncpus` and `memory` variables in `config/cluster_config.yml`.
 5. Run `sf_run` to run the workflow.
    
-## Immediate submit: Screen
+## Immediate submit and Screen
 
 Sporeflow inlcudes a command, `sf_immediate`, that automatically sends all jobs to Slurm, correctly queued according to their dependencies. This is desirable e.g. when the runtime in the cluster login machine is very short, because it may kill Snakemake in the middle of the workflow. If your HPC queue system only allows a limited number of jobs submitted at once, change that number in `init_sporeflow.sh` and source it again (that also applies for `sf_run`).
 
-Please note that if the number of simultaneous jobs accepted by the queue system is less than the total number of jobs you need to submit, the workflow will fail. For such cases, we highly recommend not using `sf_immediate`. Instead, use `sf_run` inside a Screen. Screen is installed by default in most recent Linux systems.
+Please note that if the number of simultaneous jobs accepted by the queue system is less than the total number of jobs you need to submit, the workflow will fail. For such cases, we highly recommend not using `sf_immediate`. Instead, use `sf_run` inside a Screen. Screen is a multiplexer that lets you create multiple virtual terminal sessions. It is installed by default in most Linux HPC systems.
 
 To create a screen, use `screen -S sporeflow`. Then, follow usage section there. You can dettach the screen with `Ctrl+a` and then `d`. You can attach the screen again with `screen -r sporeflow`. For more details about Screen usage, please check [this Gist](https://gist.github.com/jctosta/af918e1618682638aa82).
 

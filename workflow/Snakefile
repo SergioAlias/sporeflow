@@ -37,6 +37,7 @@ SAMPLES = list(set([s[:-len("_RX.fastq.gz")] for s in os.listdir(config["raw_dat
 
 alloutput = list()
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/multiqc/multiqc_report.html")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/manifest.tsv")
 
 rule all:
     input:

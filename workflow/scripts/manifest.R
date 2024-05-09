@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 # Sergio Alías, 20240227
-# Last modified 20240304
+# Last modified 20240509
 
 # Create manifest file required for QIIME2 to work with the FASTQ files
 

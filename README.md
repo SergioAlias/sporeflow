@@ -13,9 +13,6 @@ Steps working for now:
 - Run [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) on the trimmed FASTQ files (rule `fastqc_after`)
 - Aggregate QC results (FastQC before trimming, Cutadapt, FastQC after trimming) with [MultiQC](https://multiqc.info/) (rule `multiqc`)
 - Create manifest file for QIIME2 (rule `create_manifest`)
-
-Steps working but not integrated yet:
-
 - Import FASTQ files to QIIME2 (rule `import_fastq`)
 
 Steps under active development:

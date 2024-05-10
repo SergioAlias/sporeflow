@@ -10,6 +10,7 @@ done
 if { conda env list | grep 'sporeflow-main'; } >/dev/null 2>&1; then
   echo "🦠 Environment sporeflow-main is already installed."
 else
+  echo "🦠 Installing environment sporeflow-main...."
   conda env create --file config/smk_conda.yml
   echo "🦠 Environment sporeflow-main installed successfully."
 fi
@@ -28,9 +29,9 @@ alias sf_draw_rulegraph='snakemake -f --rulegraph | dot -Tpdf > rulegraph.pdf'
 alias sf_draw_filegraph='snakemake -f --filegraph | dot -Tpdf > filegraph.pdf'
 
 
-echo "🦠 Sporeflow loaded successfully!"
-echo "    - Use sf_run to run Sporeflow in a Slurm HPC queue system"
-echo "    - Use sf_immediate to run Sporeflow and send all jobs to the queue system at once (not recommended)"
+echo "🦠 SporeFlow loaded successfully!"
+echo "    - Use sf_run to run SporeFlow in a Slurm HPC queue system"
+echo "    - Use sf_immediate to run SporeFlow and send all jobs to the queue system at once (not recommended)"
 echo "    - Use sf_draw_dag to draw a DAG of the workflow in dag.pdf"
 echo "    - Use sf_draw_rulegraph to draw a rule graph of the workflow in rulegraph.pdf"
 echo "    - Use sf_draw_filegraph to draw a file graph of the workflow in filegraph.pdf"

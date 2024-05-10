@@ -39,6 +39,7 @@ alloutput = list()
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/multiqc/multiqc_report.html")
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/reads/demux.qza")
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/reads/demux.qzv")
+
 rule all:
     input:
         alloutput

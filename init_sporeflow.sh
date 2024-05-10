@@ -25,11 +25,14 @@ alias sf_run='snakemake --use-conda --cluster "sbatch -J {cluster.jobname} -t {c
 alias sf_immediate='snakemake --use-conda --cluster-config config/cluster_config.yml --jobs 30 -pr --immediate-submit --notemp --cluster "python3 workflow/scripts/immediate_submit.py {dependencies}"'
 alias sf_draw_dag='snakemake -f --dag | dot -Tpdf > dag.pdf'
 alias sf_draw_rulegraph='snakemake -f --rulegraph | dot -Tpdf > rulegraph.pdf'
+alias sf_draw_filegraph='snakemake -f --filegraph | dot -Tpdf > filegraph.pdf'
+
 
 echo "🦠 Sporeflow loaded successfully!"
 echo "    - Use sf_run to run Sporeflow in a Slurm HPC queue system"
 echo "    - Use sf_immediate to run Sporeflow and send all jobs to the queue system at once (not recommended)"
 echo "    - Use sf_draw_dag to draw a DAG of the workflow in dag.pdf"
-echo "    - Use sf_draw_rulegraph to draw a rule graph of the workflow in ruelgraph.pdf"
+echo "    - Use sf_draw_rulegraph to draw a rule graph of the workflow in rulegraph.pdf"
+echo "    - Use sf_draw_filegraph to draw a file graph of the workflow in filegraph.pdf"
 
 

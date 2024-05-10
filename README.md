@@ -44,4 +44,4 @@ To create a screen, use `screen -S sporeflow`. Then, follow usage section there.
 
 ## Drawing DAGs and rule graphs
 
-Since Sporeflow is built over Snakemake, you can generate DAGs and rule graphs of the workflow. We provide two commands for this: `sf_draw_dag` and `sf_draw_rulegraph`.
+Since Sporeflow is built over Snakemake, you can generate DAGs, rule graphs and file graphs of the workflow. We provide three commands for this: `sf_draw_dag`, `sf_draw_rulegraph` and `sf_draw_filegraph`.

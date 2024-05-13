@@ -13,8 +13,8 @@ rule cutadapt:
         log_outdir = config["outdir"] + "/" + config["proj_name"] + "/cutadapt_logs",
         primer_f = config["cutadapt_primer_f"],
         primer_r = config["cutadapt_primer_r"],
-        revcom_f = complementary(config["cutadapt_primer_f"]),
-        revcom_r = complementary(config["cutadapt_primer_r"]),
+        revcom_f = revComplementary(config["cutadapt_primer_f"]),
+        revcom_r = revComplementary(config["cutadapt_primer_r"]),
         nthreads = config["cutadapt_n_threads"],
         trim_3_prime = config["cutadapt_trim_3_prime"]
     shell:

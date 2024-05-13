@@ -7,7 +7,7 @@ configfile: "config/config.yml"
 
 ### helper functions
 
-def complementary(gen):
+def revComplementary(seq):
     """ Returns the reverse complementary of a DNA sequence
         All IUPAC codes included
     """
@@ -15,12 +15,20 @@ def complementary(gen):
                   "N":"N","R":"Y","Y":"R","S":"S",
                   "W":"W","K":"M","M":"K","B":"V",
                   "V":"B","D":"H","H":"D"}
-    return "".join([trans_dict[nt] for nt in gen[::-1]])
+    return "".join([trans_dict[nt] for nt in seq[::-1]])
 
 
 ### create log dirs
 
-logdirs = ["default", "all", "fastqc_before", "cutadapt", "fastqc_after", "multiqc", "create_manifest", "import_fastq", "dada2"]
+logdirs = ["default",
+          "all",
+          "fastqc_before",
+          "cutadapt",
+          "fastqc_after",
+          "multiqc",
+          "create_manifest",
+          "import_fastq",
+          "dada2"]
 
 for d in logdirs:
     os.makedirs(os.path.join("logs", d), exist_ok = True)

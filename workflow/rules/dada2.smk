@@ -1,13 +1,13 @@
 rule dada2:
     input:
-        config["outdir"] + "/" + config["proj_name"] + "/reads_raw/demux.qza"
+        config["outdir"] + "/" + config["proj_name"] + "/qiime2/reads/demux.qza"
     output:
-        table_qza = config["outdir"] + "/" + config["proj_name"] + "/dada2/table.qza",
-        seqs_qza = config["outdir"] + "/" + config["proj_name"] + "/dada2/rep-seqs.qza",
-        stats_qza = config["outdir"] + "/" + config["proj_name"] + "/dada2/denoising-stats.qza",
-        table_qzv = config["outdir"] + "/" + config["proj_name"] + "/dada2/table.qzv",
-        seqs_qzv = config["outdir"] + "/" + config["proj_name"] + "/dada2/rep-seqs.qzv",
-        stats_qzv = config["outdir"] + "/" + config["proj_name"] + "/dada2/denoising-stats.qzv"
+        table_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/table.qza",
+        seqs_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/rep-seqs.qza",
+        stats_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/denoising-stats.qza",
+        table_qzv = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/table.qzv",
+        seqs_qzv = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/rep-seqs.qzv",
+        stats_qzv = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/denoising-stats.qzv"
     conda:
         "../envs/qiime2-amplicon-2024.2-py38-linux-conda.yml"
     params:

@@ -15,9 +15,6 @@ Steps working for now:
 - Create manifest file for QIIME2 (rule `create_manifest`)
 - Import FASTQ files to QIIME2 (rule `import_fastq`)
 - **(ITS analysis only)** Trim ITS sequences in QIIME2 with [ITSxpress plugin](https://forum.qiime2.org/t/q2-itsxpress-a-tutorial-on-a-qiime-2-plugin-to-trim-its-sequences/5780) (rule `itsxpress`)
-
-Steps under active development:
-
 - Denoise, dereplicate and cluster sequences in QIIME2 with [DADA2 plugin](https://docs.qiime2.org/2024.2/plugins/available/dada2/) (rule `dada2`)
 
 ## Requisites

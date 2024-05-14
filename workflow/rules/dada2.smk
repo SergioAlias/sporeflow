@@ -11,20 +11,30 @@ rule dada2:
     conda:
         "../envs/qiime2-amplicon-2024.2-py38-linux-conda.yml"
     params:
+        outdir = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2",
         trimleft_f = config["dada2_trim_left_f"],
         trimleft_r = config["dada2_trim_left_r"],
         trunclen_f = config["dada2_trunc_len_f"],
         trunclen_r = config["dada2_trunc_len_r"],
+        max_ee_f = config["dada2_max_ee_f"],
+        max_ee_r = config["dada2_max_ee_r"],
+        trunc_q = config["dada2_trunc_q"],
+        min_overlap = config["dada2_min_overlap"],
         nthreads = config["dada2_n_threads"]
     shell:
         """
+        mkdir -p {params.outdir}
         time qiime dada2 denoise-paired \
           --i-demultiplexed-seqs {input} \
           --p-trim-left-f {params.trimleft_f} \
           --p-trim-left-r {params.trimleft_r} \
           --p-trunc-len-f {params.trunclen_f} \
           --p-trunc-len-r {params.trunclen_r} \
-          --p-n-threads {params.nthreads}
+          --p-max-ee-f {params.max_ee_f} \
+          --p-max-ee-r {params.max_ee_r} \
+          --p-trunc-q {params.trunc_q} \
+          --p-min-overlap {params.min_overlap} \
+          --p-n-threads {params.nthreads} \
           --o-table {output.table_qza} \
           --o-representative-sequences {output.seqs_qza} \
           --o-denoising-stats {output.stats_qza}

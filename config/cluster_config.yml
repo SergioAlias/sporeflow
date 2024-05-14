@@ -73,7 +73,7 @@ itsxpress:
 dada2:
     jobname: dada2
     time: 0-02:00:00
-    ncpus: 4 #cluster# Change dada2_n_threads accordingly in config.yml
-    memory: 4G
+    ncpus: 20 #cluster# Change dada2_n_threads accordingly in config.yml
+    memory: 25G
     output: logs/dada2/dada2_%j.out
     error: logs/dada2/dada2_%j.err

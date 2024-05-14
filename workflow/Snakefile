@@ -45,8 +45,12 @@ SAMPLES = list(set([s[:-len("_RX.fastq.gz")] for s in os.listdir(config["raw_dat
 
 alloutput = list()
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/multiqc/multiqc_report.html")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/itsxpress/its_seqs.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/itsxpress/its_seqs.qzv")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/table.qza")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/rep-seqs.qza")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/denoising-stats.qza")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/table.qzv")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/rep-seqs.qzv")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/denoising-stats.qzv")
 
 rule all:
     input:
@@ -61,4 +65,4 @@ include: "rules/multiqc.smk"
 include: "rules/create_manifest.smk"
 include: "rules/import_fastq.smk"
 include: "rules/itsxpress.smk"
-# include: "rules/dada2.smk"
+include: "rules/dada2.smk"

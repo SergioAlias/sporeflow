@@ -14,6 +14,7 @@ Steps working for now:
 - Aggregate QC results (FastQC before trimming, Cutadapt, FastQC after trimming) with [MultiQC](https://multiqc.info/) (rule `multiqc`)
 - Create manifest file for QIIME2 (rule `create_manifest`)
 - Import FASTQ files to QIIME2 (rule `import_fastq`)
+- **(ITS analysis only)** Trim ITS sequences in QIIME2 with [ITSxpress plugin](https://forum.qiime2.org/t/q2-itsxpress-a-tutorial-on-a-qiime-2-plugin-to-trim-its-sequences/5780) (rule `itsxpress`)
 
 Steps under active development:
 

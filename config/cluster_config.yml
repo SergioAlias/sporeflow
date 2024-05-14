@@ -62,6 +62,14 @@ import_fastq:
     output: logs/import_fastq/import_fastq_%j.out
     error: logs/import_fastq/import_fastq_%j.err
 
+itsxpress:
+    jobname: itsxpress
+    time: 0-02:00:00
+    ncpus: 16 #cluster# Change itsxpress_n_threads accordingly in config.yml
+    memory: 4G
+    output: logs/itsxpress/itsxpress_%j.out
+    error: logs/itsxpress/itsxpress_%j.err
+
 dada2:
     jobname: dada2
     time: 0-02:00:00

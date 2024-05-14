@@ -9,12 +9,12 @@
 ### General ###
 
 proj_name: cereal_fungi                     #-------#    Project name
-home: /home/salias                          #-------#    Home directory TODO: is it useful at all?
 outdir: /scratch/salias/projects            #-------#    Directory with all projects
 raw_data: /home/salias/data/cereal_fungi    #-------#    Directory with FASTQ files
+type: ITS                                   #-------#    Region sequenced: 16S (Bacteria) or ITS (Fungi)
 
 
-### Import sequences ###
+### Sequences ###
 
 end: paired    #-------#    Options: single or paired (end)
 r1_suf: R1     #-------#    Forward read suffix (ignored if end: single)
@@ -27,6 +27,13 @@ cutadapt_trim_3_prime: False               #-------#    To trim (True) or not to
 cutadapt_primer_f: GATGAAGAACGYAGYRAA      #-------#    Forward primer sequence (ignored if trim_primers: False)
 cutadapt_primer_r: TCCTCCGCTTWTTGWTWTGC    #-------#    Reverse primer sequence (ignored if trim_primers: False)
 cutadapt_n_threads: 2                      #cluster#    Number of threads to use for multithreaded processing
+
+
+### ITSxpress ###
+
+itsxpress_region: ITS2         #-------#    Regions ITS2, ITS1, and ALL can be selected
+itsxpress_cluster_id: 0.995    #-------#    Percent identity for clustering reads (0.995-1). Set to 1 for exact dereplication
+itsxpress_n_threads: 16        #cluster#    Number of threads to use for multithreaded processing (ITSxpress stops reducing runtime at about 10 cores)
 
 ### DADA2 ###
 

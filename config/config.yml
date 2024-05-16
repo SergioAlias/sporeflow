@@ -41,8 +41,8 @@ dada2_trim_left_f: 0     #-------#    Position at which forward read sequences s
 dada2_trim_left_r: 0     #-------#    Position at which reverse read sequences should be trimmed due to low quality
 dada2_trunc_len_f: 0     #-------#    Position at which forward read sequences should be truncated due to decrease in quality
 dada2_trunc_len_r: 0     #-------#    Position at which reverse read sequences should be truncated due to decrease in quality
-dada2_max_ee_f: 2        #-------#    Forward reads with number of expected errors higher than this value will be discarded
-dada2_max_ee_r: 2        #-------#    Reverse reads with number of expected errors higher than this value will be discarded
-dada2_trunc_q: 2         #-------#    Reads are truncated at the first instance of a quality score less than or equal to this value
+dada2_max_ee_f: 8        #-------#    Forward reads with number of expected errors higher than this value will be discarded
+dada2_max_ee_r: 8        #-------#    Reverse reads with number of expected errors higher than this value will be discarded
+dada2_trunc_q: 8         #-------#    Reads are truncated at the first instance of a quality score less than or equal to this value
 dada2_min_overlap: 12    #-------#    The minimum length of the overlap required for merging the forward and reverse reads
 dada2_n_threads: 20      #cluster#    Number of threads to use for multithreaded processing

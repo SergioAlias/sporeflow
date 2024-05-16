@@ -14,6 +14,18 @@ raw_data: /home/salias/data/cereal_fungi    #-------#    Directory with FASTQ fi
 type: ITS                                   #-------#    Region sequenced: 16S (Bacteria) or ITS (Fungi)
 
 
+### Databases ###
+
+db_dir: /home/salias/data/sf_databases    #-------#    Directory where databases will be downloaded
+db_name: UNITE                            #-------#    Database name. Available options: UNITE
+
+###### UNITE parameters (only checked if db_name: UNITE) ######
+db_unite_version: 9.0        #-------#    UNITE database version. Available options: 9.0, 8.3, 8.2
+db_unite_taxon: fungi        #-------#    Download a UNITE database with only 'fungi' or including all 'eukaryotes'
+db_unite_cluster: dynamic    #-------#    % similarity at which sequences in the UNITE database were clustered. Available options: 99, 97, dynamic
+db_unite_singletons: True    #-------#    Include singleton clusters in the database. Available options: True, False
+
+
 ### Sequences ###
 
 end: paired    #-------#    Options: single or paired (end)

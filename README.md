@@ -10,14 +10,13 @@ SporeFlow (**S**nakemake **P**ipeline F**or** M**e**tataxonomics Work**flow**s) 
 
 Steps working for now:
 
-- Download database for taxonomic assignation in QIIME2 format with [RESCRIPt plugin](https://docs.qiime2.org/2024.2/plugins/available/rescript/) (rule `download_db`)
 - Run [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) on the raw FASTQ files (rule `fastqc_before`)
 - Run [Cutadapt](https://cutadapt.readthedocs.io/en/v4.6/) on the raw FASTQ files (rule `cutadapt`)
 - Run [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) on the trimmed FASTQ files (rule `fastqc_after`)
 - Aggregate QC results (FastQC before trimming, Cutadapt, FastQC after trimming) with [MultiQC](https://multiqc.info/) (rule `multiqc`)
 - Create manifest file for QIIME2 (rule `create_manifest`)
 - Import FASTQ files to QIIME2 (rule `import_fastq`)
-- **(ITS analysis only)** Trim ITS sequences in QIIME2 with [ITSxpress plugin](https://forum.qiime2.org/t/q2-itsxpress-a-tutorial-on-a-qiime-2-plugin-to-trim-its-sequences/5780) (rule `itsxpress`)
+- Trim ITS sequences in QIIME2 with [ITSxpress plugin](https://forum.qiime2.org/t/q2-itsxpress-a-tutorial-on-a-qiime-2-plugin-to-trim-its-sequences/5780) (rule `itsxpress`)
 - Denoise, dereplicate and cluster sequences in QIIME2 with [DADA2 plugin](https://docs.qiime2.org/2024.2/plugins/available/dada2/) (rule `dada2`)
 
 ## Requisites
@@ -27,12 +26,25 @@ The only prerequisite is having Conda installed. In this regard, we **highly rec
 ## Usage
 
 1. Clone the repository
-2. Run `source init_sporeflow.sh`
+
+2. Run the following command to download (if needed) and activate the SporeFlow environment, and to set aliases for the main functions:
+```bash
+source init_sporeflow.sh
+```
+
 3. Edit `config/config.yml` with your experiment details. Variables annotated with #cluster# must also be updated in `config/cluster_config.yml`.
+
 4. If needed, modify `time`, `ncpus` and `memory` variables in `config/cluster_config.yml`.
-5. Run `sf_download_db` to download the database for taxonomic assignation.
-6. Run `sf_run` to run the workflow.
-   
+
+5. Download a UNITE classfier in QIIME2 format from [https://github.com/colinbrislawn/unite-train/releases](https://github.com/colinbrislawn/unite-train/releases). We recommend using one of the following (remember to change the name accordingly in `config/config.yml`):
+   - `unite_ver10_dynamic_all_04.04.2024-Q2-2024.2.qza`
+   - `unite_ver10_99_all_04.04.2024-Q2-2024.2.qza`  
+
+6. Run the following command to start the workflow:
+```bash
+sf_run
+```
+
 ## Immediate submit and Screen
 
 Sporeflow inlcudes a command, `sf_immediate`, that automatically sends all jobs to Slurm, correctly queued according to their dependencies. This is desirable e.g. when the runtime in the cluster login machine is very short, because it may kill Snakemake in the middle of the workflow. If your HPC queue system only allows a limited number of jobs submitted at once, change that number in `init_sporeflow.sh` and source it again (that also applies for `sf_run`).

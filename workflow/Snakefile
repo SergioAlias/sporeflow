@@ -37,12 +37,6 @@ for d in logdirs:
 
 os.makedirs(os.path.join(config["outdir"], config["proj_name"]), exist_ok = True)
 
-## database subdirectory name
-
-db_key_list = ["db_name", "db_unite_version", "db_unite_taxon", "db_unite_cluster", "db_unite_singletons"]
-db_subdir = "_".join([str(config[key]) if key != "db_unite_singletons" else "include_singletons" if config[key] else "no_singletons" for key in db_key_list])
-
-
 ## sample names
 
 SAMPLES = list(set([s[:-len("_RX.fastq.gz")] for s in os.listdir(config["raw_data"])]))
@@ -63,8 +57,6 @@ rule all:
         alloutput
 
 ### load rules
-
-include: "rules/download_db.smk"
 
 include: "rules/fastqc_before.smk"
 include: "rules/cutadapt.smk"

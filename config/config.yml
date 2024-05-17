@@ -16,14 +16,8 @@ type: ITS                                   #-------#    Region sequenced: 16S (
 
 ### Databases ###
 
-db_dir: /home/salias/data/sf_databases    #-------#    Directory where databases will be downloaded
-db_name: UNITE                            #-------#    Database name. Available options: UNITE
-
-###### UNITE parameters (only checked if db_name: UNITE) ######
-db_unite_version: 9.0        #-------#    UNITE database version. Available options: 9.0, 8.3, 8.2
-db_unite_taxon: fungi        #-------#    Download a UNITE database with only 'fungi' or including all 'eukaryotes'
-db_unite_cluster: dynamic    #-------#    % similarity at which sequences in the UNITE database were clustered. Available options: 99, 97, dynamic
-db_unite_singletons: True    #-------#    Include singleton clusters in the database. Available options: True, False
+db_dir: /home/salias/data/sf_databases/UNITE                 #-------#    Directory where database is stored
+db_file: unite_ver10_dynamic_all_04.04.2024-Q2-2024.2.qza    #-------#    Database filename
 
 
 ### Sequences ###

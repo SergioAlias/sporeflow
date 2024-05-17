@@ -24,7 +24,6 @@ echo "🦠 Setting aliases..."
 ## For database download
 
 
-alias sf_download_db='snakemake --use-conda --until download_db --cores 1'
 alias sf_run='snakemake --use-conda --cluster "sbatch -J {cluster.jobname} -t {cluster.time} --mem {cluster.memory} -c {cluster.ncpus} -o {cluster.output} -e {cluster.error}" --cluster-config config/cluster_config.yml --jobs 30'
 alias sf_immediate='snakemake --use-conda --cluster-config config/cluster_config.yml --jobs 30 -pr --immediate-submit --notemp --cluster "python3 workflow/scripts/immediate_submit.py {dependencies}"'
 alias sf_draw_dag='snakemake -f --dag | dot -Tpdf > dag.pdf'
@@ -33,11 +32,10 @@ alias sf_draw_filegraph='snakemake -f --filegraph | dot -Tpdf > filegraph.pdf'
 
 
 echo "🦠 SporeFlow loaded successfully!"
-echo "    - First of all, use sf_download_db to download the database that will be used (specify it in config/config.yml)"
-echo "    - Use sf_run to run SporeFlow in a Slurm HPC queue system"
-echo "    - Use sf_immediate to run SporeFlow and send all jobs to the queue system at once (not recommended)"
-echo "    - Use sf_draw_dag to draw a DAG of the workflow in dag.pdf"
-echo "    - Use sf_draw_rulegraph to draw a rule graph of the workflow in rulegraph.pdf"
-echo "    - Use sf_draw_filegraph to draw a file graph of the workflow in filegraph.pdf"
+echo "    🍄 Use sf_run to run SporeFlow in a Slurm HPC queue system"
+echo "    🍄 Use sf_immediate to run SporeFlow and send all jobs to the queue system at once (not recommended)"
+echo "    🍄 Use sf_draw_dag to draw a DAG of the workflow in dag.pdf"
+echo "    🍄 Use sf_draw_rulegraph to draw a rule graph of the workflow in rulegraph.pdf"
+echo "    🍄 Use sf_draw_filegraph to draw a file graph of the workflow in filegraph.pdf"
 
 

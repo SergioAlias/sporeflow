@@ -2,3 +2,4 @@
 logs
 *.pdf
 .tests
+.img/*

@@ -1,10 +1,12 @@
-# 🦠 SporeFlow: Snakemake Pipeline For Metataxonomics Workflows
+# <img src="./.img/sf_negative.png" width="500">
+
+🦠 **SporeFlow: Fungal ITS metataxonomics made easy**
 
 > ⚠️ ***Disclaimer*** ⚠️
 > 
 > *This workflow is still under development, thus it can not be used for a complete metataxonomic experiment yet.*
 
-Workflow for metataxonomic analysis of cereal soil using [QIIME2](https://qiime2.org/) and [Snakemake](https://snakemake.readthedocs.io/en/v7.32.2/).
+SporeFlow (**S**nakemake **P**ipeline F**or** M**e**tataxonomics Work**flow**s) is a pipeline for metataxonomic analysis of fungal ITS using [QIIME2](https://qiime2.org/) and [Snakemake](https://snakemake.readthedocs.io/en/v7.32.2/). It takes into consideration all the particularities of the indel-rich ITS region and modifies the typical QIIME2 workflow (which with default settings usually works well in 16S) according to these particularities.
 
 Steps working for now:
 

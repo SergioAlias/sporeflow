@@ -41,6 +41,13 @@ os.makedirs(os.path.join(config["outdir"], config["proj_name"]), exist_ok = True
 
 SAMPLES = list(set([s[:-len("_RX.fastq.gz")] for s in os.listdir(config["raw_data"])]))
 
+## optional itsxpress rule handling
+
+if config["use_itsxpress"] == True:
+  dada2_input_seqs_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/itsxpress/its_seqs.qza"
+else:
+  dada2_input_seqs_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/reads/demux.qza"
+
 ## output handling
 
 alloutput = list()

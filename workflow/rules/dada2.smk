@@ -1,6 +1,6 @@
 rule dada2:
     input:
-        config["outdir"] + "/" + config["proj_name"] + "/qiime2/itsxpress/its_seqs.qza"
+        dada2_input_seqs_qza
     output:
         table_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/table.qza",
         seqs_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/rep-seqs.qza",

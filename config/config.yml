@@ -11,7 +11,7 @@
 proj_name: cereal_fungi                     #-------#    Project name
 outdir: /scratch/salias/projects            #-------#    Directory with all projects
 raw_data: /home/salias/data/cereal_fungi    #-------#    Directory with FASTQ files
-type: ITS                                   #-------#    Region sequenced: 16S (Bacteria) or ITS (Fungi)
+type: ITS                                   #-------#    Region sequenced: 16S (Bacteria, not implemented yet) or ITS (Fungi)
 
 
 ### Databases ###
@@ -37,6 +37,7 @@ cutadapt_n_threads: 2                      #cluster#    Number of threads to use
 
 ### ITSxpress ###
 
+use_itsxpress: True           #-------#    True if you want to use ITSxpress, False otherwise (the rest of ITSxpress options will be ignored then)
 itsxpress_region: ITS2         #-------#    Regions ITS2, ITS1, and ALL can be selected
 itsxpress_cluster_id: 0.995    #-------#    Percent identity for clustering reads (0.995-1). Set to 1 for exact dereplication
 itsxpress_n_threads: 16        #cluster#    Number of threads to use for multithreaded processing (ITSxpress stops reducing runtime at about 10 cores)

@@ -18,6 +18,7 @@ Steps working for now:
 - Import FASTQ files to QIIME2 (rule `import_fastq`)
 - Trim ITS sequences in QIIME2 with [ITSxpress plugin](https://forum.qiime2.org/t/q2-itsxpress-a-tutorial-on-a-qiime-2-plugin-to-trim-its-sequences/5780) (rule `itsxpress`)
 - Denoise, dereplicate and cluster sequences in QIIME2 with [DADA2 plugin](https://docs.qiime2.org/2024.2/plugins/available/dada2/) (rule `dada2`)
+- Perform taxonomic classification in QIIME2 with [feature-classifier](https://library.qiime2.org/plugins/q2-feature-classifier/3/) (rule `classify_asv`)
 
 ## Requisites
 

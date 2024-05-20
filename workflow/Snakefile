@@ -28,7 +28,8 @@ logdirs = ["default",
           "create_manifest",
           "import_fastq",
           "itsxpress",
-          "dada2"]
+          "dada2",
+          "classify_asv"]
 
 for d in logdirs:
     os.makedirs(os.path.join("logs", d), exist_ok = True)
@@ -52,12 +53,9 @@ else:
 
 alloutput = list()
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/multiqc/multiqc_report.html")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/table.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/rep-seqs.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/denoising-stats.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/table.qzv")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/rep-seqs.qzv")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/denoising-stats.qzv")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/taxonomy.qza")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/taxonomy.qzv")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/barplot.qzv")
 
 rule all:
     input:
@@ -73,3 +71,4 @@ include: "rules/create_manifest.smk"
 include: "rules/import_fastq.smk"
 include: "rules/itsxpress.smk"
 include: "rules/dada2.smk"
+include: "rules/classify_asv.smk"

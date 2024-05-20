@@ -77,3 +77,11 @@ dada2:
     memory: 25G
     output: logs/dada2/dada2_%j.out
     error: logs/dada2/dada2_%j.err
+
+classify_asv:
+    jobname: classify_asv
+    time: 0-01:00:00
+    ncpus: 2 #cluster# Change sklearn_n_threads accordingly in config.yml
+    memory: 75G
+    output: logs/classify_asv/classify_asv_%j.out
+    error: logs/classify_asv/classify_asv_%j.err

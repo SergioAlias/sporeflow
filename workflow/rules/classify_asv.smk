@@ -7,7 +7,10 @@ rule classify_asv:
     output:
         taxonomy_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/taxonomy.qza",
         taxonomy_qzv = config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/taxonomy.qzv",
-        taxonomy_barplot = config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/barplot.qzv"
+        taxonomy_barplot = config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/barplot.qzv",
+        collapsed_table_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/collapsed_table.qza",
+        collapsed_table_qzv = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/collapsed_table.qzv"
+
     conda:
         "../envs/qiime2-amplicon-2024.2-py38-linux-conda.yml"
     params:
@@ -29,4 +32,13 @@ rule classify_asv:
           --i-taxonomy {output.taxonomy_qza} \
           --m-metadata-file {input.metadata} \
           --o-visualization {output.taxonomy_barplot}
+        time qiime taxa collapse \
+          --i-table {input.dada2_table} \
+          --i-taxonomy {output.taxonomy_qza} \
+          --p-level 7 \
+          --o-collapsed-table {output.collapsed_table_qza}
+        time qiime feature-table summarize \
+          --i-table {output.collapsed_table_qza} \
+          --m-sample-metadata-file {input.metadata} \
+          --o-visualization {output.collapsed_table_qzv}
         """

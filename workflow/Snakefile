@@ -56,6 +56,9 @@ alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/multiqc/multiq
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/taxonomy.qza")
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/taxonomy.qzv")
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/barplot.qzv")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/collapsed_table.qza")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/collapsed_table.qzv")
+
 
 rule all:
     input:

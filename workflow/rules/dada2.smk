@@ -1,6 +1,7 @@
 rule dada2:
     input:
-        dada2_input_seqs_qza
+        seqs = dada2_input_seqs_qza,
+        metadata = config["metadata"]
     output:
         table_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/table.qza",
         seqs_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/rep-seqs.qza",
@@ -25,7 +26,7 @@ rule dada2:
         """
         mkdir -p {params.outdir}
         time qiime dada2 denoise-paired \
-          --i-demultiplexed-seqs {input} \
+          --i-demultiplexed-seqs {input.seqs} \
           --p-trim-left-f {params.trimleft_f} \
           --p-trim-left-r {params.trimleft_r} \
           --p-trunc-len-f {params.trunclen_f} \
@@ -40,6 +41,7 @@ rule dada2:
           --o-denoising-stats {output.stats_qza}
         time qiime feature-table summarize \
           --i-table {output.table_qza} \
+          --m-sample-metadata-file {input.metadata} \
           --o-visualization {output.table_qzv}
         time qiime feature-table tabulate-seqs \
           --i-data {output.seqs_qza} \

@@ -1,4 +1,4 @@
-rule classify_asv:
+rule taxonomy:
     input:
         dada2_seqs = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/rep-seqs.qza",
         dada2_table = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/table.qza",

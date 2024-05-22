@@ -78,13 +78,13 @@ dada2:
     output: logs/dada2/dada2_%j.out
     error: logs/dada2/dada2_%j.err
 
-classify_asv:
-    jobname: classify_asv
+taxonomy:
+    jobname: taxonomy
     time: 0-01:00:00
     ncpus: 2 #cluster# Change sklearn_n_threads accordingly in config.yml
     memory: 75G
-    output: logs/classify_asv/classify_asv_%j.out
-    error: logs/classify_asv/classify_asv_%j.err
+    output: logs/taxonomy/taxonomy_%j.out
+    error: logs/taxonomy/taxonomy_%j.err
 
 diversity:
     jobname: diversity

@@ -29,7 +29,7 @@ logdirs = ["default",
           "import_fastq",
           "itsxpress",
           "dada2",
-          "classify_asv",
+          "taxonomy",
           "diversity"]
 
 for d in logdirs:
@@ -77,5 +77,5 @@ include: "rules/create_manifest.smk"
 include: "rules/import_fastq.smk"
 include: "rules/itsxpress.smk"
 include: "rules/dada2.smk"
-include: "rules/classify_asv.smk"
+include: "rules/taxonomy.smk"
 include: "rules/diversity.smk"

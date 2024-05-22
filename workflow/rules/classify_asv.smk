@@ -15,7 +15,7 @@ rule classify_asv:
         "../envs/qiime2-amplicon-2024.2-py38-linux-conda.yml"
     params:
         outdir = config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy",
-        nthreads = config["sklearn_n_threads"]
+        nthreads = config["taxonomy_n_threads"]
     shell:
         """
         mkdir -p {params.outdir}

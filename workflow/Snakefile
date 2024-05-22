@@ -29,7 +29,8 @@ logdirs = ["default",
           "import_fastq",
           "itsxpress",
           "dada2",
-          "classify_asv"]
+          "classify_asv",
+          "diversity"]
 
 for d in logdirs:
     os.makedirs(os.path.join("logs", d), exist_ok = True)
@@ -58,6 +59,8 @@ alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonom
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/barplot.qzv")
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/collapsed_table.qza")
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/collapsed_table.qzv")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/rarefaction_curves.qzv")
+
 
 
 rule all:
@@ -75,3 +78,4 @@ include: "rules/import_fastq.smk"
 include: "rules/itsxpress.smk"
 include: "rules/dada2.smk"
 include: "rules/classify_asv.smk"
+include: "rules/diversity.smk"

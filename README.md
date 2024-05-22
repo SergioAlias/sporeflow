@@ -18,7 +18,8 @@ Steps working for now:
 - Import FASTQ files to QIIME2 (rule `import_fastq`)
 - Trim ITS sequences in QIIME2 with [ITSxpress plugin](https://forum.qiime2.org/t/q2-itsxpress-a-tutorial-on-a-qiime-2-plugin-to-trim-its-sequences/5780) (rule `itsxpress`)
 - Denoise, dereplicate and cluster sequences in QIIME2 with [DADA2 plugin](https://docs.qiime2.org/2024.2/plugins/available/dada2/) (rule `dada2`)
-- Perform taxonomic classification in QIIME2 with [feature-classifier](https://library.qiime2.org/plugins/q2-feature-classifier/3/) and generate barplots (rule `classify_asv`)
+- Perform taxonomic classification in QIIME2 with [feature-classifier plugin](https://library.qiime2.org/plugins/q2-feature-classifier/3/) and generate barplots (rule `classify_asv`)
+- Perform diversity analysis in QIIME2 with [diversity plugin](https://docs.qiime2.org/2024.2/plugins/available/diversity/) (rule `diversity`)
 
 ## Requisites
 
@@ -28,20 +29,22 @@ The only prerequisite is having Conda installed. In this regard, we **highly rec
 
 1. Clone the repository
 
-2. Run the following command to download (if needed) and activate the SporeFlow environment, and to set aliases for the main functions:
+2. Create a Screen (see section **Immediate submit and Screen**)
+
+3. Run the following command to download (if needed) and activate the SporeFlow environment, and to set aliases for the main functions:
 ```bash
 source init_sporeflow.sh
 ```
 
-3. Edit `config/config.yml` with your experiment details. Variables annotated with #cluster# must also be updated in `config/cluster_config.yml`.
+4. Edit `config/config.yml` with your experiment details. Variables annotated with #cluster# must also be updated in `config/cluster_config.yml`.
 
-4. If needed, modify `time`, `ncpus` and `memory` variables in `config/cluster_config.yml`.
+5. If needed, modify `time`, `ncpus` and `memory` variables in `config/cluster_config.yml`.
 
-5. Download a UNITE classfier in QIIME2 format from [https://github.com/colinbrislawn/unite-train/releases](https://github.com/colinbrislawn/unite-train/releases). We recommend using one of the following (remember to change the name accordingly in `config/config.yml`):
+6. Download a UNITE classfier in QIIME2 format from [https://github.com/colinbrislawn/unite-train/releases](https://github.com/colinbrislawn/unite-train/releases). We recommend using one of the following (remember to change the name accordingly in `config/config.yml`):
    - `unite_ver10_dynamic_all_04.04.2024-Q2-2024.2.qza`
    - `unite_ver10_99_all_04.04.2024-Q2-2024.2.qza`  
 
-6. Run the following command to start the workflow:
+7. Run the following command to start the workflow:
 ```bash
 sf_run
 ```

@@ -53,10 +53,19 @@ dada2_trunc_len_r: 0     #-------#    Position at which reverse read sequences s
 dada2_max_ee_f: 8        #-------#    Forward reads with number of expected errors higher than this value will be discarded
 dada2_max_ee_r: 8        #-------#    Reverse reads with number of expected errors higher than this value will be discarded
 dada2_trunc_q: 8         #-------#    Reads are truncated at the first instance of a quality score less than or equal to this value
-dada2_min_overlap: 12    #-------#    The minimum length of the overlap required for merging the forward and reverse reads
+dada2_min_overlap: 12    #-------#    Minimum length of the overlap required for merging the forward and reverse reads
 dada2_n_threads: 20      #cluster#    Number of threads to use for multithreaded processing
 
 
 ### Sklearn-based taxonomy classifier ###
 
 sklearn_n_threads: 2    #cluster#    Maximum number of concurrent worker processes
+
+
+### Diversity analysis ###
+
+diveristy_rarefaction_max_depth: 150512    #-------#    Maximum rarefaction depth (use the number of sequences of the biggest sample)
+diversity_rarefaction_steps: 20            #-------#    Rarefaction depths to include
+diversity_rarefaction_iterations: 10       #-------#    Rarefaction depths to include
+diversity_sampling_depth: 71049            #-------#    Total frequency that each sample should be rarefied to prior to computing diversity metrics (use the number of sequences of the poorest sample)
+diversity_beta_n_threads: 4                #cluster#    Number of concurrent jobs to use in performing beta methods

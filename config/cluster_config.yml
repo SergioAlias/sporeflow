@@ -85,3 +85,11 @@ classify_asv:
     memory: 75G
     output: logs/classify_asv/classify_asv_%j.out
     error: logs/classify_asv/classify_asv_%j.err
+
+diversity:
+    jobname: diversity
+    time: 0-01:00:00
+    ncpus: 4 #cluster# Change beta_diversity_n_threads accordingly in config.yml
+    memory: 10G
+    output: logs/diversity/diversity_%j.out
+    error: logs/diversity/diversity_%j.err

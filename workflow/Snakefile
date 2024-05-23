@@ -60,7 +60,16 @@ alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonom
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/collapsed_table.qza")
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/collapsed_table.qzv")
 alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/rarefaction_curves.qzv")
-
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/rarefied_table.qza")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/observed_features_vector.qza")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/shannon_vector.qza")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/evenness_vector.qza")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/jaccard_distance_matrix.qza")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/bray_curtis_distance_matrix.qza")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/jaccard_pcoa_results.qza")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/bray_curtis_pcoa_results.qza")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/jaccard_emperor.qzv")
+alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/bray_curtis_emperor.qzv")
 
 
 rule all:

@@ -1,13 +1,13 @@
 rule create_manifest:
     input:
-        expand(config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed/{sample}_" + config["r1_suf"] + "_cutadapt.fastq.gz", sample = SAMPLES)
+        expand(cutadapt_dir("{sample}_" + config["r1_suf"] + "_cutadapt.fastq.gz"), sample = SAMPLES)
     output:
-        config["outdir"] + "/" + config["proj_name"] + "/qiime2/manifest.tsv"
+        qiime2_dir("manifest.tsv")
     conda:
-        "../envs/qiime2-amplicon-2024.2-py38-linux-conda.yml"
+        conda_qiime2
     params:
-        outdir = config["outdir"] + "/" + config["proj_name"] + "/qiime2",
-        reads_dir = config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed",
+        outdir = qiime2_dir(),
+        reads_dir = cutadapt_dir(),
         end = config["end"],
         frw = config["r1_suf"],
         rev = config["r2_suf"]

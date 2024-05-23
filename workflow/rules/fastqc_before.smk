@@ -1,16 +1,16 @@
 rule fastqc_before:
     input:
-        fq_f = config["raw_data"] + "/{sample}_" + config["r1_suf"] + ".fastq.gz",
-        fq_r = config["raw_data"] + "/{sample}_" + config["r2_suf"] + ".fastq.gz",
+        fq_f = os.path.join(config["raw_data"], "{sample}_" + config["r1_suf"] + ".fastq.gz"),
+        fq_r = os.path.join(config["raw_data"], "{sample}_" + config["r2_suf"] + ".fastq.gz")
     output:
-        html_f = config["outdir"] + "/" + config["proj_name"] + "/fastqc_before/{sample}_" + config["r1_suf"] + "_fastqc.html",
-        html_r = config["outdir"] + "/" + config["proj_name"] + "/fastqc_before/{sample}_" + config["r2_suf"] + "_fastqc.html",
-        zip_f = config["outdir"] + "/" + config["proj_name"] + "/fastqc_before/{sample}_" + config["r1_suf"] + "_fastqc.zip",
-        zip_r = config["outdir"] + "/" + config["proj_name"] + "/fastqc_before/{sample}_" + config["r2_suf"] + "_fastqc.zip"
+        html_f = fastqc_before_dir("{sample}_" + config["r1_suf"] + "_fastqc.html"),
+        html_r = fastqc_before_dir("{sample}_" + config["r2_suf"] + "_fastqc.html"),
+        zip_f = fastqc_before_dir("{sample}_" + config["r1_suf"] + "_fastqc.zip"),
+        zip_r = fastqc_before_dir("{sample}_" + config["r2_suf"] + "_fastqc.zip")
     conda:
-        "../envs/qc.yml"
+        conda_qc
     params:
-        outdir = config["outdir"] + "/" + config["proj_name"] + "/fastqc_before"
+        outdir = fastqc_before_dir()
     shell:
         """
         mkdir -p {params.outdir}

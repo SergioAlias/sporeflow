@@ -1,16 +1,16 @@
 rule fastqc_after:
     input:
-        fq_f = config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed" + "/{sample}_" + config["r1_suf"] + "_cutadapt.fastq.gz",
-        fq_r = config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed" + "/{sample}_" + config["r2_suf"] + "_cutadapt.fastq.gz"
+        fq_f = cutadapt_dir("{sample}_" + config["r1_suf"] + "_cutadapt.fastq.gz"),
+        fq_r = cutadapt_dir("{sample}_" + config["r2_suf"] + "_cutadapt.fastq.gz")
     output:
-        html_f = config["outdir"] + "/" + config["proj_name"] + "/fastqc_after/{sample}_" + config["r1_suf"] + "_cutadapt_fastqc.html",
-        html_r = config["outdir"] + "/" + config["proj_name"] + "/fastqc_after/{sample}_" + config["r2_suf"] + "_cutadapt_fastqc.html",
-        zip_f = config["outdir"] + "/" + config["proj_name"] + "/fastqc_after/{sample}_" + config["r1_suf"] + "_cutadapt_fastqc.zip",
-        zip_r = config["outdir"] + "/" + config["proj_name"] + "/fastqc_after/{sample}_" + config["r2_suf"] + "_cutadapt_fastqc.zip"
+        html_f = fastqc_after_dir("{sample}_" + config["r1_suf"] + "_cutadapt_fastqc.html"),
+        html_r = fastqc_after_dir("{sample}_" + config["r2_suf"] + "_cutadapt_fastqc.html"),
+        zip_f = fastqc_after_dir("{sample}_" + config["r1_suf"] + "_cutadapt_fastqc.zip"),
+        zip_r = fastqc_after_dir("{sample}_" + config["r2_suf"] + "_cutadapt_fastqc.zip")
     conda:
-        "../envs/qc.yml"
+        conda_qc
     params:
-        outdir = config["outdir"] + "/" + config["proj_name"] + "/fastqc_after"
+        outdir = fastqc_after_dir()
     shell:
         """
         mkdir -p {params.outdir}

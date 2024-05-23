@@ -1,16 +1,16 @@
 rule cutadapt:
     input:
-        fq_f = config["raw_data"] + "/{sample}_" + config["r1_suf"] + ".fastq.gz",
-        fq_r = config["raw_data"] + "/{sample}_" + config["r2_suf"] + ".fastq.gz",
+        fq_f = os.path.join(config["raw_data"], "{sample}_" + config["r1_suf"] + ".fastq.gz"),
+        fq_r = os.path.join(config["raw_data"], "{sample}_" + config["r2_suf"] + ".fastq.gz")
     output:
-        fq_trim_f = config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed" + "/{sample}_" + config["r1_suf"] + "_cutadapt.fastq.gz",
-        fq_trim_r = config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed" + "/{sample}_" + config["r2_suf"] + "_cutadapt.fastq.gz",
-        trim_log = config["outdir"] + "/" + config["proj_name"] + "/cutadapt_logs" + "/{sample}_cutadapt.log"
+        fq_trim_f = cutadapt_dir("{sample}_" + config["r1_suf"] + "_cutadapt.fastq.gz"),
+        fq_trim_r = cutadapt_dir("{sample}_" + config["r2_suf"] + "_cutadapt.fastq.gz"),
+        trim_log = cutadapt_logdir("{sample}_cutadapt.log")
     conda:
-        "../envs/qiime2-amplicon-2024.2-py38-linux-conda.yml"
+        conda_qiime2
     params:
-        outdir = config["outdir"] + "/" + config["proj_name"] + "/reads_trimmed",
-        log_outdir = config["outdir"] + "/" + config["proj_name"] + "/cutadapt_logs",
+        outdir = cutadapt_dir(),
+        log_outdir = cutadapt_logdir(),
         primer_f = config["cutadapt_primer_f"],
         primer_r = config["cutadapt_primer_r"],
         revcom_f = revComplementary(config["cutadapt_primer_f"]),

@@ -17,6 +17,12 @@ def revComplementary(seq):
                   "V":"B","D":"H","H":"D"}
     return "".join([trans_dict[nt] for nt in seq[::-1]])
 
+def pathCreator(dir):
+    """ Return a lambda function that joins paths with the specified dir
+        Useful for not repeating paths all the time in rules
+    """
+    return lambda *args: os.path.join(dir, *args)
+
 ### create log dirs
 
 logdirs = ["default",
@@ -35,9 +41,27 @@ logdirs = ["default",
 for d in logdirs:
     os.makedirs(os.path.join("logs", d), exist_ok = True)
 
+## directory variables and functions
+
+proj_dir = os.path.join(config["outdir"], config["proj_name"])
+
+fastqc_before_dir = pathCreator(os.path.join(proj_dir, "fastqc_before"))
+cutadapt_dir = pathCreator(os.path.join(proj_dir, "reads_trimmed"))
+cutadapt_logdir = pathCreator(os.path.join(proj_dir, "cutadapt_logs"))
+fastqc_after_dir = pathCreator(os.path.join(proj_dir, "fastqc_after"))
+multiqc_dir = pathCreator(os.path.join(proj_dir, "multiqc"))
+qiime2_dir = pathCreator(os.path.join(proj_dir, "qiime2"))
+
+## conda environment variables
+
+code_dir = os.path.abspath(os.getcwd())
+conda_env_dir = os.path.join(code_dir, "workflow", "envs")
+conda_qc = os.path.join(conda_env_dir, "qc.yml")
+conda_qiime2 = os.path.join(conda_env_dir, "qiime2-amplicon-2024.2-py38-linux-conda.yml")
+
 ## create outdir
 
-os.makedirs(os.path.join(config["outdir"], config["proj_name"]), exist_ok = True)
+os.makedirs(proj_dir, exist_ok = True)
 
 ## sample names
 

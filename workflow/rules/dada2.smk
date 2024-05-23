@@ -25,6 +25,7 @@ rule dada2:
     shell:
         """
         mkdir -p {params.outdir}
+        >&2 echo "DADA2"
         time qiime dada2 denoise-paired \
           --i-demultiplexed-seqs {input.seqs} \
           --p-trim-left-f {params.trimleft_f} \
@@ -39,6 +40,7 @@ rule dada2:
           --o-table {output.table_qza} \
           --o-representative-sequences {output.seqs_qza} \
           --o-denoising-stats {output.stats_qza}
+        >&2 echo "QZV generation"
         time qiime feature-table summarize \
           --i-table {output.table_qza} \
           --m-sample-metadata-file {input.metadata} \

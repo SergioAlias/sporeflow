@@ -14,6 +14,7 @@ rule itsxpress:
     shell:
         """
         mkdir -p {params.outdir}
+        >&2 echo "ITSxpress"
         time qiime itsxpress trim-pair-output-unmerged \
           --i-per-sample-sequences {input} \
           --p-region {params.region} \
@@ -21,6 +22,7 @@ rule itsxpress:
           --p-cluster-id {params.cluster_id} \
           --p-threads {params.nthreads} \
           --o-trimmed {output.fastq_qza}
+        >&2 echo "QZV generation"
         time qiime demux summarize \
           --i-data {output.fastq_qza} \
           --o-visualization {output.fastq_qzv}

@@ -1,4 +1,4 @@
-import os
+import os, csv
 from snakemake.utils import min_version
 
 min_version("7.32.4")
@@ -35,6 +35,7 @@ logdirs = ["default",
           "import_fastq",
           "itsxpress",
           "dada2",
+          "group_feature_table",
           "taxonomy",
           "diversity"]
 
@@ -74,6 +75,11 @@ if config["use_itsxpress"] == True:
 else:
   dada2_input_seqs_qza = qiime2_dir("reads", "demux.qza")
 
+## feature table variations
+
+with open(config["metadata"], 'r', newline='') as f:
+    TABLES = [""] + [i + '_' for i in [*next(csv.reader(f, delimiter='\t'))[1:], "sp_collapsed"]]
+
 ## output handling
 
 alloutput = list()
@@ -83,17 +89,7 @@ alloutput.append(qiime2_dir("taxonomy", "taxonomy.qzv"))
 alloutput.append(qiime2_dir("taxonomy", "barplot.qzv"))
 alloutput.append(qiime2_dir("dada2", "sp_collapsed_table.qza"))
 alloutput.append(qiime2_dir("dada2", "sp_collapsed_table.qzv"))
-alloutput.append(qiime2_dir("diversity", "rarefaction_curves.qzv"))
-alloutput.append(qiime2_dir("diversity", "rarefied_table.qza"))
-alloutput.append(qiime2_dir("diversity", "observed_features_vector.qza"))
-alloutput.append(qiime2_dir("diversity", "shannon_vector.qza"))
-alloutput.append(qiime2_dir("diversity", "evenness_vector.qza"))
-alloutput.append(qiime2_dir("diversity", "jaccard_distance_matrix.qza"))
-alloutput.append(qiime2_dir("diversity", "bray_curtis_distance_matrix.qza"))
-alloutput.append(qiime2_dir("diversity", "jaccard_pcoa_results.qza"))
-alloutput.append(qiime2_dir("diversity", "bray_curtis_pcoa_results.qza"))
-alloutput.append(qiime2_dir("diversity", "jaccard_emperor.qzv"))
-alloutput.append(qiime2_dir("diversity", "bray_curtis_emperor.qzv"))
+alloutput.append(expand(qiime2_dir("diversity", "{column}rarefaction_curves.qzv"), column = TABLES))
 
 
 rule all:
@@ -110,5 +106,6 @@ include: "rules/create_manifest.smk"
 include: "rules/import_fastq.smk"
 include: "rules/itsxpress.smk"
 include: "rules/dada2.smk"
+include: "rules/group_feature_table.smk"
 include: "rules/taxonomy.smk"
 include: "rules/diversity.smk"

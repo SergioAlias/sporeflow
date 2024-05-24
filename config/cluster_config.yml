@@ -78,6 +78,14 @@ dada2:
     output: logs/dada2/dada2_%j.out
     error: logs/dada2/dada2_%j.err
 
+group_feature_table:
+    jobname: group_feature_table
+    time: 0-00:10:00
+    ncpus: 1
+    memory: 200
+    output: logs/group_feature_table/group_feature_table_%j.out
+    error: logs/group_feature_table/group_feature_table_%j.err
+
 taxonomy:
     jobname: taxonomy
     time: 0-01:00:00

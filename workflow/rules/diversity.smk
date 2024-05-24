@@ -1,19 +1,19 @@
 rule diversity:
     input:
         metadata = config["metadata"],
-        table = qiime2_dir("dada2", "table.qza")
+        table = qiime2_dir("dada2", "{column}table.qza")
     output:
-        rarefaction = qiime2_dir("diversity", "rarefaction_curves.qzv"),
-        rarefied_table = qiime2_dir("diversity", "rarefied_table.qza"),
-        obs_feat_vector = qiime2_dir("diversity", "observed_features_vector.qza"),
-        shannon_vector = qiime2_dir("diversity", "shannon_vector.qza"),
-        evenness_vector = qiime2_dir("diversity", "evenness_vector.qza"),
-        jaccard_dist_mat = qiime2_dir("diversity", "jaccard_distance_matrix.qza"),
-        bray_curtis_dist_mat = qiime2_dir("diversity", "bray_curtis_distance_matrix.qza"),
-        jaccard_pcoa = qiime2_dir("diversity", "jaccard_pcoa_results.qza"),
-        bray_curtis_pcoa = qiime2_dir("diversity", "bray_curtis_pcoa_results.qza"),
-        jaccard_emperor = qiime2_dir("diversity", "jaccard_emperor.qzv"),
-        bray_curtis_emperor = qiime2_dir("diversity", "bray_curtis_emperor.qzv")
+        rarefaction = qiime2_dir("diversity", "{column}rarefaction_curves.qzv"),
+        rarefied_table = qiime2_dir("diversity", "{column}rarefied_table.qza"),
+        obs_feat_vector = qiime2_dir("diversity", "{column}observed_features_vector.qza"),
+        shannon_vector = qiime2_dir("diversity", "{column}shannon_vector.qza"),
+        evenness_vector = qiime2_dir("diversity", "{column}evenness_vector.qza"),
+        jaccard_dist_mat = qiime2_dir("diversity", "{column}jaccard_distance_matrix.qza"),
+        bray_curtis_dist_mat = qiime2_dir("diversity", "{column}bray_curtis_distance_matrix.qza"),
+        jaccard_pcoa = qiime2_dir("diversity", "{column}jaccard_pcoa_results.qza"),
+        bray_curtis_pcoa = qiime2_dir("diversity", "{column}bray_curtis_pcoa_results.qza"),
+        jaccard_emperor = qiime2_dir("diversity", "{column}jaccard_emperor.qzv"),
+        bray_curtis_emperor = qiime2_dir("diversity", "{column}bray_curtis_emperor.qzv")
     conda:
         conda_qiime2
     params:

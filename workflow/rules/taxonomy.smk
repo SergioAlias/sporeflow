@@ -1,20 +1,19 @@
 rule taxonomy:
     input:
-        dada2_seqs = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/rep-seqs.qza",
-        dada2_table = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/table.qza",
+        dada2_seqs = qiime2_dir("dada2", "rep-seqs.qza"),
+        dada2_table = qiime2_dir("dada2", "table.qza"),
         metadata = config["metadata"],
-        classifier = config["db_dir"] + "/" + config["db_file"]
+        classifier = os.path.join(config["db_dir"], config["db_file"])
     output:
-        taxonomy_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/taxonomy.qza",
-        taxonomy_qzv = config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/taxonomy.qzv",
-        taxonomy_barplot = config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/barplot.qzv",
-        collapsed_table_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/collapsed_table.qza",
-        collapsed_table_qzv = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/collapsed_table.qzv"
-
+        taxonomy_qza = qiime2_dir("taxonomy", "taxonomy.qza"),
+        taxonomy_qzv = qiime2_dir("taxonomy", "taxonomy.qzv"),
+        taxonomy_barplot = qiime2_dir("taxonomy", "barplot.qzv"),
+        collapsed_table_qza = qiime2_dir("dada2", "collapsed_table.qza"),
+        collapsed_table_qzv = qiime2_dir("dada2", "collapsed_table.qzv")
     conda:
-        "../envs/qiime2-amplicon-2024.2-py38-linux-conda.yml"
+        conda_qiime2
     params:
-        outdir = config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy",
+        outdir = qiime2_dir("taxonomy"),
         nthreads = config["taxonomy_n_threads"]
     shell:
         """

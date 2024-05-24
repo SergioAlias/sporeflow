@@ -1,13 +1,13 @@
 rule itsxpress:
     input:
-        config["outdir"] + "/" + config["proj_name"] + "/qiime2/reads/demux.qza"
+        qiime2_dir("reads", "demux.qza")
     output:
-        fastq_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/itsxpress/its_seqs.qza",
-        fastq_qzv = config["outdir"] + "/" + config["proj_name"] + "/qiime2/itsxpress/its_seqs.qzv",
+        fastq_qza = qiime2_dir("itsxpress", "its_seqs.qza"),
+        fastq_qzv = qiime2_dir("itsxpress", "its_seqs.qzv")
     conda:
-        "../envs/qiime2-amplicon-2024.2-py38-linux-conda.yml"
+        conda_qiime2
     params:
-        outdir = config["outdir"] + "/" + config["proj_name"] + "/qiime2/itsxpress",
+        outdir = qiime2_dir("itsxpress"),
         region = config["itsxpress_region"],
         cluster_id = config["itsxpress_cluster_id"],
         nthreads = config["itsxpress_n_threads"]

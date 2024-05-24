@@ -1,11 +1,11 @@
 rule import_fastq:
     input:
-        config["outdir"] + "/" + config["proj_name"] + "/qiime2/manifest.tsv"
+        qiime2_dir("manifest.tsv")
     output:
-        fastq_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/reads/demux.qza",
-        fastq_qzv = config["outdir"] + "/" + config["proj_name"] + "/qiime2/reads/demux.qzv"
+        fastq_qza = qiime2_dir("reads", "demux.qza"),
+        fastq_qzv = qiime2_dir("reads", "demux.qzv")
     conda:
-        "../envs/qiime2-amplicon-2024.2-py38-linux-conda.yml"
+        conda_qiime2
     shell:
         """
         >&2 echo "Import sequences"

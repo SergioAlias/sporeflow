@@ -70,30 +70,30 @@ SAMPLES = list(set([s[:-len("_RX.fastq.gz")] for s in os.listdir(config["raw_dat
 ## optional itsxpress rule handling
 
 if config["use_itsxpress"] == True:
-  dada2_input_seqs_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/itsxpress/its_seqs.qza"
+  dada2_input_seqs_qza = qiime2_dir("itsxpress", "its_seqs.qza")
 else:
-  dada2_input_seqs_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/reads/demux.qza"
+  dada2_input_seqs_qza = qiime2_dir("reads", "demux.qza")
 
 ## output handling
 
 alloutput = list()
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/multiqc/multiqc_report.html")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/taxonomy.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/taxonomy.qzv")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/taxonomy/barplot.qzv")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/collapsed_table.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/collapsed_table.qzv")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/rarefaction_curves.qzv")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/rarefied_table.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/observed_features_vector.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/shannon_vector.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/evenness_vector.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/jaccard_distance_matrix.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/bray_curtis_distance_matrix.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/jaccard_pcoa_results.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/bray_curtis_pcoa_results.qza")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/jaccard_emperor.qzv")
-alloutput.append(config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/bray_curtis_emperor.qzv")
+alloutput.append(multiqc_dir("multiqc_report.html"))
+alloutput.append(qiime2_dir("taxonomy", "taxonomy.qza"))
+alloutput.append(qiime2_dir("taxonomy", "taxonomy.qzv"))
+alloutput.append(qiime2_dir("taxonomy", "barplot.qzv"))
+alloutput.append(qiime2_dir("dada2", "collapsed_table.qza"))
+alloutput.append(qiime2_dir("dada2", "collapsed_table.qzv"))
+alloutput.append(qiime2_dir("diversity", "rarefaction_curves.qzv"))
+alloutput.append(qiime2_dir("diversity", "rarefied_table.qza"))
+alloutput.append(qiime2_dir("diversity", "observed_features_vector.qza"))
+alloutput.append(qiime2_dir("diversity", "shannon_vector.qza"))
+alloutput.append(qiime2_dir("diversity", "evenness_vector.qza"))
+alloutput.append(qiime2_dir("diversity", "jaccard_distance_matrix.qza"))
+alloutput.append(qiime2_dir("diversity", "bray_curtis_distance_matrix.qza"))
+alloutput.append(qiime2_dir("diversity", "jaccard_pcoa_results.qza"))
+alloutput.append(qiime2_dir("diversity", "bray_curtis_pcoa_results.qza"))
+alloutput.append(qiime2_dir("diversity", "jaccard_emperor.qzv"))
+alloutput.append(qiime2_dir("diversity", "bray_curtis_emperor.qzv"))
 
 
 rule all:

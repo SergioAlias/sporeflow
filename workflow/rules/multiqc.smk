@@ -2,7 +2,7 @@ rule multiqc:
     input:
         zip_f = expand(fastqc_before_dir("{sample}_" + config["r1_suf"] + "_fastqc.zip"), sample = SAMPLES),
         zip_r = expand(fastqc_before_dir("{sample}_" + config["r2_suf"] + "_fastqc.zip"), sample = SAMPLES),
-        trim_log = expand(cutadapt_logdir("{sample}_cutadapt.log") sample = SAMPLES),
+        trim_log = expand(cutadapt_logdir("{sample}_cutadapt.log"), sample = SAMPLES),
         zip_trim_f = expand(fastqc_after_dir("{sample}_" + config["r1_suf"] + "_cutadapt_fastqc.zip"), sample = SAMPLES),
         zip_trim_r = expand(fastqc_after_dir("{sample}_" + config["r2_suf"] + "_cutadapt_fastqc.zip"), sample = SAMPLES)
     output:

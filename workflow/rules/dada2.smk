@@ -3,16 +3,16 @@ rule dada2:
         seqs = dada2_input_seqs_qza,
         metadata = config["metadata"]
     output:
-        table_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/table.qza",
-        seqs_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/rep-seqs.qza",
-        stats_qza = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/denoising-stats.qza",
-        table_qzv = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/table.qzv",
-        seqs_qzv = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/rep-seqs.qzv",
-        stats_qzv = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/denoising-stats.qzv"
+        table_qza = qiime2_dir("dada2", "table.qza"),
+        seqs_qza = qiime2_dir("dada2", "rep-seqs.qza"),
+        stats_qza = qiime2_dir("dada2", "denoising-stats.qza"),
+        table_qzv = qiime2_dir("dada2", "table.qzv"),
+        seqs_qzv = qiime2_dir("dada2", "rep-seqs.qzv"),
+        stats_qzv = qiime2_dir("dada2", "denoising-stats.qzv")
     conda:
-        "../envs/qiime2-amplicon-2024.2-py38-linux-conda.yml"
+        conda_qiime2
     params:
-        outdir = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2",
+        outdir = qiime2_dir("dada2"),
         trimleft_f = config["dada2_trim_left_f"],
         trimleft_r = config["dada2_trim_left_r"],
         trunclen_f = config["dada2_trunc_len_f"],

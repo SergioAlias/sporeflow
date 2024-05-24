@@ -1,23 +1,23 @@
 rule diversity:
     input:
         metadata = config["metadata"],
-        table = config["outdir"] + "/" + config["proj_name"] + "/qiime2/dada2/table.qza"
+        table = qiime2_dir("dada2", "table.qza")
     output:
-        rarefaction = config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/rarefaction_curves.qzv",
-        rarefied_table = config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/rarefied_table.qza",
-        obs_feat_vector = config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/observed_features_vector.qza",
-        shannon_vector = config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/shannon_vector.qza",
-        evenness_vector = config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/evenness_vector.qza",
-        jaccard_dist_mat = config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/jaccard_distance_matrix.qza",
-        bray_curtis_dist_mat = config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/bray_curtis_distance_matrix.qza",
-        jaccard_pcoa = config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/jaccard_pcoa_results.qza",
-        bray_curtis_pcoa = config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/bray_curtis_pcoa_results.qza",
-        jaccard_emperor = config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/jaccard_emperor.qzv",
-        bray_curtis_emperor = config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity/bray_curtis_emperor.qzv"
+        rarefaction = qiime2_dir("diversity", "rarefaction_curves.qzv"),
+        rarefied_table = qiime2_dir("diversity", "rarefied_table.qza"),
+        obs_feat_vector = qiime2_dir("diversity", "observed_features_vector.qza"),
+        shannon_vector = qiime2_dir("diversity", "shannon_vector.qza"),
+        evenness_vector = qiime2_dir("diversity", "evenness_vector.qza"),
+        jaccard_dist_mat = qiime2_dir("diversity", "jaccard_distance_matrix.qza"),
+        bray_curtis_dist_mat = qiime2_dir("diversity", "bray_curtis_distance_matrix.qza"),
+        jaccard_pcoa = qiime2_dir("diversity", "jaccard_pcoa_results.qza"),
+        bray_curtis_pcoa = qiime2_dir("diversity", "bray_curtis_pcoa_results.qza"),
+        jaccard_emperor = qiime2_dir("diversity", "jaccard_emperor.qzv"),
+        bray_curtis_emperor = qiime2_dir("diversity", "bray_curtis_emperor.qzv")
     conda:
-        "../envs/qiime2-amplicon-2024.2-py38-linux-conda.yml"
+        conda_qiime2
     params:
-        outdir = config["outdir"] + "/" + config["proj_name"] + "/qiime2/diversity",
+        outdir = qiime2_dir("diversity"),
         max_depth = config["diveristy_rarefaction_max_depth"],
         steps = config["diversity_rarefaction_steps"],
         iterations = config["diversity_rarefaction_iterations"],

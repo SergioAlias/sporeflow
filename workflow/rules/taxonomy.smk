@@ -8,8 +8,8 @@ rule taxonomy:
         taxonomy_qza = qiime2_dir("taxonomy", "taxonomy.qza"),
         taxonomy_qzv = qiime2_dir("taxonomy", "taxonomy.qzv"),
         taxonomy_barplot = qiime2_dir("taxonomy", "barplot.qzv"),
-        collapsed_table_qza = qiime2_dir("dada2", "collapsed_table.qza"),
-        collapsed_table_qzv = qiime2_dir("dada2", "collapsed_table.qzv")
+        collapsed_table_qza = qiime2_dir("dada2", "sp_collapsed_table.qza"),
+        collapsed_table_qzv = qiime2_dir("dada2", "sp_collapsed_table.qzv")
     conda:
         conda_qiime2
     params:

@@ -26,14 +26,14 @@ rule diversity:
     shell:
         """
         mkdir -p {params.outdir}
-        >&2 echo "Alpha rarefaction"
+        >&2 printf "\nAlpha rarefaction:\n"
         time qiime diversity alpha-rarefaction \
           --i-table {input.table} \
           --p-max-depth {params.max_depth} \
           --p-steps {params.steps} \
           --p-iterations {params.iterations} \
           --o-visualization {output.rarefaction}
-        >&2 echo "Diversity core metrics"
+        >&2 printf "\nDiversity core metrics:\n"
         time qiime diversity core-metrics \
           --i-table {input.table} \
           --p-sampling-depth {params.sampling_depth} \

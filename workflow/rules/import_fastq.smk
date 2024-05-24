@@ -8,13 +8,13 @@ rule import_fastq:
         conda_qiime2
     shell:
         """
-        >&2 echo "Import sequences"
+        >&2 printf "\nImport sequences:\n"
         time qiime tools import \
           --type 'SampleData[PairedEndSequencesWithQuality]' \
           --input-path {input} \
           --output-path {output.fastq_qza} \
           --input-format PairedEndFastqManifestPhred33V2
-        >&2 echo "QZV generation"
+        >&2 printf "\nQZV generation:\n"
         time qiime demux summarize \
           --i-data {output.fastq_qza} \
           --o-visualization {output.fastq_qzv}

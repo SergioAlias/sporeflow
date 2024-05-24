@@ -18,13 +18,13 @@ rule taxonomy:
     shell:
         """
         mkdir -p {params.outdir}
-        >&2 echo "Taxonomic classification"
+        >&2 printf "\nTaxonomic classification:\n"
         time qiime feature-classifier classify-sklearn \
           --i-classifier {input.classifier} \
           --i-reads {input.dada2_seqs} \
           --p-n-jobs {params.nthreads} \
           --o-classification {output.taxonomy_qza}
-        >&2 echo "QZV generation"
+        >&2 printf "\nQZV generation:\n"
         time qiime metadata tabulate \
           --m-input-file {output.taxonomy_qza} \
           --o-visualization {output.taxonomy_qzv}
@@ -33,7 +33,7 @@ rule taxonomy:
           --i-taxonomy {output.taxonomy_qza} \
           --m-metadata-file {input.metadata} \
           --o-visualization {output.taxonomy_barplot}
-        >&2 echo "Collapse table to species level"
+        >&2 printf "\nCollapse feature table to species level:\n"
         time qiime taxa collapse \
           --i-table {input.dada2_table} \
           --i-taxonomy {output.taxonomy_qza} \

@@ -1,18 +1,18 @@
 rule group_feature_table:
     input:
-        table = qiime2_dir("dada2", "table.qza"),
+        table = qiime2_dir("feature_tables", "table.qza"),
         metadata = config["metadata"]
     output:
-        expand(qiime2_dir("dada2", "{column}_table.qza"), column = META_COLS),
-        expand(qiime2_dir("dada2", "{column}_table.qzv"), column = META_COLS)
+        expand(qiime2_dir("feature_tables", "{column}_table.qza"), column = META_COLS),
+        expand(qiime2_dir("feature_tables", "{column}_table.qzv"), column = META_COLS)
     conda:
         conda_qiime2
     params:
-        qiime2_dir("dada2")
+        qiime2_dir("feature_tables")
     shell:
         """
           headers=$(head -n 1 {input.metadata})
-          IFS=$'\t' read -r -a header_array <<< "$headers"
+          IFS=$'\\t' read -r -a header_array <<< "$headers"
           >&2 printf "\nFeature table grouping and QZV generation:\n"
           for ((i = 1; i < ${{#header_array[@]}}; i++)); do
             time qiime feature-table group \

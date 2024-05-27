@@ -82,7 +82,7 @@ group_feature_table:
     jobname: group_feature_table
     time: 0-00:10:00
     ncpus: 1
-    memory: 200
+    memory: 2G
     output: logs/group_feature_table/group_feature_table_%j.out
     error: logs/group_feature_table/group_feature_table_%j.err
 
@@ -93,6 +93,22 @@ taxonomy:
     memory: 75G
     output: logs/taxonomy/taxonomy_%j.out
     error: logs/taxonomy/taxonomy_%j.err
+
+collapse_feature_table:
+    jobname: collapse_feature_table
+    time: 0-00:15:00
+    ncpus: 1
+    memory: 2G
+    output: logs/collapse_feature_table/collapse_feature_table_%j.out
+    error: logs/collapse_feature_table/collapse_feature_table_%j.err
+
+adapt_metadata:
+    jobname: adapt_metadata
+    time: 0-00:10:00
+    ncpus: 1
+    memory: 200
+    output: logs/adapt_metadata/adapt_metadata_%j.out
+    error: logs/adapt_metadata/adapt_metadata_%j.err
 
 diversity:
     jobname: diversity

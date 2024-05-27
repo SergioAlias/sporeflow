@@ -3,16 +3,17 @@ rule dada2:
         seqs = dada2_input_seqs_qza,
         metadata = config["metadata"]
     output:
-        table_qza = qiime2_dir("dada2", "table.qza"),
+        table_qza = qiime2_dir("feature_tables", "table.qza"),
         seqs_qza = qiime2_dir("dada2", "rep-seqs.qza"),
         stats_qza = qiime2_dir("dada2", "denoising-stats.qza"),
-        table_qzv = qiime2_dir("dada2", "table.qzv"),
+        table_qzv = qiime2_dir("feature_tables", "table.qzv"),
         seqs_qzv = qiime2_dir("dada2", "rep-seqs.qzv"),
         stats_qzv = qiime2_dir("dada2", "denoising-stats.qzv")
     conda:
         conda_qiime2
     params:
         outdir = qiime2_dir("dada2"),
+        feature_tables_outdir = qiime2_dir("feature_tables"),
         trimleft_f = config["dada2_trim_left_f"],
         trimleft_r = config["dada2_trim_left_r"],
         trunclen_f = config["dada2_trunc_len_f"],
@@ -24,7 +25,7 @@ rule dada2:
         nthreads = config["dada2_n_threads"]
     shell:
         """
-        mkdir -p {params.outdir}
+        mkdir -p {params.outdir} {params.feature_tables_outdir}
         >&2 printf "\nDADA2:\n"
         time qiime dada2 denoise-paired \
           --i-demultiplexed-seqs {input.seqs} \

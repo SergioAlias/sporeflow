@@ -37,6 +37,8 @@ logdirs = ["default",
           "dada2",
           "group_feature_table",
           "taxonomy",
+          "collapse_feature_table",
+          "adapt_metadata",
           "diversity"]
 
 for d in logdirs:
@@ -80,18 +82,15 @@ else:
 with open(config["metadata"], 'r', newline='') as f:
     META_COLS = next(csv.reader(f, delimiter='\t'))[1:]
 
-TABLES = [""] + [i + '_' for i in [*META_COLS, "sp_collapsed"]]
+TO_COLLAPSE = [""] + [i + '_' for i in [*META_COLS]]
+
+TABLES = [""] + [i + '_' for i in [*META_COLS, "sp_collapsed"]] + [i + '_sp_collapsed_' for i in META_COLS]
 
 
 ## output handling
 
 alloutput = list()
 alloutput.append(multiqc_dir("multiqc_report.html"))
-alloutput.append(qiime2_dir("taxonomy", "taxonomy.qza"))
-alloutput.append(qiime2_dir("taxonomy", "taxonomy.qzv"))
-alloutput.append(qiime2_dir("taxonomy", "barplot.qzv"))
-alloutput.append(qiime2_dir("dada2", "sp_collapsed_table.qza"))
-alloutput.append(qiime2_dir("dada2", "sp_collapsed_table.qzv"))
 alloutput.append(expand(qiime2_dir("diversity", "{feat_table}rarefaction_curves.qzv"), feat_table = TABLES))
 
 rule all:
@@ -110,4 +109,6 @@ include: "rules/itsxpress.smk"
 include: "rules/dada2.smk"
 include: "rules/group_feature_table.smk"
 include: "rules/taxonomy.smk"
+include: "rules/collapse_feature_table.smk"
+include: "rules/adapt_metadata.smk"
 include: "rules/diversity.smk"

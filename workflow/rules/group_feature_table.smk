@@ -3,28 +3,27 @@ rule group_feature_table:
         table = qiime2_dir("dada2", "table.qza"),
         metadata = config["metadata"]
     output:
-        grouped_table_qza = qiime2_dir("dada2", "{column}table.qza"),
-        grouped_table_qzv = qiime2_dir("dada2", "{column}table.qzv")
+        expand(qiime2_dir("dada2", "{column}_table.qza"), column = META_COLS),
+        expand(qiime2_dir("dada2", "{column}_table.qzv"), column = META_COLS)
     conda:
         conda_qiime2
     params:
-        metadata_col = "{column}"[:-1] if "{column}" not in ["", "sp_collapsed_"] else SKIP_RULE
+        qiime2_dir("dada2")
     shell:
         """
-        if [ "{params.metadata_col}" == "SKIP_RULE" ]; then
-          >&2 printf "\nAlready existing feature table provided as input; skipping rule...\n"
-        else
-          >&2 printf "\nFeature table grouping:\n"
-          time qiime feature-table group \
-            --i-table {input.table} \
-            --p-axis sample \
-            --p-mode sum \
-            --m-metadata-file {input.metadata} \
-            --m-metadata-column {params.metadata_col} \
-            --o-grouped-table {output.grouped_table_qza}
-          >&2 printf "\nQZV generation:\n"
-          time qiime feature-table summarize \
-            --i-table {output.grouped_table_qza} \
-            --o-visualization {output.grouped_table_qzv}
-        fi
+          headers=$(head -n 1 {input.metadata})
+          IFS=$'\t' read -r -a header_array <<< "$headers"
+          >&2 printf "\nFeature table grouping and QZV generation:\n"
+          for ((i = 1; i < ${{#header_array[@]}}; i++)); do
+            time qiime feature-table group \
+              --i-table {input.table} \
+              --p-axis sample \
+              --p-mode sum \
+              --m-metadata-file {input.metadata} \
+              --m-metadata-column ${{header_array[$i]}} \
+              --o-grouped-table {params}/${{header_array[$i]}}_table.qza
+            time qiime feature-table summarize \
+              --i-table {params}/${{header_array[$i]}}_table.qza \
+              --o-visualization {params}/${{header_array[$i]}}_table.qzv
+          done
         """

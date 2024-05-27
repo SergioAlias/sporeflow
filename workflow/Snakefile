@@ -78,7 +78,10 @@ else:
 ## feature table variations
 
 with open(config["metadata"], 'r', newline='') as f:
-    TABLES = [""] + [i + '_' for i in [*next(csv.reader(f, delimiter='\t'))[1:], "sp_collapsed"]]
+    META_COLS = next(csv.reader(f, delimiter='\t'))[1:]
+
+TABLES = [""] + [i + '_' for i in [*META_COLS, "sp_collapsed"]]
+
 
 ## output handling
 
@@ -89,8 +92,7 @@ alloutput.append(qiime2_dir("taxonomy", "taxonomy.qzv"))
 alloutput.append(qiime2_dir("taxonomy", "barplot.qzv"))
 alloutput.append(qiime2_dir("dada2", "sp_collapsed_table.qza"))
 alloutput.append(qiime2_dir("dada2", "sp_collapsed_table.qzv"))
-alloutput.append(expand(qiime2_dir("diversity", "{column}rarefaction_curves.qzv"), column = TABLES))
-
+alloutput.append(expand(qiime2_dir("diversity", "{feat_table}rarefaction_curves.qzv"), feat_table = TABLES))
 
 rule all:
     input:

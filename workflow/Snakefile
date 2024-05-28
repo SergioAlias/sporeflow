@@ -86,6 +86,17 @@ TO_COLLAPSE = [""] + [i + '_' for i in [*META_COLS]]
 
 TABLES = [""] + [i + '_' for i in [*META_COLS, "sp_collapsed"]] + [i + '_sp_collapsed_' for i in META_COLS]
 
+## metadata files associations
+
+META_FILES = {}
+
+for table in TABLES:
+    meta_filename = "metadata.tsv"
+    for meta_col in META_COLS:
+        if meta_col in table:
+            meta_filename = f"metadata_{meta_col}.tsv"
+            break
+    META_FILES[table] = meta_filename
 
 ## output handling
 

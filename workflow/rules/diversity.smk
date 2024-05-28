@@ -1,8 +1,7 @@
 rule diversity:
     input:
-        expand(os.path.join(code_dir, "metadata_{col}.tsv"), col = META_COLS),
-        metadata = config["metadata"],
-        table = qiime2_dir("feature_tables", "{feat_table}table.qza")
+        table = qiime2_dir("feature_tables", "{feat_table}table.qza"),
+        metadata = lambda w: os.path.join(code_dir, META_FILES[w.feat_table])
     output:
         rarefaction = qiime2_dir("diversity", "{feat_table}rarefaction_curves.qzv"),
         rarefied_table = qiime2_dir("diversity", "{feat_table}rarefied_table.qza"),
@@ -19,8 +18,6 @@ rule diversity:
         conda_qiime2
     params:
         outdir = qiime2_dir("diversity"),
-        metadir = code_dir,
-        metacol = lambda w: "{}".replace('sp_collapsed_', '').replace('_', '').format(w.feat_table),
         max_depth = config["diveristy_rarefaction_max_depth"],
         steps = config["diversity_rarefaction_steps"],
         iterations = config["diversity_rarefaction_iterations"],
@@ -31,11 +28,6 @@ rule diversity:
     shell:
         """
         mkdir -p {params.outdir}
-        if [ -z "{params.metacol}" ]; then
-          metafile="{input.metadata}"
-        else
-          metafile="{params.metadir}/metadata_{params.metacol}.tsv"
-        fi
         >&2 printf "\nAlpha rarefaction:\n"
         time qiime diversity alpha-rarefaction \
           --i-table {input.table} \
@@ -48,7 +40,7 @@ rule diversity:
           --i-table {input.table} \
           --p-sampling-depth {params.sampling_depth} \
           --p-n-jobs {params.nthreads} \
-          --m-metadata-file $metafile \
+          --m-metadata-file {input.metadata} \
           --o-rarefied-table {output.rarefied_table} \
           --o-observed-features-vector {output.obs_feat_vector} \
           --o-shannon-vector {output.shannon_vector} \
@@ -58,5 +50,6 @@ rule diversity:
           --o-jaccard-pcoa-results {output.jaccard_pcoa} \
           --o-bray-curtis-pcoa-results {output.bray_curtis_pcoa} \
           --o-jaccard-emperor {output.jaccard_emperor} \
-          --o-bray-curtis-emperor {output.bray_curtis_emperor}
+          --o-bray-curtis-emperor {output.bray_curtis_emperor} \
+          --no-recycle
         """

@@ -11,7 +11,7 @@
 proj_name: cereal_fungi                                   #-------#    Project name
 outdir: /scratch/salias/projects                          #-------#    Directory with all projects
 raw_data: /home/salias/data/cereal_fungi                  #-------#    Directory with FASTQ files
-metadata: /home/salias/projects/sporeflow/metadata.tsv    #-------#    Metadata file (modify it with your experiment details)
+metadata: /home/salias/projects/sporeflow/metadata.tsv    #-------#    Metadata file. Modify it with your experiment details (it needs to have metadata.tsv as filename)
 type: ITS                                                 #-------#    Region sequenced: 16S (bacteria, not implemented yet) or ITS (fungi)
 
 

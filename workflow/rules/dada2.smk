@@ -3,10 +3,10 @@ rule dada2:
         seqs = dada2_input_seqs_qza,
         metadata = config["metadata"]
     output:
-        table_qza = qiime2_dir("feature_tables", "table.qza"),
+        table_qza = qiime2_dir("feature_tables", "ungrouped_table.qza"),
         seqs_qza = qiime2_dir("dada2", "rep-seqs.qza"),
         stats_qza = qiime2_dir("dada2", "denoising-stats.qza"),
-        table_qzv = qiime2_dir("feature_tables", "table.qzv"),
+        table_qzv = qiime2_dir("feature_tables", "ungrouped_table.qzv"),
         seqs_qzv = qiime2_dir("dada2", "rep-seqs.qzv"),
         stats_qzv = qiime2_dir("dada2", "denoising-stats.qzv")
     conda:

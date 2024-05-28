@@ -1,6 +1,6 @@
 rule group_feature_table:
     input:
-        table = qiime2_dir("feature_tables", "table.qza"),
+        table = qiime2_dir("feature_tables", "ungrouped_table.qza"),
         metadata = config["metadata"]
     output:
         expand(qiime2_dir("feature_tables", "{column}_table.qza"), column = META_COLS),

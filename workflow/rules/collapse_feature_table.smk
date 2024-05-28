@@ -11,16 +11,14 @@ rule collapse_feature_table:
         conda_qiime2
     params:
         qiime2_dir("feature_tables")
-    wildcard_constraints:
-        collapse = ".*"
     shell:
         """
           headers=$(head -n 1 {input.metadata})
           IFS=$'\\t' read -r -a header_array <<< "$headers"
+          header_array[0]="ungrouped"
           for ((i = 0; i < ${{#header_array[@]}}; i++)); do
             header_array[$i]="${{header_array[$i]}}_"
           done
-          header_array[0]=""
           >&2 printf "\nFeature table collapses:\n"
           for ((i = 0; i < ${{#header_array[@]}}; i++)); do
             >&2 printf "\nBarplot before collapse:\n"

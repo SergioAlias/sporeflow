@@ -25,7 +25,7 @@ rule plot_feature_table:
           --p-normalize \
           --p-metric euclidean \
           --p-method average \
-          --p-cluster both \
+          --p-cluster samples \
           --p-color-scheme rocket \
           --o-visualization {output.heatmap}
         """ 

@@ -8,12 +8,14 @@ rule dada2:
         stats_qza = qiime2_dir("dada2", "denoising-stats.qza"),
         table_qzv = qiime2_dir("feature_tables", "ungrouped_table.qzv"),
         seqs_qzv = qiime2_dir("dada2", "rep-seqs.qzv"),
-        stats_qzv = qiime2_dir("dada2", "denoising-stats.qzv")
+        stats_qzv = qiime2_dir("dada2", "denoising-stats.qzv"),
+        freqs_qza = qiime2_dir("sample_frequencies", "ungrouped_frequencies.qza")
     conda:
         conda_qiime2
     params:
         outdir = qiime2_dir("dada2"),
         feature_tables_outdir = qiime2_dir("feature_tables"),
+        freqs_outdir = qiime2_dir("sample_frequencies"),
         trimleft_f = config["dada2_trim_left_f"],
         trimleft_r = config["dada2_trim_left_r"],
         trunclen_f = config["dada2_trunc_len_f"],
@@ -25,7 +27,9 @@ rule dada2:
         nthreads = config["dada2_n_threads"]
     shell:
         """
-        mkdir -p {params.outdir} {params.feature_tables_outdir}
+        mkdir -p {params.outdir} \
+          {params.feature_tables_outdir} \
+          {params.freqs_outdir}
         >&2 printf "\nDADA2:\n"
         time qiime dada2 denoise-paired \
           --i-demultiplexed-seqs {input.seqs} \
@@ -46,6 +50,9 @@ rule dada2:
           --i-table {output.table_qza} \
           --m-sample-metadata-file {input.metadata} \
           --o-visualization {output.table_qzv}
+        time qiime feature-table tabulate-sample-frequencies \
+          --i-table {output.table_qza} \
+          --o-sample-frequencies {output.freqs_qza}
         time qiime feature-table tabulate-seqs \
           --i-data {output.seqs_qza} \
           --o-visualization {output.seqs_qzv}

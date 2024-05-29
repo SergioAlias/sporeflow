@@ -4,11 +4,13 @@ rule group_feature_table:
         metadata = config["metadata"]
     output:
         expand(qiime2_dir("feature_tables", "{column}_table.qza"), column = META_COLS),
-        expand(qiime2_dir("feature_tables", "{column}_table.qzv"), column = META_COLS)
+        expand(qiime2_dir("feature_tables", "{column}_table.qzv"), column = META_COLS),
+        expand(qiime2_dir("sample_frequencies", "{column}_frequencies.qza"), column = META_COLS)
     conda:
         conda_qiime2
     params:
-        qiime2_dir("feature_tables")
+        feature_tables_outdir = qiime2_dir("feature_tables"),
+        freqs_outdir = qiime2_dir("sample_frequencies")
     shell:
         """
           headers=$(head -n 1 {input.metadata})
@@ -21,9 +23,12 @@ rule group_feature_table:
               --p-mode sum \
               --m-metadata-file {input.metadata} \
               --m-metadata-column ${{header_array[$i]}} \
-              --o-grouped-table {params}/${{header_array[$i]}}_table.qza
+              --o-grouped-table {params.feature_tables_outdir}/${{header_array[$i]}}_table.qza
             time qiime feature-table summarize \
-              --i-table {params}/${{header_array[$i]}}_table.qza \
-              --o-visualization {params}/${{header_array[$i]}}_table.qzv
+              --i-table {params.feature_tables_outdir}/${{header_array[$i]}}_table.qza \
+              --o-visualization {params.feature_tables_outdir}/${{header_array[$i]}}_table.qzv
+            time qiime feature-table tabulate-sample-frequencies \
+              --i-table {params.feature_tables_outdir}/${{header_array[$i]}}_table.qza \
+              --o-sample-frequencies {params.freqs_outdir}/${{header_array[$i]}}_frequencies.qza
           done
         """

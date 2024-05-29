@@ -36,6 +36,7 @@ logdirs = ["default",
           "itsxpress",
           "dada2",
           "group_feature_table",
+          "plot_feature_table",
           "taxonomy",
           "adapt_metadata",
           "diversity"]
@@ -100,7 +101,7 @@ for table in TABLES:
 alloutput = list()
 alloutput.append(multiqc_dir("multiqc_report.html"))
 alloutput.append(expand(qiime2_dir("diversity", "{feat_table}", "{feat_table}_rarefaction_curves.qzv"), feat_table = TABLES))
-
+alloutput.append(expand(qiime2_dir("feature_table_plots", "{feat_table}_barplot.qzv"), feat_table = TABLES))
 rule all:
     input:
         alloutput
@@ -116,6 +117,7 @@ include: "rules/import_fastq.smk"
 include: "rules/itsxpress.smk"
 include: "rules/dada2.smk"
 include: "rules/group_feature_table.smk"
+include: "rules/plot_feature_table.smk"
 include: "rules/taxonomy.smk"
 include: "rules/adapt_metadata.smk"
 include: "rules/diversity.smk"

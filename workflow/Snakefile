@@ -37,7 +37,6 @@ logdirs = ["default",
           "dada2",
           "group_feature_table",
           "taxonomy",
-          "collapse_feature_table",
           "adapt_metadata",
           "diversity"]
 
@@ -82,9 +81,7 @@ else:
 with open(config["metadata"], 'r', newline='') as f:
     META_COLS = next(csv.reader(f, delimiter='\t'))[1:]
 
-TO_COLLAPSE = [i + '_' for i in ["ungrouped", *META_COLS]]
-
-TABLES = [i + '_' for i in ["ungrouped", *META_COLS, "ungrouped_sp_collapsed"]] + [i + '_sp_collapsed_' for i in META_COLS]
+TABLES = [i + '_' for i in ["ungrouped", *META_COLS]]
 
 ## metadata files associations
 
@@ -120,6 +117,5 @@ include: "rules/itsxpress.smk"
 include: "rules/dada2.smk"
 include: "rules/group_feature_table.smk"
 include: "rules/taxonomy.smk"
-include: "rules/collapse_feature_table.smk"
 include: "rules/adapt_metadata.smk"
 include: "rules/diversity.smk"

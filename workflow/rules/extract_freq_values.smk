@@ -19,7 +19,7 @@ rule extract_freq_values:
             lowest=$(echo "$values" | sort -n | head -n 1)
             base_name=$(basename "$freq_qza")
             name=$(echo "$base_name" | sed 's/_.*//')
-            json_output+="\"$name\": {{\"highest\": \"$highest\", \"lowest\": \"$lowest\"}},"
+            json_output+='"'$name'": {{"highest": "'$highest'", "lowest": "'$lowest'"}},'
             rm -rf {params.freqs_dir}/tmp
         done
         json_output="${{json_output%,}}}}"

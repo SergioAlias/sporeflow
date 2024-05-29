@@ -1,19 +1,19 @@
 rule diversity:
     input:
-        table = qiime2_dir("feature_tables", "{feat_table}table.qza"),
+        table = qiime2_dir("feature_tables", "{feat_table}_table.qza"),
         metadata = lambda w: os.path.join(code_dir, META_FILES[w.feat_table])
     output:
-        rarefaction = qiime2_dir("diversity", "{feat_table}", "{feat_table}rarefaction_curves.qzv"),
-        rarefied_table = qiime2_dir("diversity", "{feat_table}", "{feat_table}rarefied_table.qza"),
-        obs_feat_vector = qiime2_dir("diversity", "{feat_table}", "{feat_table}observed_features_vector.qza"),
-        shannon_vector = qiime2_dir("diversity", "{feat_table}", "{feat_table}shannon_vector.qza"),
-        evenness_vector = qiime2_dir("diversity", "{feat_table}", "{feat_table}evenness_vector.qza"),
-        jaccard_dist_mat = qiime2_dir("diversity", "{feat_table}", "{feat_table}jaccard_distance_matrix.qza"),
-        bray_curtis_dist_mat = qiime2_dir("diversity", "{feat_table}", "{feat_table}bray_curtis_distance_matrix.qza"),
-        jaccard_pcoa = qiime2_dir("diversity", "{feat_table}", "{feat_table}jaccard_pcoa_results.qza"),
-        bray_curtis_pcoa = qiime2_dir("diversity", "{feat_table}", "{feat_table}bray_curtis_pcoa_results.qza"),
-        jaccard_emperor = qiime2_dir("diversity", "{feat_table}", "{feat_table}jaccard_emperor.qzv"),
-        bray_curtis_emperor = qiime2_dir("diversity", "{feat_table}", "{feat_table}bray_curtis_emperor.qzv")
+        rarefaction = qiime2_dir("diversity", "{feat_table}", "{feat_table}_rarefaction_curves.qzv"),
+        rarefied_table = qiime2_dir("diversity", "{feat_table}", "{feat_table}_rarefied_table.qza"),
+        obs_feat_vector = qiime2_dir("diversity", "{feat_table}", "{feat_table}_observed_features_vector.qza"),
+        shannon_vector = qiime2_dir("diversity", "{feat_table}", "{feat_table}_shannon_vector.qza"),
+        evenness_vector = qiime2_dir("diversity", "{feat_table}", "{feat_table}_evenness_vector.qza"),
+        jaccard_dist_mat = qiime2_dir("diversity", "{feat_table}", "{feat_table}_jaccard_distance_matrix.qza"),
+        bray_curtis_dist_mat = qiime2_dir("diversity", "{feat_table}", "{feat_table}_bray_curtis_distance_matrix.qza"),
+        jaccard_pcoa = qiime2_dir("diversity", "{feat_table}", "{feat_table}_jaccard_pcoa_results.qza"),
+        bray_curtis_pcoa = qiime2_dir("diversity", "{feat_table}", "{feat_table}_bray_curtis_pcoa_results.qza"),
+        jaccard_emperor = qiime2_dir("diversity", "{feat_table}", "{feat_table}_jaccard_emperor.qzv"),
+        bray_curtis_emperor = qiime2_dir("diversity", "{feat_table}", "{feat_table}_bray_curtis_emperor.qzv")
     conda:
         conda_qiime2
     params:
@@ -23,8 +23,6 @@ rule diversity:
         iterations = config["diversity_rarefaction_iterations"],
         sampling_depth = config["diversity_sampling_depth"],
         nthreads = config["diversity_beta_n_threads"]
-    wildcard_constraints:
-        feat_table = ".*"
     shell:
         """
         mkdir -p {params.outdir}

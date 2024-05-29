@@ -1,7 +1,8 @@
 rule diversity:
     input:
         table = qiime2_dir("feature_tables", "{feat_table}_table.qza"),
-        metadata = lambda w: os.path.join(code_dir, META_FILES[w.feat_table])
+        metadata = lambda w: os.path.join(code_dir, META_FILES[w.feat_table]),
+        freqs_json = qiime2_dir("sample_frequencies", "freqs.json")
     output:
         rarefaction = qiime2_dir("diversity", "{feat_table}", "{feat_table}_rarefaction_curves.qzv"),
         rarefied_table = qiime2_dir("diversity", "{feat_table}", "{feat_table}_rarefied_table.qza"),
@@ -18,10 +19,10 @@ rule diversity:
         conda_qiime2
     params:
         outdir = lambda w: qiime2_dir("diversity", "{}".format(w.feat_table)),
-        max_depth = config["diveristy_rarefaction_max_depth"],
+        max_depth = lambda w: json.load(open(qiime2_dir("sample_frequencies", "freqs.json")))["{}".format(w.feat_table)]["highest"].replace(",", "").split('.')[0],
         steps = config["diversity_rarefaction_steps"],
         iterations = config["diversity_rarefaction_iterations"],
-        sampling_depth = config["diversity_sampling_depth"],
+        sampling_depth = lambda w: json.load(open(qiime2_dir("sample_frequencies", "freqs.json")))["{}".format(w.feat_table)]["lowest"].replace(",", "").split('.')[0],
         nthreads = config["diversity_beta_n_threads"]
     shell:
         """

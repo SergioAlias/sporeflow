@@ -39,6 +39,7 @@ logdirs = ["default",
           "plot_feature_table",
           "taxonomy",
           "adapt_metadata",
+          "extract_freq_values",
           "diversity"]
 
 for d in logdirs:
@@ -102,6 +103,8 @@ alloutput = list()
 alloutput.append(multiqc_dir("multiqc_report.html"))
 alloutput.append(expand(qiime2_dir("diversity", "{feat_table}", "{feat_table}_rarefaction_curves.qzv"), feat_table = TABLES))
 alloutput.append(expand(qiime2_dir("feature_table_plots", "{feat_table}_barplot.qzv"), feat_table = TABLES))
+alloutput.append(qiime2_dir("sample_frequencies", "freqs.json"))
+
 rule all:
     input:
         alloutput
@@ -120,4 +123,5 @@ include: "rules/group_feature_table.smk"
 include: "rules/taxonomy.smk"
 include: "rules/adapt_metadata.smk"
 include: "rules/plot_feature_table.smk"
+include: "rules/extract_freq_values.smk"
 include: "rules/diversity.smk"

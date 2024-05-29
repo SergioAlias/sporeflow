@@ -110,6 +110,14 @@ plot_feature_table:
     output: logs/plot_feature_table/plot_feature_table_%j.out
     error: logs/plot_feature_table/plot_feature_table_%j.err
 
+extract_freq_values:
+    jobname: extract_freq_values
+    time: 0-00:10:00
+    ncpus: 1
+    memory: 2G
+    output: logs/extract_freq_values/extract_freq_values_%j.out
+    error: logs/extract_freq_values/extract_freq_values_%j.err
+
 diversity:
     jobname: diversity
     time: 0-01:00:00

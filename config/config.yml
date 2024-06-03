@@ -65,5 +65,5 @@ taxonomy_n_threads: 2    #cluster#    Maximum number of concurrent worker proces
 ### Diversity analysis ###
 
 diversity_rarefaction_steps: 20          #-------#    Rarefaction depths to include
-diversity_rarefaction_iterations: 10     #-------#    Rarefaction depths to include
+diversity_rarefaction_iterations: 10     #-------#    Number of rarefied feature tables to compute at each step
 diversity_beta_n_threads: 4              #cluster#    Number of concurrent jobs to use in performing beta methods

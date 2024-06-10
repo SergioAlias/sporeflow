@@ -67,3 +67,11 @@ taxonomy_n_threads: 2    #cluster#    Maximum number of concurrent worker proces
 diversity_rarefaction_steps: 20          #-------#    Rarefaction depths to include
 diversity_rarefaction_iterations: 10     #-------#    Number of rarefied feature tables to compute at each step
 diversity_beta_n_threads: 4              #cluster#    Number of concurrent jobs to use in performing beta methods
+
+
+### Differential abundance ###
+
+abundance_meta_col: Treatment          #-------#    Metadata column for differential abundance
+abundance_meta_ref: CON                #-------#    Metadata column reference value
+abundance_p_alpha: 0.001               #-------#    Significance level
+abundance_barplot_threshold: 0.001     #-------#    To exclude features from the barplot

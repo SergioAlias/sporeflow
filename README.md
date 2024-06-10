@@ -4,11 +4,11 @@
 
 > ⚠️ ***Disclaimer*** ⚠️
 > 
-> *This workflow is still under development, thus it can not be used for a complete metataxonomic experiment yet.*
+> *This workflow is still under active development. New functions and improvements may be added in the future.*
 
 SporeFlow (**S**nakemake **P**ipeline F**or** M**e**tataxonomics Work**flow**s) is a pipeline for metataxonomic analysis of fungal ITS using [QIIME2](https://qiime2.org/) and [Snakemake](https://snakemake.readthedocs.io/en/v7.32.2/). It takes into consideration all the particularities of the indel-rich ITS region and modifies the typical QIIME2 workflow (which with default settings usually works well in 16S) according to these particularities.
 
-Steps working for now:
+What SporeFlow does:
 
 - Run [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) on the raw FASTQ files (rule `fastqc_before`)
 - Run [Cutadapt](https://cutadapt.readthedocs.io/en/v4.6/) on the raw FASTQ files (rule `cutadapt`)
@@ -20,6 +20,9 @@ Steps working for now:
 - Denoise, dereplicate and cluster sequences in QIIME2 with [DADA2 plugin](https://docs.qiime2.org/2024.2/plugins/available/dada2/) (rule `dada2`)
 - Perform taxonomic classification in QIIME2 with [feature-classifier plugin](https://library.qiime2.org/plugins/q2-feature-classifier/3/) and generate barplots (rule `taxonomy`)
 - Perform diversity analysis in QIIME2 with [diversity plugin](https://docs.qiime2.org/2024.2/plugins/available/diversity/) (rule `diversity`)
+- Perform differential abundance in QIIME2 with [composition plugin](https://docs.qiime2.org/2024.2/plugins/available/composition/) (rule `abundance`)
+
+There are some additional steps used for adapting results between main steps. We don't worry about those for now.
 
 ## Requisites
 

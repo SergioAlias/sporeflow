@@ -125,3 +125,11 @@ diversity:
     memory: 10G
     output: logs/diversity/diversity_%j.out
     error: logs/diversity/diversity_%j.err
+    
+abundance:
+    jobname: abundance
+    time: 0-00:15:00
+    ncpus: 1
+    memory: 10G
+    output: logs/abundance/abundance_%j.out
+    error: logs/abundance/abundance_%j.err

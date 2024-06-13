@@ -14,7 +14,9 @@ rule diversity:
         jaccard_pcoa = qiime2_dir("diversity", "{feat_table}", "{feat_table}_jaccard_pcoa_results.qza"),
         bray_curtis_pcoa = qiime2_dir("diversity", "{feat_table}", "{feat_table}_bray_curtis_pcoa_results.qza"),
         jaccard_emperor = qiime2_dir("diversity", "{feat_table}", "{feat_table}_jaccard_emperor.qzv"),
-        bray_curtis_emperor = qiime2_dir("diversity", "{feat_table}", "{feat_table}_bray_curtis_emperor.qzv")
+        bray_curtis_emperor = qiime2_dir("diversity", "{feat_table}", "{feat_table}_bray_curtis_emperor.qzv"),
+        simpson_vector = qiime2_dir("diversity", "{feat_table}", "{feat_table}_simpson_vector.qza"),
+        aitchison_dist_mat = qiime2_dir("diversity", "{feat_table}", "{feat_table}_aitchison_distance_matrix.qza")
     conda:
         conda_qiime2
     params:
@@ -51,4 +53,15 @@ rule diversity:
           --o-jaccard-emperor {output.jaccard_emperor} \
           --o-bray-curtis-emperor {output.bray_curtis_emperor} \
           --no-recycle
+        >&2 printf "\nAlpha: Simpson index (not included in core metrics):\n"
+        time qiime diversity alpha \
+          --i-table {output.rarefied_table} \
+          --p-metric simpson \
+          --o-alpha-diversity {output.simpson_vector}
+        >&2 printf "\nBeta: Aitchison distance (not included in core metrics):\n"
+        time qiime diversity beta \
+          --i-table {output.rarefied_table} \
+          --p-metric aitchison \
+          --p-pseudocount 1 \
+          --o-distance-matrix {output.aitchison_dist_mat}
         """

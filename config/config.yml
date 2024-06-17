@@ -64,14 +64,25 @@ taxonomy_n_threads: 2    #cluster#    Maximum number of concurrent worker proces
 
 ### Diversity analysis ###
 
-diversity_rarefaction_steps: 20          #-------#    Rarefaction depths to include
-diversity_rarefaction_iterations: 10     #-------#    Number of rarefied feature tables to compute at each step
-diversity_beta_n_threads: 4              #cluster#    Number of concurrent jobs to use in performing beta methods
+diversity_rarefaction_steps: 20                         #-------#    Rarefaction depths to include
+diversity_rarefaction_iterations: 10                    #-------#    Number of rarefied feature tables to compute at each step
+diversity_beta_group_significance_method: permanova     #-------#    Group significance test to be applied in beta group significance. Options: permanova, anosim, permdisp
+diversity_beta_n_threads: 4                             #cluster#    Number of concurrent jobs to use in performing beta methods
 
 
 ### Differential abundance ###
 
-abundance_meta_col: Treatment          #-------#    Metadata column for differential abundance
+abundance_collapse_levels: 6;7         #-------#    Taxonomic levels to collapse prior to ANCOM-BC.
+#----------------------------------------------#    Levels must be separated with semicolons (;) and you must specify at least one level.
+#----------------------------------------------#    Available levels:
+#----------------------------------------------#      1: Kingdom
+#----------------------------------------------#      2: Phylum
+#----------------------------------------------#      3: Class
+#----------------------------------------------#      4: Order
+#----------------------------------------------#      5: Family
+#----------------------------------------------#      6: Genus
+#----------------------------------------------#      7: Species
+abundance_meta_col: Treatment          #-------#    Metadata column for differential abundance (and also for beta group significances)
 abundance_meta_ref: CON                #-------#    Metadata column reference value
 abundance_p_alpha: 0.001               #-------#    Significance level
 abundance_barplot_threshold: 0.001     #-------#    To exclude features from the barplot

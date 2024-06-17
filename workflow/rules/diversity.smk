@@ -16,7 +16,9 @@ rule diversity:
         jaccard_emperor = qiime2_dir("diversity", "{feat_table}", "{feat_table}_jaccard_emperor.qzv"),
         bray_curtis_emperor = qiime2_dir("diversity", "{feat_table}", "{feat_table}_bray_curtis_emperor.qzv"),
         simpson_vector = qiime2_dir("diversity", "{feat_table}", "{feat_table}_simpson_vector.qza"),
-        aitchison_dist_mat = qiime2_dir("diversity", "{feat_table}", "{feat_table}_aitchison_distance_matrix.qza")
+        aitchison_dist_mat = qiime2_dir("diversity", "{feat_table}", "{feat_table}_aitchison_distance_matrix.qza"),
+        aitchison_pcoa = qiime2_dir("diversity", "{feat_table}", "{feat_table}_aitchison_pcoa_results.qza"),
+        aitchison_emperor = qiime2_dir("diversity", "{feat_table}", "{feat_table}_aitchison_emperor.qzv")
     conda:
         conda_qiime2
     params:
@@ -64,4 +66,12 @@ rule diversity:
           --p-metric aitchison \
           --p-pseudocount 1 \
           --o-distance-matrix {output.aitchison_dist_mat}
+        >&2 printf "\nBeta: Aitchison distance PCoA and Emperor plot:\n"
+        time qiime diversity pcoa \
+          --i-distance-matrix {output.aitchison_dist_mat} \
+          --o-pcoa {output.aitchison_pcoa}
+        time qiime emperor plot \
+          --i-pcoa {output.aitchison_pcoa} \
+          --m-metadata-file {input.metadata} \
+          --o-visualization {output.aitchison_emperor}
         """

@@ -110,9 +110,8 @@ alloutput = list()
 alloutput.append(multiqc_dir("multiqc_report.html"))
 alloutput.append(expand(qiime2_dir("diversity", "{feat_table}", "{feat_table}_rarefaction_curves.qzv"), feat_table = TABLES))
 alloutput.append(expand(qiime2_dir("feature_table_plots", "{feat_table}_barplot.qzv"), feat_table = TABLES))
-alloutput.append(qiime2_dir("abundance", "da_barplot.qzv"))
 alloutput.append(qiime2_dir("group_significances", "observed_features_group_significance.qzv"))
-alloutput.append(expand(qiime2_dir("feature_tables", "{levels}_table.qza"), levels = COLLAPSED_TABLES[1:]))
+alloutput.append(expand(qiime2_dir("abundance", "{levels}_ancombc.qza"), levels = COLLAPSED_TABLES))
 
 rule all:
     input:

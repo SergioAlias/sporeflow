@@ -144,7 +144,7 @@ taxa_collapse:
 
 abundance:
     jobname: abundance
-    time: 0-00:15:00
+    time: 0-00:30:00
     ncpus: 1
     memory: 10G
     output: logs/abundance/abundance_%j.out

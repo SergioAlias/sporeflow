@@ -126,14 +126,6 @@ diversity:
     output: logs/diversity/diversity_%j.out
     error: logs/diversity/diversity_%j.err
 
-abundance:
-    jobname: abundance
-    time: 0-00:15:00
-    ncpus: 1
-    memory: 10G
-    output: logs/abundance/abundance_%j.out
-    error: logs/abundance/abundance_%j.err
-
 analyse_diversity:
     jobname: analyse_diversity
     time: 0-01:00:00
@@ -141,3 +133,19 @@ analyse_diversity:
     memory: 2G
     output: logs/analyse_diversity/analyse_diversity_%j.out
     error: logs/analyse_diversity/analyse_diversity_%j.err
+
+taxa_collapse:
+    jobname: taxa_collapse
+    time: 0-00:10:00
+    ncpus: 1
+    memory: 2G
+    output: logs/taxa_collapse/taxa_collapse_%j.out
+    error: logs/taxa_collapse/taxa_collapse_%j.err
+
+abundance:
+    jobname: abundance
+    time: 0-00:15:00
+    ncpus: 1
+    memory: 10G
+    output: logs/abundance/abundance_%j.out
+    error: logs/abundance/abundance_%j.err

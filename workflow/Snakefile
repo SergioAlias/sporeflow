@@ -42,6 +42,7 @@ logdirs = ["default",
           "extract_freq_values",
           "diversity",
           "analyse_diversity",
+          "taxa_collapse",
           "abundance"]
 
 for d in logdirs:
@@ -99,6 +100,10 @@ for table in TABLES:
             break
     META_FILES[table] = meta_filename
 
+## levels for taxa collapse
+
+COLLAPSED_TABLES = ["ungrouped", *["level_" + l for l in config["abundance_collapse_levels"].split(";")]]
+
 ## output handling
 
 alloutput = list()
@@ -107,6 +112,7 @@ alloutput.append(expand(qiime2_dir("diversity", "{feat_table}", "{feat_table}_ra
 alloutput.append(expand(qiime2_dir("feature_table_plots", "{feat_table}_barplot.qzv"), feat_table = TABLES))
 alloutput.append(qiime2_dir("abundance", "da_barplot.qzv"))
 alloutput.append(qiime2_dir("group_significances", "observed_features_group_significance.qzv"))
+alloutput.append(expand(qiime2_dir("feature_tables", "{levels}_table.qza"), levels = COLLAPSED_TABLES[1:]))
 
 rule all:
     input:
@@ -129,4 +135,5 @@ include: "rules/plot_feature_table.smk"
 include: "rules/extract_freq_values.smk"
 include: "rules/diversity.smk"
 include: "rules/analyse_diversity.smk"
+include: "rules/taxa_collapse.smk"
 include: "rules/abundance.smk"

@@ -23,14 +23,17 @@ rule diversity:
         conda_qiime2
     params:
         outdir = lambda w: qiime2_dir("diversity", "{}".format(w.feat_table)),
-        max_depth = lambda w: json.load(open(qiime2_dir("sample_frequencies", "freqs.json")))["{}".format(w.feat_table)]["highest"].replace(",", "").split('.')[0],
+        max_depth = lambda w: diversityGetDepth(w.feat_table, "highest"),
         steps = config["diversity_rarefaction_steps"],
         iterations = config["diversity_rarefaction_iterations"],
-        sampling_depth = lambda w: json.load(open(qiime2_dir("sample_frequencies", "freqs.json")))["{}".format(w.feat_table)]["lowest"].replace(",", "").split('.')[0],
+        sampling_depth = lambda w: diversityGetDepth(w.feat_table, "lowest"),
         nthreads = config["diversity_beta_n_threads"]
     shell:
         """
         mkdir -p {params.outdir}
+        >&2 printf "\nUsing table: {input.table}\n"
+        >&2 printf "\nMax depth: {params.max_depth}\n"
+        >&2 printf "\nSampling depth: {params.sampling_depth}\n"
         >&2 printf "\nAlpha rarefaction:\n"
         time qiime diversity alpha-rarefaction \
           --i-table {input.table} \

@@ -1,10 +1,11 @@
 rule taxa_collapse:
     input:
         table = qiime2_dir("feature_tables", "ungrouped_table.qza"),
+        only_kgd_table = qiime2_dir("feature_tables", "kingdom_table.qza"),
         taxonomy = qiime2_dir("taxonomy", "taxonomy.qza")
     output:
-        expand(qiime2_dir("feature_tables", "{levels}_table.qza"), levels = COLLAPSED_TABLES[1:]),
-        expand(qiime2_dir("feature_tables", "{levels}_table.qzv"), levels = COLLAPSED_TABLES[1:])
+        expand(qiime2_dir("feature_tables", "{levels}_table.qza"), levels = COLLAPSED_TABLES[2:]),
+        expand(qiime2_dir("feature_tables", "{levels}_table.qzv"), levels = COLLAPSED_TABLES[2:])
     conda:
         conda_qiime2
     params:
@@ -23,5 +24,13 @@ rule taxa_collapse:
             time qiime feature-table summarize \
               --i-table "{params.feature_tables_outdir}/level_"$TAXA_LEVEL"_table.qza" \
               --o-visualization "{params.feature_tables_outdir}/level_"$TAXA_LEVEL"_table.qzv"
+            time qiime taxa collapse \
+              --i-table {input.only_kgd_table} \
+              --i-taxonomy {input.taxonomy} \
+              --p-level $TAXA_LEVEL \
+              --o-collapsed-table "{params.feature_tables_outdir}/only_kgd_level_"$TAXA_LEVEL"_table.qza"
+            time qiime feature-table summarize \
+              --i-table "{params.feature_tables_outdir}/only_kgd_level_"$TAXA_LEVEL"_table.qza" \
+              --o-visualization "{params.feature_tables_outdir}/only_kgd_level_"$TAXA_LEVEL"_table.qzv"
           done
         """

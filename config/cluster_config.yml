@@ -94,6 +94,14 @@ taxonomy:
     output: logs/taxonomy/taxonomy_%j.out
     error: logs/taxonomy/taxonomy_%j.err
 
+filter_junk:
+    jobname: filter_junk
+    time: 0-00:15:00
+    ncpus: 1
+    memory: 2G
+    output: logs/filter_junk/filter_junk_%j.out
+    error: logs/filter_junk/filter_junk_%j.err
+
 adapt_metadata:
     jobname: adapt_metadata
     time: 0-00:10:00
@@ -136,7 +144,7 @@ analyse_diversity:
 
 taxa_collapse:
     jobname: taxa_collapse
-    time: 0-00:10:00
+    time: 0-00:30:00
     ncpus: 1
     memory: 2G
     output: logs/taxa_collapse/taxa_collapse_%j.out

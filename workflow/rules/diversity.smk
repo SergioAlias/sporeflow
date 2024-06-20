@@ -65,7 +65,7 @@ rule diversity:
           --o-alpha-diversity {output.simpson_vector}
         >&2 printf "\nBeta: Aitchison distance (not included in core metrics):\n"
         time qiime diversity beta \
-          --i-table {output.rarefied_table} \
+          --i-table {input.table} \
           --p-metric aitchison \
           --p-pseudocount 1 \
           --o-distance-matrix {output.aitchison_dist_mat}

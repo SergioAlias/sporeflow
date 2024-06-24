@@ -1,7 +1,7 @@
 rule diversity:
     input:
         table = qiime2_dir("feature_tables", "{feat_table}_table.qza"),
-        metadata = lambda w: os.path.join(code_dir, META_FILES[w.feat_table]),
+        metadata = config["metadata"],
         freqs_json = qiime2_dir("sample_frequencies", "freqs.json")
     output:
         rarefaction = qiime2_dir("diversity", "{feat_table}", "{feat_table}_rarefaction_curves.qzv"),

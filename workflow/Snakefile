@@ -35,7 +35,6 @@ logdirs = ["default",
           "import_fastq",
           "itsxpress",
           "dada2",
-          "group_feature_table",
           "plot_feature_table",
           "taxonomy",
           "filter_junk",
@@ -91,24 +90,14 @@ if config["use_itsxpress"] == True:
 else:
   dada2_input_seqs_qza = qiime2_dir("reads", "demux.qza")
 
-## feature table variations
+## metadata columns
 
 with open(config["metadata"], 'r', newline='') as f:
     META_COLS = next(csv.reader(f, delimiter='\t'))[1:]
 
-TABLES = ["ungrouped", "kingdom", *META_COLS]
+## initial feature tables
 
-## metadata files associations
-
-META_FILES = {}
-
-for table in TABLES:
-    meta_filename = "metadata.tsv"
-    for meta_col in META_COLS:
-        if meta_col in table:
-            meta_filename = f"metadata_{meta_col}.tsv"
-            break
-    META_FILES[table] = meta_filename
+TABLES = ["ungrouped", "kingdom"]
 
 ## levels for taxa collapse
 
@@ -139,7 +128,6 @@ include: "rules/create_manifest.smk"
 include: "rules/import_fastq.smk"
 include: "rules/itsxpress.smk"
 include: "rules/dada2.smk"
-include: "rules/group_feature_table.smk"
 include: "rules/taxonomy.smk"
 include: "rules/filter_junk.smk"
 include: "rules/adapt_metadata.smk"

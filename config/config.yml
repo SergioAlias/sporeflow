@@ -39,7 +39,7 @@ cutadapt_n_threads: 2                      #cluster#    Number of threads to use
 
 ### ITSxpress ###
 
-use_itsxpress: False          #-------#    True if you want to use ITSxpress, False otherwise (the rest of ITSxpress options will be ignored then)
+use_itsxpress: True          #-------#    True if you want to use ITSxpress, False otherwise (the rest of ITSxpress options will be ignored then)
 itsxpress_region: ITS2       #-------#    Regions ITS2, ITS1, and ALL can be selected
 itsxpress_cluster_id: 1.0    #-------#    Percent identity for clustering reads (0.995-1). Set to 1 for exact dereplication
 itsxpress_n_threads: 16      #cluster#    Number of threads to use for multithreaded processing (ITSxpress stops reducing runtime at about 10 cores)
@@ -66,7 +66,7 @@ taxonomy_n_threads: 2    #cluster#    Maximum number of concurrent worker proces
 ### Filter junk ###
 
 kingdom_to_keep: k__Fungi     #-------#    All sequencies not belonging to that kingdom will be discarded. Options available: k__Fungi (note the double underscore '_')
-min_taxa_level: o__           #-------#    All sequences without annotations at least as general as this taxonomic level will be discarded.
+min_taxa_level: c__           #-------#    All sequences without annotations at least as general as this taxonomic level will be discarded.
 #-------------------------------------#    Available levels (note the double underscore '_'):
 #-------------------------------------#      k__: Kingdom
 #-------------------------------------#      p__: Phylum (conservative)
@@ -97,7 +97,7 @@ abundance_collapse_levels: 5;6;7       #-------#    Taxonomic levels to collapse
 #----------------------------------------------#      5: Family (recommended)
 #----------------------------------------------#      6: Genus (recommended)
 #----------------------------------------------#      7: Species (try if you feel confident)
-abundance_meta_col: Treatment          #-------#    Metadata column for differential abundance (and also for beta group significances)
+abundance_meta_col: Type               #-------#    Metadata column for differential abundance (and also for beta group significances)
 abundance_meta_ref: CON                #-------#    Metadata column reference value
 abundance_p_alpha: 0.001               #-------#    Significance level
 abundance_barplot_threshold: 0.001     #-------#    To exclude features from the barplot

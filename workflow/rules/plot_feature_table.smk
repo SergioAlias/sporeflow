@@ -2,7 +2,7 @@ rule plot_feature_table:
     input:
         table = qiime2_dir("feature_tables", "{feat_table}_table.qza"),
         taxonomy = qiime2_dir("taxonomy", "taxonomy.qza"),
-        metadata = lambda w: os.path.join(code_dir, META_FILES[w.feat_table])
+        metadata = config["metadata"]
     output:
         barplot = qiime2_dir("feature_table_plots", "{feat_table}_barplot.qzv")
     conda:

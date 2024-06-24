@@ -2,4 +2,4 @@
 logs
 *.pdf
 .tests
-metadata*
+metadata.tsv

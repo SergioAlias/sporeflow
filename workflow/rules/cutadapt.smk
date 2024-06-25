@@ -11,10 +11,10 @@ rule cutadapt:
     params:
         outdir = cutadapt_dir(),
         log_outdir = cutadapt_logdir(),
-        primer_f = config["cutadapt_primer_f"],
-        primer_r = config["cutadapt_primer_r"],
-        revcom_f = revComplementary(config["cutadapt_primer_f"]),
-        revcom_r = revComplementary(config["cutadapt_primer_r"]),
+        primer_f = primer_seq_f,
+        primer_r = primer_seq_r,
+        revcom_f = revComplementary(primer_seq_f),
+        revcom_r = revComplementary(primer_seq_r),
         nthreads = config["cutadapt_n_threads"],
         trim_3_prime = config["cutadapt_trim_3_prime"]
     shell:

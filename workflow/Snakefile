@@ -74,7 +74,6 @@ def diversityGetDepth(feature_table, high_or_low):
   except:
     return -1
 
-
 ## create outdir
 
 os.makedirs(proj_dir, exist_ok = True)
@@ -89,7 +88,6 @@ multiqc_input = list()
 multiqc_input.append(expand(fastqc_before_dir("{sample}_" + config["r1_suf"] + "_fastqc.zip"), sample = SAMPLES))
 multiqc_input.append(expand(fastqc_before_dir("{sample}_" + config["r2_suf"] + "_fastqc.zip"), sample = SAMPLES))
 
-
 if config["use_cutadapt"] == True:
   qiime2_input_dir = cutadapt_dir()
   qiime2_input_seqs = expand(cutadapt_dir("{sample}_" + config["r1_suf"] + "_cutadapt.fastq.gz"), sample = SAMPLES)
@@ -97,6 +95,10 @@ if config["use_cutadapt"] == True:
   multiqc_input.append(expand(cutadapt_logdir("{sample}_cutadapt.log"), sample = SAMPLES))
   multiqc_input.append(expand(fastqc_after_dir("{sample}_" + config["r1_suf"] + "_cutadapt_fastqc.zip"), sample = SAMPLES))
   multiqc_input.append(expand(fastqc_after_dir("{sample}_" + config["r2_suf"] + "_cutadapt_fastqc.zip"), sample = SAMPLES))
+  with open(os.path.join(code_dir, "resources", "ITS_primers.tsv"), mode = "r", newline = "") as file:
+      primer_dict = {key: value for key, value in csv.reader(file, delimiter = "\t")}
+  primer_seq_f = primer_dict.get(config["cutadapt_primer_f"], config["cutadapt_primer_f"])
+  primer_seq_r = primer_dict.get(config["cutadapt_primer_r"], config["cutadapt_primer_r"])
 else:
   qiime2_input_dir = config["raw_data"]
   qiime2_input_seqs = config["raw_data"] # technically not seqs, but input is not really used in create_manifest

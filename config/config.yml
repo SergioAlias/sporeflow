@@ -23,9 +23,9 @@ db_file: unite_ver10_dynamic_all_04.04.2024-Q2-2024.2.qza    #-------#    Databa
 
 ### Sequences ###
 
-end: paired    #-------#    Options: paired
-r1_suf: R1     #-------#    Forward read suffix (ignored if end: single)
-r2_suf: R2     #-------#    Reverse read suffix (ignored if end: single)
+end: paired    #-------#    Options: paired (single end not supported for now)
+r1_suf: R1     #-------#    Forward read suffix (DO NOT CHANGE)
+r2_suf: R2     #-------#    Reverse read suffix (DO NOT CHANGE)
 
 
 ### Cutadapt ###

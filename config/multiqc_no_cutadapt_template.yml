@@ -1,0 +1,7 @@
+module_order:
+  - fastqc:
+      name: "FastQC (raw)"
+      anchor: "fastqc_raw"
+      info: "This report shows FastQC results on the raw files, since Cutadapt was disabled in this run."
+      path_filters_exclude:
+        - "*_cutadapt_fastqc.zip"

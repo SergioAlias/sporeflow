@@ -1,12 +1,9 @@
 #!/usr/bin/env Rscript
 
 # Sergio Alías, 20240227
-# Last modified 20240509
+# Last modified 20240625
 
 # Create manifest file required for QIIME2 to work with the FASTQ files
-
-#--- Libs ---#
-
 
 #--- Args ---#
 
@@ -22,6 +19,7 @@ if (end == "paired"){
 } else if (end == "single"){
   cols <- c("sample-id", "absolute-filepath")
 }
+cutadapted <- as.logical(args[6])
 
 #--- Main ---#
 
@@ -31,7 +29,11 @@ colnames(manifest) <- cols
 
 ## We get FASTQ filenames and sample names
 fastq <- list.files(fastq_dir)
-samples <- unique(gsub("_R\\d+_cutadapt.fastq.gz", "", fastq))
+if (cutadapted){
+  samples <- unique(gsub("_R\\d+_cutadapt.fastq.gz", "", fastq))
+} else {
+  samples <- unique(gsub("_R\\d+.fastq.gz", "", fastq))
+}
 
 ## Iterate and get sample names and absolute paths, add them to manifest
 for (i in seq_along(samples)){

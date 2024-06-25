@@ -62,13 +62,15 @@ rule diversity:
         time qiime diversity alpha \
           --i-table {output.rarefied_table} \
           --p-metric simpson \
-          --o-alpha-diversity {output.simpson_vector}
+          --o-alpha-diversity {output.simpson_vector} \
+          --no-recycle
         >&2 printf "\nBeta: Aitchison distance (not included in core metrics):\n"
         time qiime diversity beta \
           --i-table {input.table} \
           --p-metric aitchison \
           --p-pseudocount 1 \
-          --o-distance-matrix {output.aitchison_dist_mat}
+          --o-distance-matrix {output.aitchison_dist_mat} \
+          --no-recycle
         >&2 printf "\nBeta: Aitchison distance PCoA and Emperor plot:\n"
         time qiime diversity pcoa \
           --i-distance-matrix {output.aitchison_dist_mat} \

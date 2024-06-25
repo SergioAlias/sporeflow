@@ -105,6 +105,10 @@ COLLAPSED_TABLES = ["ungrouped", "kingdom",
                     *["level_" + l for l in config["abundance_collapse_levels"].split(";")],
                     *["only_kgd_level_" + l for l in config["abundance_collapse_levels"].split(";")],]
 
+## abundance subdir
+
+abundance_subdir = config["abundance_meta_col"] + "_" + config["abundance_meta_ref"]
+
 ## output handling
 
 alloutput = list()
@@ -112,7 +116,7 @@ alloutput.append(multiqc_dir("multiqc_report.html"))
 alloutput.append(expand(qiime2_dir("diversity", "{feat_table}", "{feat_table}_rarefaction_curves.qzv"), feat_table = TABLES))
 alloutput.append(expand(qiime2_dir("feature_table_plots", "{feat_table}_barplot.qzv"), feat_table = TABLES))
 alloutput.append(expand(qiime2_dir("group_significances", "{type}", "observed_features_group_significance.qzv"), type = ["ungrouped", "kingdom"]))
-alloutput.append(expand(qiime2_dir("abundance", "{levels}_ancombc.qza"), levels = COLLAPSED_TABLES))
+alloutput.append(expand(qiime2_dir("abundance", abundance_subdir, "{levels}_ancombc.qza"), levels = COLLAPSED_TABLES))
 
 rule all:
     input:

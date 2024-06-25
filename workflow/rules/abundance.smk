@@ -3,13 +3,13 @@ rule abundance:
         table = qiime2_dir("feature_tables", "{levels}_table.qza"),
         metadata = config["metadata"]
     output:
-        ancom = qiime2_dir("abundance", "{levels}_ancombc.qza"),
-        barplot = qiime2_dir("abundance", "{levels}_da_barplot.qzv"),
-        tabular = qiime2_dir("abundance", "{levels}_tabular.qzv")
+        ancom = qiime2_dir("abundance", abundance_subdir, "{levels}_ancombc.qza"),
+        barplot = qiime2_dir("abundance", abundance_subdir, "{levels}_da_barplot.qzv"),
+        tabular = qiime2_dir("abundance", abundance_subdir, "{levels}_tabular.qzv")
     conda:
         conda_qiime2
     params:
-        outdir = qiime2_dir("abundance"),
+        outdir = qiime2_dir("abundance", abundance_subdir),
         formula = config["abundance_meta_col"],
         reference = config["abundance_meta_ref"],
         p_alpha = config["abundance_p_alpha"],

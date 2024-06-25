@@ -66,7 +66,7 @@ conda_env_dir = os.path.join(code_dir, "workflow", "envs")
 conda_qc = os.path.join(conda_env_dir, "qc.yml")
 conda_qiime2 = os.path.join(conda_env_dir, "qiime2-amplicon-2024.2-py38-linux-conda.yml")
 
-### dry-run fixes (in a dry-run, Snakemake will evaluate the params directive in the potentially non-existing input files)
+### dry-run fixes (because in a dry-run, Snakemake will evaluate the params directive in the potentially non-existing input files)
 
 def diversityGetDepth(feature_table, high_or_low):
   try:

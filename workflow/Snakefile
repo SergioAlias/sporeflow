@@ -103,6 +103,8 @@ else:
   qiime2_input_dir = config["raw_data"]
   qiime2_input_seqs = config["raw_data"] # technically not seqs, but input is not really used in create_manifest
   multiqc_template = os.path.join(code_dir, "config", "multiqc_no_cutadapt_template.yml")
+  primer_seq_f = "A" # default values to avoid horrors
+  primer_seq_r = "A"
 
 ## optional itsxpress rule handling
 

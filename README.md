@@ -1,12 +1,15 @@
 # <img src="./.img/sf_negative.png" width="500">
 
+[![Snakemake](https://img.shields.io/badge/Snakemake-7.32.4-5442a6.svg)](https://snakemake.github.io)
+[![QIIME 2](https://img.shields.io/badge/QIIME2-2024.2-e5b611.svg)](https://qiime2.org/)
+
 🦠 **SporeFlow: Fungal ITS metataxonomics made easy**
 
 > ⚠️ ***Disclaimer*** ⚠️
 > 
 > *This workflow is still under active development. New functions and improvements may be added in the future.*
 
-SporeFlow (**S**nakemake **P**ipeline F**or** M**e**tataxonomics Work**flow**s) is a pipeline for metataxonomic analysis of fungal ITS using [QIIME2](https://qiime2.org/) and [Snakemake](https://snakemake.readthedocs.io/en/v7.32.2/). It takes into consideration all the particularities of the indel-rich ITS region.
+SporeFlow (**S**nakemake **P**ipeline F**or** M**e**tataxonomics Work**flow**s) is a pipeline for metataxonomic analysis of fungal ITS using [QIIME 2](https://qiime2.org/) and [Snakemake](https://snakemake.readthedocs.io/en/v7.32.2/). It takes into consideration all the particularities of the indel-rich ITS region.
 
 What SporeFlow does:
 
@@ -14,13 +17,13 @@ What SporeFlow does:
 - Run [Cutadapt](https://cutadapt.readthedocs.io/en/v4.6/) on the raw FASTQ files (rule `cutadapt`)
 - Run [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) on the trimmed FASTQ files (rule `fastqc_after`)
 - Aggregate QC results (FastQC before trimming, Cutadapt, FastQC after trimming) with [MultiQC](https://multiqc.info/) (rule `multiqc`)
-- Create manifest file for QIIME2 (rule `create_manifest`)
-- Import FASTQ files to QIIME2 (rule `import_fastq`)
-- Trim ITS sequences in QIIME2 with [ITSxpress plugin](https://forum.qiime2.org/t/q2-itsxpress-a-tutorial-on-a-qiime-2-plugin-to-trim-its-sequences/5780) (rule `itsxpress`)
-- Denoise, dereplicate, remove chimeras and merge sequences in QIIME2 with [DADA2 plugin](https://docs.qiime2.org/2024.2/plugins/available/dada2/) (rule `dada2`)
-- Perform taxonomic classification in QIIME2 with [feature-classifier plugin](https://library.qiime2.org/plugins/q2-feature-classifier/3/) (rule `taxonomy`)
-- Perform diversity analysis in QIIME2 with [diversity plugin](https://docs.qiime2.org/2024.2/plugins/available/diversity/) (rule `diversity`)
-- Perform differential abundance in QIIME2 with [composition plugin](https://docs.qiime2.org/2024.2/plugins/available/composition/) (rule `abundance`)
+- Create manifest file for QIIME 2 (rule `create_manifest`)
+- Import FASTQ files to QIIME 2 (rule `import_fastq`)
+- Trim ITS sequences in QIIME 2 with [ITSxpress plugin](https://forum.qiime2.org/t/q2-itsxpress-a-tutorial-on-a-qiime-2-plugin-to-trim-its-sequences/5780) (rule `itsxpress`)
+- Denoise, dereplicate, remove chimeras and merge sequences in QIIME 2 with [DADA2 plugin](https://docs.qiime2.org/2024.2/plugins/available/dada2/) (rule `dada2`)
+- Perform taxonomic classification in QIIME 2 with [feature-classifier plugin](https://library.qiime2.org/plugins/q2-feature-classifier/3/) (rule `taxonomy`)
+- Perform diversity analysis in QIIME 2 with [diversity plugin](https://docs.qiime2.org/2024.2/plugins/available/diversity/) (rule `diversity`)
+- Perform differential abundance in QIIME 2 with [composition plugin](https://docs.qiime2.org/2024.2/plugins/available/composition/) (rule `abundance`)
 
 There are some additional steps used for adapting results between main steps. We don't worry about those for now.
 
@@ -43,7 +46,7 @@ source init_sporeflow.sh
 
 5. If needed, modify `time`, `ncpus` and `memory` variables in `config/cluster_config.yml`.
 
-6. Download a UNITE classfier in QIIME2 format from [https://github.com/colinbrislawn/unite-train/releases](https://github.com/colinbrislawn/unite-train/releases). We recommend using one of the following (remember to change the name accordingly in `config/config.yml`):
+6. Download a UNITE classfier in QIIME 2 format from [https://github.com/colinbrislawn/unite-train/releases](https://github.com/colinbrislawn/unite-train/releases). We recommend using one of the following (remember to change the name accordingly in `config/config.yml`):
    - `unite_ver10_dynamic_all_04.04.2024-Q2-2024.2.qza`
    - `unite_ver10_99_all_04.04.2024-Q2-2024.2.qza`  
 

@@ -17,8 +17,8 @@ type: ITS                                                 #-------#    Region se
 
 ### Databases ###
 
-db_dir: /home/salias/data/sf_databases/UNITE                 #-------#    Directory where database is stored
-db_file: unite_ver10_dynamic_all_04.04.2024-Q2-2024.2.qza    #-------#    Database filename
+db_dir: /home/salias/data/sf_databases/UNITE            #-------#    Directory where database is stored
+db_file: unite_ver10_99_all_04.04.2024-Q2-2024.2.qza    #-------#    Database filename
 
 
 ### Sequences ###

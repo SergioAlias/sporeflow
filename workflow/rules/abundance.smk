@@ -32,6 +32,7 @@ rule abundance:
         time qiime composition da-barplot \
           --i-data {output.ancom} \
           --p-significance-threshold {params.barplot_thr} \
+          --p-level-delimiter ';' \
           --o-visualization {output.barplot}
         time qiime composition tabulate \
           --i-data {output.ancom} \

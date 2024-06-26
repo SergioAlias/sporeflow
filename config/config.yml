@@ -87,17 +87,17 @@ diversity_beta_n_threads: 4                             #cluster#    Number of c
 
 ### Differential abundance ###
 
-abundance_collapse_levels: 5;6;7       #-------#    Taxonomic levels to collapse prior to ANCOM-BC.
-#----------------------------------------------#    Levels must be separated with semicolons (;) and you must specify at least one level.
-#----------------------------------------------#    Available levels:
-#----------------------------------------------#      1: Kingdom
-#----------------------------------------------#      2: Phylum
-#----------------------------------------------#      3: Class
-#----------------------------------------------#      4: Order
-#----------------------------------------------#      5: Family (recommended)
-#----------------------------------------------#      6: Genus (recommended)
-#----------------------------------------------#      7: Species (try if you feel confident)
-abundance_meta_col: Type               #-------#    Metadata column for differential abundance (and also for beta group significances)
-abundance_meta_ref: CON                #-------#    Metadata column reference value
-abundance_p_alpha: 0.001               #-------#    Significance level
-abundance_barplot_threshold: 0.001     #-------#    To exclude features from the barplot
+abundance_collapse_levels: 5;6;7      #-------#    Taxonomic levels to collapse prior to ANCOM-BC.
+#---------------------------------------------#    Levels must be separated with semicolons (;) and you must specify at least one level.
+#---------------------------------------------#    Available levels:
+#---------------------------------------------#      1: Kingdom
+#---------------------------------------------#      2: Phylum
+#---------------------------------------------#      3: Class
+#---------------------------------------------#      4: Order
+#---------------------------------------------#      5: Family (recommended)
+#---------------------------------------------#      6: Genus (recommended)
+#---------------------------------------------#      7: Species (try if you feel confident)
+abundance_meta_col: Type              #-------#    Metadata column for differential abundance (and also for beta group significances)
+abundance_meta_ref: CON               #-------#    Metadata column reference value
+abundance_p_alpha: 0.05               #-------#    Significance level
+abundance_barplot_threshold: 0.05     #-------#    To exclude features from the barplot

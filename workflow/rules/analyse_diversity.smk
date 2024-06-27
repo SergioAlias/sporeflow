@@ -1,22 +1,21 @@
 rule analyse_diversity:
     input:
         metadata = config["metadata"],
-        obs_feat_vector = qiime2_dir("diversity", "{type}", "{type}_observed_features_vector.qza"),
-        shannon_vector = qiime2_dir("diversity", "{type}", "{type}_shannon_vector.qza"),
-        evenness_vector = qiime2_dir("diversity", "{type}", "{type}_evenness_vector.qza"),
-        simpson_vector = qiime2_dir("diversity", "{type}", "{type}_simpson_vector.qza"),
-        jaccard_dist_mat = qiime2_dir("diversity", "{type}", "{type}_jaccard_distance_matrix.qza"),
-        bray_curtis_dist_mat = qiime2_dir("diversity", "{type}", "{type}_bray_curtis_distance_matrix.qza"),
-        aitchison_dist_mat = qiime2_dir("diversity", "{type}", "{type}_aitchison_distance_matrix.qza")
+        obs_feat_vector = qiime2_dir("diversity", "observed_features_vector.qza"),
+        shannon_vector = qiime2_dir("diversity", "shannon_vector.qza"),
+        evenness_vector = qiime2_dir("diversity", "evenness_vector.qza"),
+        simpson_vector = qiime2_dir("diversity", "simpson_vector.qza"),
+        jaccard_dist_mat = qiime2_dir("diversity", "jaccard_distance_matrix.qza"),
+        bray_curtis_dist_mat = qiime2_dir("diversity", "bray_curtis_distance_matrix.qza"),
+        aitchison_dist_mat = qiime2_dir("diversity", "aitchison_distance_matrix.qza")
     output:
-        obs_feat_sign = qiime2_dir("group_significances", "{type}", "observed_features_group_significance.qzv"),
-        shannon_sign = qiime2_dir("group_significances", "{type}", "shannon_group_significance.qzv"),
-        evenness_sign = qiime2_dir("group_significances", "{type}", "evenness_group_significance.qzv"),
-        simpson_sign = qiime2_dir("group_significances", "{type}", "simpson_group_significance.qzv"),
-        jaccard_sign = qiime2_dir("group_significances", "{type}", "jaccard_group_significance.qzv"),
-        bray_curtis_sign = qiime2_dir("group_significances", "{type}", "bray_curtis_group_significance.qzv"),
-        aitchison_sign = qiime2_dir("group_significances", "{type}", "aitchison_group_significance.qzv")
-
+        obs_feat_sign = qiime2_dir("group_significances", "observed_features_group_significance.qzv"),
+        shannon_sign = qiime2_dir("group_significances", "shannon_group_significance.qzv"),
+        evenness_sign = qiime2_dir("group_significances", "evenness_group_significance.qzv"),
+        simpson_sign = qiime2_dir("group_significances", "simpson_group_significance.qzv"),
+        jaccard_sign = qiime2_dir("group_significances", "jaccard_group_significance.qzv"),
+        bray_curtis_sign = qiime2_dir("group_significances", "bray_curtis_group_significance.qzv"),
+        aitchison_sign = qiime2_dir("group_significances", "aitchison_group_significance.qzv")
     conda:
         conda_qiime2
     params:
@@ -28,7 +27,7 @@ rule analyse_diversity:
         mkdir -p {params.outdir}
         >&2 printf "\nAlpha group significance: Observed features\n"
         time qiime diversity alpha-group-significance \
-          --i-alpha-diversity {input.obs_feat_vector} \
+          --i-alpha-diversity {input.obs_vector} \
           --m-metadata-file {input.metadata} \
           --o-visualization {output.obs_feat_sign}
         >&2 printf "\nAlpha group significance: Shannon\n"

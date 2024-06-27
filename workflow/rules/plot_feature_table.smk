@@ -1,10 +1,10 @@
 rule plot_feature_table:
     input:
-        table = qiime2_dir("feature_tables", "{feat_table}_table.qza"),
+        table = qiime2_dir("feature_tables", "filtered_table.qza"),
         taxonomy = qiime2_dir("taxonomy", "taxonomy.qza"),
         metadata = config["metadata"]
     output:
-        barplot = qiime2_dir("feature_table_plots", "{feat_table}_barplot.qzv")
+        barplot = qiime2_dir("feature_table_plots", "barplot.qzv")
     conda:
         conda_qiime2
     params:

@@ -1,32 +1,32 @@
 rule diversity:
     input:
-        table = qiime2_dir("feature_tables", "{feat_table}_table.qza"),
+        table = qiime2_dir("feature_tables", "filtered_table.qza"),
         metadata = config["metadata"],
         freqs_json = qiime2_dir("sample_frequencies", "freqs.json")
     output:
-        rarefaction = qiime2_dir("diversity", "{feat_table}", "{feat_table}_rarefaction_curves.qzv"),
-        rarefied_table = qiime2_dir("diversity", "{feat_table}", "{feat_table}_rarefied_table.qza"),
-        obs_feat_vector = qiime2_dir("diversity", "{feat_table}", "{feat_table}_observed_features_vector.qza"),
-        shannon_vector = qiime2_dir("diversity", "{feat_table}", "{feat_table}_shannon_vector.qza"),
-        evenness_vector = qiime2_dir("diversity", "{feat_table}", "{feat_table}_evenness_vector.qza"),
-        jaccard_dist_mat = qiime2_dir("diversity", "{feat_table}", "{feat_table}_jaccard_distance_matrix.qza"),
-        bray_curtis_dist_mat = qiime2_dir("diversity", "{feat_table}", "{feat_table}_bray_curtis_distance_matrix.qza"),
-        jaccard_pcoa = qiime2_dir("diversity", "{feat_table}", "{feat_table}_jaccard_pcoa_results.qza"),
-        bray_curtis_pcoa = qiime2_dir("diversity", "{feat_table}", "{feat_table}_bray_curtis_pcoa_results.qza"),
-        jaccard_emperor = qiime2_dir("diversity", "{feat_table}", "{feat_table}_jaccard_emperor.qzv"),
-        bray_curtis_emperor = qiime2_dir("diversity", "{feat_table}", "{feat_table}_bray_curtis_emperor.qzv"),
-        simpson_vector = qiime2_dir("diversity", "{feat_table}", "{feat_table}_simpson_vector.qza"),
-        aitchison_dist_mat = qiime2_dir("diversity", "{feat_table}", "{feat_table}_aitchison_distance_matrix.qza"),
-        aitchison_pcoa = qiime2_dir("diversity", "{feat_table}", "{feat_table}_aitchison_pcoa_results.qza"),
-        aitchison_emperor = qiime2_dir("diversity", "{feat_table}", "{feat_table}_aitchison_emperor.qzv")
+        rarefaction = qiime2_dir("diversity", "rarefaction_curves.qzv"),
+        rarefied_table = qiime2_dir("diversity", "rarefied_table.qza"),
+        obs_feat_vector = qiime2_dir("diversity", "observed_features_vector.qza"),
+        shannon_vector = qiime2_dir("diversity", "shannon_vector.qza"),
+        evenness_vector = qiime2_dir("diversity", "evenness_vector.qza"),
+        jaccard_dist_mat = qiime2_dir("diversity", "jaccard_distance_matrix.qza"),
+        bray_curtis_dist_mat = qiime2_dir("diversity", "bray_curtis_distance_matrix.qza"),
+        jaccard_pcoa = qiime2_dir("diversity", "jaccard_pcoa_results.qza"),
+        bray_curtis_pcoa = qiime2_dir("diversity", "bray_curtis_pcoa_results.qza"),
+        jaccard_emperor = qiime2_dir("diversity", "jaccard_emperor.qzv"),
+        bray_curtis_emperor = qiime2_dir("diversity", "bray_curtis_emperor.qzv"),
+        simpson_vector = qiime2_dir("diversity", "simpson_vector.qza"),
+        aitchison_dist_mat = qiime2_dir("diversity", "aitchison_distance_matrix.qza"),
+        aitchison_pcoa = qiime2_dir("diversity", "aitchison_pcoa_results.qza"),
+        aitchison_emperor = qiime2_dir("diversity", "aitchison_emperor.qzv")
     conda:
         conda_qiime2
     params:
-        outdir = lambda w: qiime2_dir("diversity", "{}".format(w.feat_table)),
-        max_depth = lambda w: diversityGetDepth(w.feat_table, "highest"),
+        outdir = qiime2_dir("diversity"),
+        max_depth = diversityGetDepth("filtered", "highest"),
         steps = config["diversity_rarefaction_steps"],
         iterations = config["diversity_rarefaction_iterations"],
-        sampling_depth = lambda w: diversityGetDepth(w.feat_table, "lowest"),
+        sampling_depth = diversityGetDepth("filtered", "lowest"),
         nthreads = config["diversity_beta_n_threads"]
     shell:
         """

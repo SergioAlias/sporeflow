@@ -38,7 +38,6 @@ logdirs = ["default",
           "plot_feature_table",
           "taxonomy",
           "filter_junk",
-          "adapt_metadata",
           "extract_freq_values",
           "diversity",
           "analyse_diversity",
@@ -118,13 +117,9 @@ else:
 with open(config["metadata"], 'r', newline='') as f:
     META_COLS = next(csv.reader(f, delimiter='\t'))[1:]
 
-## initial feature tables
-
-TABLES = ["ungrouped"]
-
 ## levels for taxa collapse
 
-COLLAPSED_TABLES = ["ungrouped",
+COLLAPSED_TABLES = ["filtered",
                     *["level_" + l for l in config["abundance_collapse_levels"].split(";")]]
 
 ## abundance subdir
@@ -135,9 +130,9 @@ abundance_subdir = config["abundance_meta_col"] + "_" + config["abundance_meta_r
 
 alloutput = list()
 alloutput.append(multiqc_dir("multiqc_report.html"))
-alloutput.append(expand(qiime2_dir("diversity", "{feat_table}", "{feat_table}_rarefaction_curves.qzv"), feat_table = TABLES))
-alloutput.append(expand(qiime2_dir("feature_table_plots", "{feat_table}_barplot.qzv"), feat_table = TABLES))
-alloutput.append(expand(qiime2_dir("group_significances", "{type}", "observed_features_group_significance.qzv"), type = ["ungrouped"]))
+alloutput.append(qiime2_dir("diversity", "rarefaction_curves.qzv"))
+alloutput.append(qiime2_dir("feature_table_plots", "barplot.qzv"))
+alloutput.append(qiime2_dir("group_significances", "observed_features_group_significance.qzv"))
 alloutput.append(expand(qiime2_dir("abundance", abundance_subdir, "{levels}_ancombc.qza"), levels = COLLAPSED_TABLES))
 
 rule all:
@@ -156,7 +151,6 @@ include: "rules/itsxpress.smk"
 include: "rules/dada2.smk"
 include: "rules/taxonomy.smk"
 include: "rules/filter_junk.smk"
-include: "rules/adapt_metadata.smk"
 include: "rules/plot_feature_table.smk"
 include: "rules/extract_freq_values.smk"
 include: "rules/diversity.smk"

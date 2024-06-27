@@ -4,9 +4,9 @@ rule filter_junk:
         taxonomy = qiime2_dir("taxonomy", "taxonomy.qza"),
         metadata = config["metadata"]
     output:
-        filtered_table_qza = qiime2_dir("feature_tables", "ungrouped_table.qza"),
-        filtered_table_qzv = qiime2_dir("feature_tables", "ungrouped_table.qzv"),
-        filtered_freqs_qza = qiime2_dir("sample_frequencies", "ungrouped_frequencies.qza")
+        filtered_table_qza = qiime2_dir("feature_tables", "filtered_table.qza"),
+        filtered_table_qzv = qiime2_dir("feature_tables", "filtered_table.qzv"),
+        filtered_freqs_qza = qiime2_dir("sample_frequencies", "filtered_frequencies.qza")
     conda:
         conda_qiime2
     params:

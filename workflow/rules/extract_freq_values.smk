@@ -1,6 +1,6 @@
 rule extract_freq_values:
     input:
-        expand(qiime2_dir("sample_frequencies", "{feat_table}_frequencies.qza"), feat_table = TABLES),
+        qiime2_dir("sample_frequencies", "filtered_frequencies.qza"),
     output:
         freqs_json = qiime2_dir("sample_frequencies", "freqs.json"),
     conda:

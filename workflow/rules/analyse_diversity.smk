@@ -9,18 +9,17 @@ rule analyse_diversity:
         bray_curtis_dist_mat = qiime2_dir("diversity", "bray_curtis_distance_matrix.qza"),
         aitchison_dist_mat = qiime2_dir("diversity", "aitchison_distance_matrix.qza")
     output:
+        expand(qiime2_dir("group_significances", "{meta_col}", "jaccard_group_significance.qzv"), meta_col = META_COLS),
+        expand(qiime2_dir("group_significances", "{meta_col}", "bray_curtis_group_significance.qzv"), meta_col = META_COLS),
+        expand(qiime2_dir("group_significances", "{meta_col}", "aitchison_group_significance.qzv"), meta_col = META_COLS),
         obs_feat_sign = qiime2_dir("group_significances", "observed_features_group_significance.qzv"),
         shannon_sign = qiime2_dir("group_significances", "shannon_group_significance.qzv"),
         evenness_sign = qiime2_dir("group_significances", "evenness_group_significance.qzv"),
-        simpson_sign = qiime2_dir("group_significances", "simpson_group_significance.qzv"),
-        jaccard_sign = qiime2_dir("group_significances", "jaccard_group_significance.qzv"),
-        bray_curtis_sign = qiime2_dir("group_significances", "bray_curtis_group_significance.qzv"),
-        aitchison_sign = qiime2_dir("group_significances", "aitchison_group_significance.qzv")
+        simpson_sign = qiime2_dir("group_significances", "simpson_group_significance.qzv")
     conda:
         conda_qiime2
     params:
         outdir = qiime2_dir("group_significances"),
-        meta_col = config["abundance_meta_col"],
         beta_method = config["diversity_beta_group_significance_method"]
     shell:
         """
@@ -45,28 +44,33 @@ rule analyse_diversity:
           --i-alpha-diversity {input.simpson_vector} \
           --m-metadata-file {input.metadata} \
           --o-visualization {output.simpson_sign}
-        >&2 printf "\nBeta group significance: Jaccard\n"
-        time qiime diversity beta-group-significance \
-          --i-distance-matrix {input.jaccard_dist_mat} \
-          --m-metadata-file {input.metadata} \
-          --m-metadata-column {params.meta_col} \
-          --p-method {params.beta_method} \
-          --p-pairwise \
-          --o-visualization {output.jaccard_sign}
-        >&2 printf "\nBeta group significance: Bray-Curtis\n"
-        time qiime diversity beta-group-significance \
-          --i-distance-matrix {input.bray_curtis_dist_mat} \
-          --m-metadata-file {input.metadata} \
-          --m-metadata-column {params.meta_col} \
-          --p-method {params.beta_method} \
-          --p-pairwise \
-          --o-visualization {output.bray_curtis_sign}
-        >&2 printf "\nBeta group significance: Aitchison\n"
-        time qiime diversity beta-group-significance \
-          --i-distance-matrix {input.aitchison_dist_mat} \
-          --m-metadata-file {input.metadata} \
-          --m-metadata-column {params.meta_col} \
-          --p-method {params.beta_method} \
-          --p-pairwise \
-          --o-visualization {output.aitchison_sign}
+        metadata_file={input.metadata}
+        header=$(head -n 1 "$metadata_file")
+        IFS=$'\t' read -r -a columns <<< "$header"
+        for (( i=1; i<${{#columns[@]}}; i++ )); do
+          >&2 printf "\nBeta group significance: Jaccard\n"
+          time qiime diversity beta-group-significance \
+            --i-distance-matrix {input.jaccard_dist_mat} \
+            --m-metadata-file {input.metadata} \
+            --m-metadata-column ${{columns[i]}} \
+            --p-method {params.beta_method} \
+            --p-pairwise \
+            --o-visualization "{params.outdir}/"${{columns[i]}}"/jaccard_group_significance.qzv"
+          >&2 printf "\nBeta group significance: Bray-Curtis\n"
+          time qiime diversity beta-group-significance \
+            --i-distance-matrix {input.bray_curtis_dist_mat} \
+            --m-metadata-file {input.metadata} \
+            --m-metadata-column ${{columns[i]}} \
+            --p-method {params.beta_method} \
+            --p-pairwise \
+            --o-visualization "{params.outdir}/"${{columns[i]}}"/bray_curtis_group_significance.qzv"
+          >&2 printf "\nBeta group significance: Aitchison\n"
+          time qiime diversity beta-group-significance \
+            --i-distance-matrix {input.aitchison_dist_mat} \
+            --m-metadata-file {input.metadata} \
+            --m-metadata-column ${{columns[i]}} \
+            --p-method {params.beta_method} \
+            --p-pairwise \
+            --o-visualization "{params.outdir}/"${{columns[i]}}"/aitchison_group_significance.qzv"
+        done
         """

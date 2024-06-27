@@ -40,6 +40,7 @@ rule diversity:
           --p-max-depth {params.max_depth} \
           --p-steps {params.steps} \
           --p-iterations {params.iterations} \
+          --m-metadata-file {input.metadata} \
           --o-visualization {output.rarefaction}
         >&2 printf "\nDiversity core metrics:\n"
         time qiime diversity core-metrics \

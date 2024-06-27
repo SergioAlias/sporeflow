@@ -97,7 +97,5 @@ abundance_collapse_levels: 5;6;7      #-------#    Taxonomic levels to collapse 
 #---------------------------------------------#      5: Family (recommended)
 #---------------------------------------------#      6: Genus (recommended)
 #---------------------------------------------#      7: Species (try if you feel confident)
-abundance_meta_col: Type              #-------#    Metadata column for differential abundance (and also for beta group significances)
-abundance_meta_ref: CON               #-------#    Metadata column reference value
 abundance_p_alpha: 0.05               #-------#    Significance level
 abundance_barplot_threshold: 0.05     #-------#    To exclude features from the barplot

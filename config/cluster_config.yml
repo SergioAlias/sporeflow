@@ -102,14 +102,6 @@ filter_junk:
     output: logs/filter_junk/filter_junk_%j.out
     error: logs/filter_junk/filter_junk_%j.err
 
-adapt_metadata:
-    jobname: adapt_metadata
-    time: 0-00:10:00
-    ncpus: 1
-    memory: 200
-    output: logs/adapt_metadata/adapt_metadata_%j.out
-    error: logs/adapt_metadata/adapt_metadata_%j.err
-
 plot_feature_table:
     jobname: plot_feature_table
     time: 0-00:15:00

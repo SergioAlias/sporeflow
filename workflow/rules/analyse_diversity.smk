@@ -48,29 +48,31 @@ rule analyse_diversity:
         header=$(head -n 1 "$metadata_file")
         IFS=$'\t' read -r -a columns <<< "$header"
         for (( i=1; i<${{#columns[@]}}; i++ )); do
+          column=${{columns[i]}}
+          column=${{column//$'\r'/}}
           >&2 printf "\nBeta group significance: Jaccard\n"
           time qiime diversity beta-group-significance \
             --i-distance-matrix {input.jaccard_dist_mat} \
             --m-metadata-file {input.metadata} \
-            --m-metadata-column ${{columns[i]}} \
+            --m-metadata-column $column \
             --p-method {params.beta_method} \
             --p-pairwise \
-            --o-visualization "{params.outdir}/"${{columns[i]}}"/jaccard_group_significance.qzv"
+            --o-visualization "{params.outdir}/"$column"/jaccard_group_significance.qzv"
           >&2 printf "\nBeta group significance: Bray-Curtis\n"
           time qiime diversity beta-group-significance \
             --i-distance-matrix {input.bray_curtis_dist_mat} \
             --m-metadata-file {input.metadata} \
-            --m-metadata-column ${{columns[i]}} \
+            --m-metadata-column $column \
             --p-method {params.beta_method} \
             --p-pairwise \
-            --o-visualization "{params.outdir}/"${{columns[i]}}"/bray_curtis_group_significance.qzv"
+            --o-visualization "{params.outdir}/"$column"/bray_curtis_group_significance.qzv"
           >&2 printf "\nBeta group significance: Aitchison\n"
           time qiime diversity beta-group-significance \
             --i-distance-matrix {input.aitchison_dist_mat} \
             --m-metadata-file {input.metadata} \
-            --m-metadata-column ${{columns[i]}} \
+            --m-metadata-column $column \
             --p-method {params.beta_method} \
             --p-pairwise \
-            --o-visualization "{params.outdir}/"${{columns[i]}}"/aitchison_group_significance.qzv"
+            --o-visualization "{params.outdir}/"$column"/aitchison_group_significance.qzv"
         done
         """

@@ -82,7 +82,7 @@ taxonomy:
     jobname: taxonomy
     time: 0-01:00:00
     ncpus: 2 #cluster# Change sklearn_n_threads accordingly in config.yml
-    memory: 75G
+    memory: 90G
     output: logs/taxonomy/taxonomy_%j.out
     error: logs/taxonomy/taxonomy_%j.err
 

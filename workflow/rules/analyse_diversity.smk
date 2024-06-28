@@ -26,7 +26,7 @@ rule analyse_diversity:
         mkdir -p {params.outdir}
         >&2 printf "\nAlpha group significance: Observed features\n"
         time qiime diversity alpha-group-significance \
-          --i-alpha-diversity {input.obs_vector} \
+          --i-alpha-diversity {input.obs_feat_vector} \
           --m-metadata-file {input.metadata} \
           --o-visualization {output.obs_feat_sign}
         >&2 printf "\nAlpha group significance: Shannon\n"

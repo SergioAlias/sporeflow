@@ -8,7 +8,7 @@
 
 ### General ###
 
-proj_name: cefun_itsxpress                                #-------#    Project name
+proj_name: micofood_24                                    #-------#    Project name
 outdir: /scratch/salias/projects                          #-------#    Directory with all projects
 raw_data: /home/salias/data/cereal_fungi                  #-------#    Directory with FASTQ files
 metadata: /home/salias/projects/sporeflow/metadata.tsv    #-------#    Metadata file. Modify it with your experiment details (it needs to have metadata.tsv as filename)

@@ -3,7 +3,7 @@
 [![Snakemake](https://img.shields.io/badge/Snakemake-7.32.4-5442a6.svg)](https://snakemake.github.io)
 [![QIIME 2](https://img.shields.io/badge/QIIME2-2024.2-e5b611.svg)](https://qiime2.org/)
 
-🦠 **SporeFlow: Fungal ITS metataxonomics made easy**
+🦠 **SporeFlow: Fungal ITS metataxonomics pipeline**
 
 > ⚠️ ***Disclaimer*** ⚠️
 > 

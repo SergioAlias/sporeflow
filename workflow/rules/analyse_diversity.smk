@@ -5,6 +5,7 @@ rule analyse_diversity:
         shannon_vector = qiime2_dir("diversity", "shannon_vector.qza"),
         evenness_vector = qiime2_dir("diversity", "evenness_vector.qza"),
         simpson_vector = qiime2_dir("diversity", "simpson_vector.qza"),
+        chao1_vector = qiime2_dir("diversity", "chao1_vector.qza"),
         jaccard_dist_mat = qiime2_dir("diversity", "jaccard_distance_matrix.qza"),
         bray_curtis_dist_mat = qiime2_dir("diversity", "bray_curtis_distance_matrix.qza"),
         aitchison_dist_mat = qiime2_dir("diversity", "aitchison_distance_matrix.qza")
@@ -15,7 +16,8 @@ rule analyse_diversity:
         obs_feat_sign = qiime2_dir("group_significances", "observed_features_group_significance.qzv"),
         shannon_sign = qiime2_dir("group_significances", "shannon_group_significance.qzv"),
         evenness_sign = qiime2_dir("group_significances", "evenness_group_significance.qzv"),
-        simpson_sign = qiime2_dir("group_significances", "simpson_group_significance.qzv")
+        simpson_sign = qiime2_dir("group_significances", "simpson_group_significance.qzv"),
+        chao1_sign = qiime2_dir("group_significances", "chao1_group_significance.qzv")
     conda:
         conda_qiime2
     params:
@@ -44,6 +46,11 @@ rule analyse_diversity:
           --i-alpha-diversity {input.simpson_vector} \
           --m-metadata-file {input.metadata} \
           --o-visualization {output.simpson_sign}
+        >&2 printf "\nAlpha group significance: Chao1\n"
+        time qiime diversity alpha-group-significance \
+          --i-alpha-diversity {input.chao1_vector} \
+          --m-metadata-file {input.metadata} \
+          --o-visualization {output.chao1_sign}
         metadata_file={input.metadata}
         header=$(head -n 1 "$metadata_file")
         IFS=$'\t' read -r -a columns <<< "$header"

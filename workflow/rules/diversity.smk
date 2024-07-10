@@ -16,6 +16,7 @@ rule diversity:
         jaccard_emperor = qiime2_dir("diversity", "jaccard_emperor.qzv"),
         bray_curtis_emperor = qiime2_dir("diversity", "bray_curtis_emperor.qzv"),
         simpson_vector = qiime2_dir("diversity", "simpson_vector.qza"),
+        chao1_vector = qiime2_dir("diversity", "chao1_vector.qza"),
         aitchison_dist_mat = qiime2_dir("diversity", "aitchison_distance_matrix.qza"),
         aitchison_pcoa = qiime2_dir("diversity", "aitchison_pcoa_results.qza"),
         aitchison_emperor = qiime2_dir("diversity", "aitchison_emperor.qzv")
@@ -63,6 +64,12 @@ rule diversity:
           --i-table {output.rarefied_table} \
           --p-metric simpson \
           --o-alpha-diversity {output.simpson_vector} \
+          --no-recycle
+        >&2 printf "\nAlpha: Chao1 index (not included in core metrics):\n"
+        time qiime diversity alpha \
+          --i-table {output.rarefied_table} \
+          --p-metric chao1 \
+          --o-alpha-diversity {output.chao1_vector} \
           --no-recycle
         >&2 printf "\nBeta: Aitchison distance (not included in core metrics):\n"
         time qiime diversity beta \

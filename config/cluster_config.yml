@@ -118,13 +118,21 @@ diversity:
     output: logs/diversity/diversity_%j.out
     error: logs/diversity/diversity_%j.err
 
-analyse_diversity:
-    jobname: analyse_diversity
+alpha_group_sign:
+    jobname: alpha_group_sign
     time: 0-01:00:00
     ncpus: 1
     memory: 2G
-    output: logs/analyse_diversity/analyse_diversity_%j.out
-    error: logs/analyse_diversity/analyse_diversity_%j.err
+    output: logs/alpha_group_sign/alpha_group_sign_%j.out
+    error: logs/alpha_group_sign/alpha_group_sign_%j.err
+
+beta_group_sign:
+    jobname: beta_group_sign
+    time: 0-01:00:00
+    ncpus: 1
+    memory: 2G
+    output: logs/beta_group_sign/beta_group_sign_%j.out
+    error: logs/beta_group_sign/beta_group_sign_%j.err
 
 taxa_collapse:
     jobname: taxa_collapse

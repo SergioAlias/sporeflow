@@ -40,7 +40,8 @@ logdirs = ["default",
           "filter_junk",
           "extract_freq_values",
           "diversity",
-          "analyse_diversity",
+          "alpha_group_sign",
+          "beta_group_sign",
           "taxa_collapse",
           "abundance"]
 
@@ -122,13 +123,17 @@ with open(config["metadata"], 'r', newline='') as f:
 COLLAPSED_TABLES = ["filtered",
                     *["level_" + l for l in config["abundance_collapse_levels"].split(";")]]
 
+## methods for beta group significance
+
+BGS_METHODS = [m for m in config["diversity_beta_group_sign_method"].split(";")]
+
 ## output handling
 
 alloutput = list()
 alloutput.append(multiqc_dir("multiqc_report.html"))
-alloutput.append(qiime2_dir("diversity", "rarefaction_curves.qzv"))
 alloutput.append(qiime2_dir("feature_table_plots", "barplot.qzv"))
 alloutput.append(qiime2_dir("group_significances", "observed_features_group_significance.qzv"))
+alloutput.append(expand(qiime2_dir("group_significances", "{bgs_method}", "{meta_col}", "jaccard_group_significance.qzv"), meta_col = META_COLS, bgs_method = BGS_METHODS))
 alloutput.append(expand(qiime2_dir("abundance", "{meta_col}", "{levels}_ancombc.qza"), meta_col = META_COLS, levels = COLLAPSED_TABLES))
 
 rule all:
@@ -150,6 +155,7 @@ include: "rules/filter_junk.smk"
 include: "rules/plot_feature_table.smk"
 include: "rules/extract_freq_values.smk"
 include: "rules/diversity.smk"
-include: "rules/analyse_diversity.smk"
+include: "rules/alpha_group_sign.smk"
+include: "rules/beta_group_sign.smk"
 include: "rules/taxa_collapse.smk"
 include: "rules/abundance.smk"

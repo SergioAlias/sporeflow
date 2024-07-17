@@ -116,7 +116,14 @@ else:
 ## metadata columns
 
 with open(config["metadata"], 'r', newline='') as f:
-    META_COLS = next(csv.reader(f, delimiter='\t'))[1:]
+    META_COLS = next(csv.reader(f, delimiter = '\t'))[1:]
+
+# abundance references
+
+with open(config["abundance_file"], mode = 'r', newline = '') as f:
+    reader = csv.reader(f, delimiter = '\t')
+    _ = next(reader)
+    DA_REFS = [f'{r[0]}_{r[1]}' for r in reader]
 
 ## levels for taxa collapse
 
@@ -134,7 +141,7 @@ alloutput.append(multiqc_dir("multiqc_report.html"))
 alloutput.append(qiime2_dir("feature_table_plots", "barplot.qzv"))
 alloutput.append(qiime2_dir("group_significances", "observed_features_group_significance.qzv"))
 alloutput.append(expand(qiime2_dir("group_significances", "{bgs_method}", "{meta_col}", "jaccard_group_significance.qzv"), meta_col = META_COLS, bgs_method = BGS_METHODS))
-alloutput.append(expand(qiime2_dir("abundance", "{meta_col}", "{levels}_ancombc.qza"), meta_col = META_COLS, levels = COLLAPSED_TABLES))
+alloutput.append(expand(qiime2_dir("abundance", "{da_ref}", "{levels}_ancombc.qza"), da_ref = DA_REFS, levels = COLLAPSED_TABLES))
 
 rule all:
     input:

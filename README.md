@@ -5,6 +5,10 @@
 
 🦠 **SporeFlow: Fungal ITS metataxonomics pipeline**
 
+> 🧫 ***New feature incoming: 16S*** 🧫
+> 
+> *We are currently prioritizing the implementation of a 16S analysis option. This feature is under active development and will be completed soon.*
+
 > ⚠️ ***Disclaimer*** ⚠️
 > 
 > *This workflow is still under active development. New functions and improvements may be added in the future.*

@@ -84,6 +84,11 @@ SAMPLES = list(set([s[:-len("_RX.fastq.gz")] for s in os.listdir(config["raw_dat
 
 ## optional cutadapt rule handling
 
+if config["type"] == "ITS":
+  primers_tsv = "ITS_primers.tsv"
+elif config["type"] == "16S":
+  primers_tsv = "16S_primers.tsv"
+
 multiqc_input = list()
 multiqc_input.append(expand(fastqc_before_dir("{sample}_" + config["r1_suf"] + "_fastqc.zip"), sample = SAMPLES))
 multiqc_input.append(expand(fastqc_before_dir("{sample}_" + config["r2_suf"] + "_fastqc.zip"), sample = SAMPLES))
@@ -95,7 +100,7 @@ if config["use_cutadapt"] == True:
   multiqc_input.append(expand(cutadapt_logdir("{sample}_cutadapt.log"), sample = SAMPLES))
   multiqc_input.append(expand(fastqc_after_dir("{sample}_" + config["r1_suf"] + "_cutadapt_fastqc.zip"), sample = SAMPLES))
   multiqc_input.append(expand(fastqc_after_dir("{sample}_" + config["r2_suf"] + "_cutadapt_fastqc.zip"), sample = SAMPLES))
-  with open(os.path.join(code_dir, "resources", "ITS_primers.tsv"), mode = "r", newline = "") as file:
+  with open(os.path.join(code_dir, "resources", primers_tsv), mode = "r", newline = "") as file:
       primer_dict = {key: value for key, value in csv.reader(file, delimiter = "\t")}
   primer_seq_f = primer_dict.get(config["cutadapt_primer_f"], config["cutadapt_primer_f"])
   primer_seq_r = primer_dict.get(config["cutadapt_primer_r"], config["cutadapt_primer_r"])

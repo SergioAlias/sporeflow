@@ -8,17 +8,17 @@
 
 ### General ###
 
-proj_name: micofood_24                                    #-------#    Project name
+proj_name: cereal_16s                                     #-------#    Project name
 outdir: /scratch/salias/projects                          #-------#    Directory with all projects
-raw_data: /home/salias/data/cereal_fungi                  #-------#    Directory with FASTQ files
+raw_data: /home/salias/data/cereal_bacteria               #-------#    Directory with FASTQ files
 metadata: /home/salias/projects/sporeflow/metadata.tsv    #-------#    Metadata file. Modify it with your experiment details (it needs to have metadata.tsv as filename)
-type: ITS                                                 #-------#    Region sequenced: 16S (bacteria, not implemented yet) or ITS (fungi)
+type: 16S                                                 #-------#    Region sequenced: 16S (bacteria, not implemented yet) or ITS (fungi)
 
 
 ### Databases ###
 
-db_dir: /home/salias/data/sf_databases/UNITE            #-------#    Directory where database is stored
-db_file: unite_ver10_99_all_04.04.2024-Q2-2024.2.qza    #-------#    Database filename
+db_dir: /home/salias/data/sf_databases/Greengenes    #-------#    Directory where database is stored
+db_file: gg_2022_10_backbone_full_length.nb.qza      #-------#    Database filename
 
 
 ### Sequences ###
@@ -28,18 +28,18 @@ r1_suf: R1     #-------#    Forward read suffix (DO NOT CHANGE)
 r2_suf: R2     #-------#    Reverse read suffix (DO NOT CHANGE)
 
 
-### Cutadapt ###
+### Cutadapt ###  (TODO: CONTINUE HERE)
 
-use_cutadapt: False             #-------#    True if you want to use Cutadapt, False otherwise (the rest of Cutadapt options will be ignored then)
+use_cutadapt: True              #-------#    True if you want to use Cutadapt, False otherwise (the rest of Cutadapt options will be ignored then)
 cutadapt_trim_3_prime: True     #-------#    To trim (True) or not to trim (False) reverse complementary of primers in the 3' end
-cutadapt_primer_f: ITS3_KYO2    #-------#    Forward primer name present in resources/ITS_primers.tsv or custom sequence
-cutadapt_primer_r: ITS4_KYO1    #-------#    Reverse primer name present in resources/ITS_primers.tsv or custom sequence
+cutadapt_primer_f: ITS3_KYO2    #-------#    Forward primer name present in resources/[ITS/16S]_primers.tsv or custom sequence
+cutadapt_primer_r: ITS4_KYO1    #-------#    Reverse primer name present in resources/[ITS/16S]_primers.tsv or custom sequence
 cutadapt_n_threads: 2           #cluster#    Number of threads to use for multithreaded processing
 
 
-### ITSxpress ###
+### ITSxpress (IMPORTANT: If using 16S, set use_itsxpress to False) ###
 
-use_itsxpress: True          #-------#    True if you want to use ITSxpress, False otherwise (the rest of ITSxpress options will be ignored then)
+use_itsxpress: False         #-------#    True if you want to use ITSxpress, False otherwise (the rest of ITSxpress options will be ignored then)
 itsxpress_region: ITS2       #-------#    Regions ITS2, ITS1, and ALL can be selected
 itsxpress_cluster_id: 1.0    #-------#    Percent identity for clustering reads (0.995-1). Set to 1 for exact dereplication
 itsxpress_n_threads: 16      #cluster#    Number of threads to use for multithreaded processing (ITSxpress stops reducing runtime at about 10 cores)

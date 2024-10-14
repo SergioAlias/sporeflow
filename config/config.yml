@@ -8,7 +8,7 @@
 
 ### General ###
 
-proj_name: cereal_16s                                     #-------#    Project name
+proj_name: cereal_16S                                     #-------#    Project name
 outdir: /scratch/salias/projects                          #-------#    Directory with all projects
 raw_data: /home/salias/data/cereal_bacteria               #-------#    Directory with FASTQ files
 metadata: /home/salias/projects/sporeflow/metadata.tsv    #-------#    Metadata file. Modify it with your experiment details (it needs to have metadata.tsv as filename)
@@ -28,12 +28,12 @@ r1_suf: R1     #-------#    Forward read suffix (DO NOT CHANGE)
 r2_suf: R2     #-------#    Reverse read suffix (DO NOT CHANGE)
 
 
-### Cutadapt ###  (TODO: CONTINUE HERE)
+### Cutadapt ###
 
 use_cutadapt: True              #-------#    True if you want to use Cutadapt, False otherwise (the rest of Cutadapt options will be ignored then)
 cutadapt_trim_3_prime: True     #-------#    To trim (True) or not to trim (False) reverse complementary of primers in the 3' end
-cutadapt_primer_f: ITS3_KYO2    #-------#    Forward primer name present in resources/[ITS/16S]_primers.tsv or custom sequence
-cutadapt_primer_r: ITS4_KYO1    #-------#    Reverse primer name present in resources/[ITS/16S]_primers.tsv or custom sequence
+cutadapt_primer_f: 341F         #-------#    Forward primer name present in resources/[ITS/16S]_primers.tsv or custom sequence
+cutadapt_primer_r: 805R         #-------#    Reverse primer name present in resources/[ITS/16S]_primers.tsv or custom sequence
 cutadapt_n_threads: 2           #cluster#    Number of threads to use for multithreaded processing
 
 
@@ -65,16 +65,16 @@ taxonomy_n_threads: 2    #cluster#    Maximum number of concurrent worker proces
 
 ### Filter junk ###
 
-kingdom_to_keep: k__Fungi     #-------#    All sequencies not belonging to that kingdom will be discarded. Options available: k__Fungi (note the double underscore '_')
-min_taxa_level: c__           #-------#    All sequences without annotations at least as general as this taxonomic level will be discarded.
-#-------------------------------------#    Available levels (note the double underscore '_'):
-#-------------------------------------#      k__: Kingdom
-#-------------------------------------#      p__: Phylum (conservative)
-#-------------------------------------#      c__: Class (recommended)
-#-------------------------------------#      o__: Order (recommended)
-#-------------------------------------#      f__: Family
-#-------------------------------------#      g__: Genus
-#-------------------------------------#      s__: Species (you will likely discard almost everything)
+kingdom_to_keep: d__Bacteria    #-------#    All sequencies not belonging to that kingdom will be discarded. Options available: k__Fungi, d__Bacteria (note the double underscore '_')
+min_taxa_level: c__             #-------#    All sequences without annotations at least as general as this taxonomic level will be discarded.
+#---------------------------------------#    Available levels (note the double underscore '_'):
+#---------------------------------------#      d__: Domain // k__: Kingdom
+#---------------------------------------#      p__: Phylum (conservative)
+#---------------------------------------#      c__: Class (recommended)
+#---------------------------------------#      o__: Order (recommended)
+#---------------------------------------#      f__: Family
+#---------------------------------------#      g__: Genus
+#---------------------------------------#      s__: Species (you will likely discard almost everything)
 
 
 ### Diversity analysis ###
@@ -90,7 +90,7 @@ diversity_beta_n_threads: 4                                     #cluster#    Num
 abundance_collapse_levels: 5;6;7                                 #-------#    Taxonomic levels to collapse prior to ANCOM-BC.
 #------------------------------------------------------------------------#    Levels must be separated with semicolons (;) and you must specify at least one level.
 #------------------------------------------------------------------------#    Available levels:
-#------------------------------------------------------------------------#      1: Kingdom
+#------------------------------------------------------------------------#      1: Domain // Kingdom
 #------------------------------------------------------------------------#      2: Phylum
 #------------------------------------------------------------------------#      3: Class
 #------------------------------------------------------------------------#      4: Order

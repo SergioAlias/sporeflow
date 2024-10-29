@@ -42,6 +42,7 @@ rule dada2:
           --p-trunc-q {params.trunc_q} \
           --p-min-overlap {params.min_overlap} \
           --p-n-threads {params.nthreads} \
+          --verbose \
           --o-table {output.table_qza} \
           --o-representative-sequences {output.seqs_qza} \
           --o-denoising-stats {output.stats_qza}

@@ -55,7 +55,7 @@ dada2_max_ee_f: 2          #-------#    Forward reads with number of expected er
 dada2_max_ee_r: 2          #-------#    Reverse reads with number of expected errors higher than this value will be discarded
 dada2_trunc_q: 2           #-------#    Reads are truncated at the first instance of a quality score less than or equal to this value
 dada2_min_overlap: 12      #-------#    Minimum length of the overlap required for merging the forward and reverse reads
-dada2_n_threads: 20        #cluster#    Number of threads to use for multithreaded processing
+dada2_n_threads: 60        #cluster#    Number of threads to use for multithreaded processing
 
 
 ### Taxonomic classification ###

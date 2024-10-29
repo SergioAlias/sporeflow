@@ -82,12 +82,13 @@ os.makedirs(proj_dir, exist_ok = True)
 
 SAMPLES = list(set([s[:-len("_RX.fastq.gz")] for s in os.listdir(config["raw_data"])]))
 
-## optional cutadapt rule handling
+## amplicon type, optional cutadapt rule handling
 
 if config["type"] == "ITS":
   primers_tsv = "ITS_primers.tsv"
 elif config["type"] == "16S":
   primers_tsv = "16S_primers.tsv"
+  config["use_itsxpress"] = False
 
 multiqc_input = list()
 multiqc_input.append(expand(fastqc_before_dir("{sample}_" + config["r1_suf"] + "_fastqc.zip"), sample = SAMPLES))

@@ -20,9 +20,7 @@ conda activate sporeflow-main
 
 echo "🦠 Setting aliases..."
 
-## Default njobs is 30. Feel free to change it in run_sporeflow and run_inmediate
-## For database download
-
+## Default njobs is 30. Feel free to change it in sf_run and sf_inmediate
 
 alias sf_run='snakemake --use-conda --cluster "sbatch -J {cluster.jobname} -t {cluster.time} --mem {cluster.memory} -c {cluster.ncpus} -o {cluster.output} -e {cluster.error}" --cluster-config config/cluster_config.yml --jobs 30'
 alias sf_immediate='snakemake --use-conda --cluster-config config/cluster_config.yml --jobs 30 -pr --immediate-submit --notemp --cluster "python3 workflow/scripts/immediate_submit.py {dependencies}"'

@@ -15,6 +15,8 @@
 
 SporeFlow (**S**nakemake **P**ipeline F**or** M**e**tataxonomics Work**flow**s) is a pipeline for metataxonomic analysis of fungal ITS using [QIIME 2](https://qiime2.org/) and [Snakemake](https://snakemake.readthedocs.io/en/v7.32.2/). It takes into consideration all the particularities of the indel-rich ITS region.
 
+>🐍 *This workflow uses Snakemake 7.32.4. Newer versions (8+) contain [backwards incompatible changes](https://snakemake.readthedocs.io/en/stable/getting_started/migration.html) that may result in this pipeline not working in a Slurm HPC queue system.*
+
 What SporeFlow does:
 
 - Run [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) on the raw FASTQ files (rule `fastqc_before`)

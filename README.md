@@ -3,17 +3,9 @@
 [![Snakemake](https://img.shields.io/badge/Snakemake-7.32.4-5442a6.svg)](https://snakemake.github.io)
 [![QIIME 2](https://img.shields.io/badge/QIIME2-2024.2-e5b611.svg)](https://qiime2.org/)
 
-🦠 **SporeFlow: Fungal ITS metataxonomics pipeline**
+🦠 **SporeFlow: 16S and ITS metataxonomics pipeline**
 
-> 🧫 ***New feature: 16S*** 🧫
-> 
-> *The 16S analysis option is now fully implemented and ready for use.*
-
-> ⚠️ ***Disclaimer*** ⚠️
-> 
-> *This workflow is still under active development. New functions and improvements may be added in the future.*
-
-SporeFlow (**S**nakemake **P**ipeline F**or** M**e**tataxonomics Work**flow**s) is a pipeline for metataxonomic analysis of fungal ITS using [QIIME 2](https://qiime2.org/) and [Snakemake](https://snakemake.readthedocs.io/en/v7.32.2/). It takes into consideration all the particularities of the indel-rich ITS region.
+SporeFlow (**S**nakemake **P**ipeline F**or** M**e**tataxonomics Work**flow**s) is a pipeline for metataxonomic analysis of fungal ITS and bacterial 16S using [QIIME 2](https://qiime2.org/) and [Snakemake](https://snakemake.readthedocs.io/en/v7.32.2/). It takes into consideration all the particularities of the indel-rich ITS region.
 
 >🐍 *This workflow uses Snakemake 7.32.4. Newer versions (8+) contain [backwards incompatible changes](https://snakemake.readthedocs.io/en/stable/getting_started/migration.html) that may result in this pipeline not working in a Slurm HPC queue system.*
 

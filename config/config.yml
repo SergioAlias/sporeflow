@@ -66,7 +66,7 @@ taxonomy_n_threads: 2    #cluster#    Maximum number of concurrent worker proces
 ### Filter junk ###
 
 kingdom_to_keep: d__Bacteria    #-------#    All sequencies not belonging to that kingdom will be discarded. Options available: k__Fungi, d__Bacteria (note the double underscore '_')
-min_taxa_level: c__             #-------#    All sequences without annotations at least as general as this taxonomic level will be discarded.
+min_taxa_level: c__             #-------#    All sequences without annotations at least as specific as this taxonomic level will be discarded.
 #---------------------------------------#    Available levels (note the double underscore '_'):
 #---------------------------------------#      d__: Domain // k__: Kingdom
 #---------------------------------------#      p__: Phylum (conservative)

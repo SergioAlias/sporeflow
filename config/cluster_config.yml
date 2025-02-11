@@ -94,6 +94,14 @@ filter_junk:
     output: logs/filter_junk/filter_junk_%j.out
     error: logs/filter_junk/filter_junk_%j.err
 
+relative_filter:
+    jobname: relative_filter
+    time: 0-00:15:00
+    ncpus: 1
+    memory: 2G
+    output: logs/relative_filter/relative_filter_%j.out
+    error: logs/relative_filter/relative_filter_%j.err
+
 plot_feature_table:
     jobname: plot_feature_table
     time: 0-00:15:00

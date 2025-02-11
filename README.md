@@ -44,9 +44,11 @@ source init_sporeflow.sh
 
 5. If needed, modify `time`, `ncpus` and `memory` variables in `config/cluster_config.yml`.
 
-6. Download a UNITE classfier in QIIME 2 format from [https://github.com/colinbrislawn/unite-train/releases](https://github.com/colinbrislawn/unite-train/releases). We recommend using one of the following (remember to change the name accordingly in `config/config.yml`):
-   - `unite_ver10_dynamic_all_04.04.2024-Q2-2024.2.qza`
-   - `unite_ver10_99_all_04.04.2024-Q2-2024.2.qza`  
+6. Classifier setup:
+   - **Fungi:** download a UNITE classfier in QIIME 2 format from [https://github.com/colinbrislawn/unite-train/releases](https://github.com/colinbrislawn/unite-train/releases). We recommend using one of the following (remember to change the name accordingly in `config/config.yml`):
+     - `unite_ver10_dynamic_all_04.04.2024-Q2-2024.2.qza`
+     - `unite_ver10_99_all_04.04.2024-Q2-2024.2.qza`
+   - **Bacteria:** download a SILVA classifier in QIIME 2 format from [https://resources.qiime2.org/](https://resources.qiime2.org/). We recommend using the SILVA 138 99% OTUs full-length sequences database (remember to change the name accordingly in `config/config.yml`).
 
 7. Run the following command to start the workflow:
 ```bash

@@ -38,6 +38,7 @@ logdirs = ["default",
           "plot_feature_table",
           "taxonomy",
           "filter_junk",
+          "relative_filter",
           "extract_freq_values",
           "diversity",
           "alpha_group_sign",
@@ -148,6 +149,8 @@ alloutput.append(qiime2_dir("feature_table_plots", "barplot.qzv"))
 alloutput.append(qiime2_dir("group_significances", "observed_features_group_significance.qzv"))
 alloutput.append(expand(qiime2_dir("group_significances", "{bgs_method}", "{meta_col}", "jaccard_group_significance.qzv"), meta_col = META_COLS, bgs_method = BGS_METHODS))
 alloutput.append(expand(qiime2_dir("abundance", "{da_ref}", "{levels}_ancombc.qza"), da_ref = DA_REFS, levels = COLLAPSED_TABLES))
+alloutput.append(qiime2_dir("feature_tables", "relative_filtered_table.qza"))
+
 
 rule all:
     input:
@@ -165,6 +168,7 @@ include: "rules/itsxpress.smk"
 include: "rules/dada2.smk"
 include: "rules/taxonomy.smk"
 include: "rules/filter_junk.smk"
+include: "rules/relative_filter.smk"
 include: "rules/plot_feature_table.smk"
 include: "rules/extract_freq_values.smk"
 include: "rules/diversity.smk"

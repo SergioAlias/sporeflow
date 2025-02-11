@@ -77,6 +77,12 @@ min_taxa_level: c__             #-------#    All sequences without annotations a
 #---------------------------------------#      s__: Species (you will likely discard almost everything)
 
 
+### Relative filtering ###
+
+filtering_abundance: 0.01     #-------#    Minimum relative abundance for a feature to be retained
+filtering_prevalence: 0.04    #-------#    Minimum portion of samples that a feature must have a relative abundance of at least `filtering_abundance` to be retained
+
+
 ### Diversity analysis ###
 
 diversity_rarefaction_steps: 20                                 #-------#    Rarefaction depths to include

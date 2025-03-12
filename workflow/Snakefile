@@ -90,6 +90,9 @@ if config["type"] == "ITS":
 elif config["type"] == "16S":
   primers_tsv = "16S_primers.tsv"
   config["use_itsxpress"] = False
+elif config["type"] == "TEF1":
+  primers_tsv = "TEF1_primers.tsv"
+  config["use_itsxpress"] = False
 
 multiqc_input = list()
 multiqc_input.append(expand(fastqc_before_dir("{sample}_" + config["r1_suf"] + "_fastqc.zip"), sample = SAMPLES))

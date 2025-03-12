@@ -3,9 +3,13 @@
 [![Snakemake](https://img.shields.io/badge/Snakemake-7.32.4-5442a6.svg)](https://snakemake.github.io)
 [![QIIME 2](https://img.shields.io/badge/QIIME2-2024.2-e5b611.svg)](https://qiime2.org/)
 
-🦠 **SporeFlow: 16S and ITS metataxonomics pipeline**
+> **Exciting news!** 🎉 This workflow now supports the use of **Translation Elongation Factor 1 alpha (TEF1)** as a marker gene for the filamentous fungal genus ***Fusarium***.
 
-SporeFlow (**S**nakemake **P**ipeline F**or** M**e**tataxonomics Work**flow**s) is a pipeline for metataxonomic analysis of fungal ITS and bacterial 16S using [QIIME 2](https://qiime2.org/) and [Snakemake](https://snakemake.readthedocs.io/en/v7.32.2/). It takes into consideration all the particularities of the indel-rich ITS region.
+🦠 **SporeFlow: 16S, ITS and TEF1 metataxonomics pipeline**
+
+SporeFlow (**S**nakemake **P**ipeline F**or** M**e**tataxonomics Work**flow**s) is a pipeline for metataxonomic analysis of fungal ITS, *Fusarium* TEF1 and bacterial 16S using [QIIME 2](https://qiime2.org/) and [Snakemake](https://snakemake.readthedocs.io/en/v7.32.2/).
+
+More information on the use of TEF1 for *Fusarium* can be found in [https://github.com/SergioAlias/fusariumid-train](https://github.com/SergioAlias/fusariumid-train).
 
 >🐍 *This workflow uses Snakemake 7.32.4. Newer versions (8+) contain [backwards incompatible changes](https://snakemake.readthedocs.io/en/stable/getting_started/migration.html) that may result in this pipeline not working in a Slurm HPC queue system.*
 
@@ -45,9 +49,12 @@ source init_sporeflow.sh
 5. If needed, modify `time`, `ncpus` and `memory` variables in `config/cluster_config.yml`.
 
 6. Classifier setup:
-   - **Fungi:** download a UNITE classfier in QIIME 2 format from [https://github.com/colinbrislawn/unite-train/releases](https://github.com/colinbrislawn/unite-train/releases). We recommend using one of the following (remember to change the name accordingly in `config/config.yml`):
+   - **Fungi (ITS):** download a UNITE classfier in QIIME 2 format from [https://github.com/colinbrislawn/unite-train/releases](https://github.com/colinbrislawn/unite-train/releases). We recommend using one of the following (remember to change the name accordingly in `config/config.yml`):
      - `unite_ver10_dynamic_all_04.04.2024-Q2-2024.2.qza`
      - `unite_ver10_99_all_04.04.2024-Q2-2024.2.qza`
+
+   - **Fungi, *Fusarium* (TEF1):** you can train your own classifier or download a pre-made one from [https://github.com/SergioAlias/fusariumid-train](https://github.com/SergioAlias/fusariumid-train).
+
    - **Bacteria:** download a SILVA classifier in QIIME 2 format from [https://resources.qiime2.org/](https://resources.qiime2.org/). We recommend using the SILVA 138 99% OTUs full-length sequences database (remember to change the name accordingly in `config/config.yml`).
 
 7. Run the following command to start the workflow:

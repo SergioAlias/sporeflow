@@ -1,9 +1,10 @@
 # <img src="./.img/sf_negative.png" width="500">
 
+[![Issues](https://img.shields.io/github/issues/SergioAlias/sporeflow?label=Issues)](https://github.com/SergioAlias/sporeflow/issues)
 [![Snakemake](https://img.shields.io/badge/Snakemake-7.32.4-5442a6.svg)](https://snakemake.github.io)
 [![QIIME 2](https://img.shields.io/badge/QIIME2-2024.2-e5b611.svg)](https://qiime2.org/)
 
-> **Exciting news!** 🎉 This workflow now supports the use of **Translation Elongation Factor 1 alpha (TEF1)** as a marker gene for the filamentous fungal genus ***Fusarium***.
+> 🎉 **Exciting news!** 🎉 This workflow now supports the use of **Translation Elongation Factor 1 alpha (TEF1)** as a marker gene for the filamentous fungal genus ***Fusarium***.
 
 🦠 **SporeFlow: 16S, ITS and TEF1 metataxonomics pipeline**
 

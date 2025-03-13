@@ -36,20 +36,26 @@ The only prerequisite is having Conda installed. In this regard, we **highly rec
 
 ## Usage
 
-1. Clone the repository
+1. Clone the repository.
 
-2. Create a Screen (see section **Immediate submit and Screen**)
+2. Create a Screen (see section [**Immediate submit and Screen**](#immediate-submit-and-screen)).
 
 3. Run the following command to download (if needed) and activate the SporeFlow environment, and to set aliases for the main functions:
 ```bash
 source init_sporeflow.sh
 ```
 
-4. Edit `config/config.yml` with your experiment details. Variables annotated with #cluster# must also be updated in `config/cluster_config.yml`.
+4. Create links to your original FASTQ files (with `ln -s`) that match the format `[sample_name]_R1.fastq.gz` / `[sample_name]_R2.fastq.gz` (the workflow only accepts paired-end sequencing for now).
 
-5. If needed, modify `time`, `ncpus` and `memory` variables in `config/cluster_config.yml`.
+5. Edit `metadata.tsv` with your samples metadata.
 
-6. Classifier setup:
+6.  For differential abundance, edit `abundance.tsv` with the comparisons you want to perform, based on fields and values included in `metadata.tsv`.
+
+7. Edit `config/config.yml` with your experiment details. Variables annotated with #cluster# must also be updated in `config/cluster_config.yml`.
+
+8. If needed, modify `time`, `ncpus` and `memory` variables in `config/cluster_config.yml`.
+
+9. Classifier setup:
    - **Fungi (ITS):** download a UNITE classfier in QIIME 2 format from [https://github.com/colinbrislawn/unite-train/releases](https://github.com/colinbrislawn/unite-train/releases). We recommend using one of the following (remember to change the name accordingly in `config/config.yml`):
      - `unite_ver10_dynamic_all_04.04.2024-Q2-2024.2.qza`
      - `unite_ver10_99_all_04.04.2024-Q2-2024.2.qza`
@@ -58,7 +64,7 @@ source init_sporeflow.sh
 
    - **Bacteria:** download a SILVA classifier in QIIME 2 format from [https://resources.qiime2.org/](https://resources.qiime2.org/). We recommend using the SILVA 138 99% OTUs full-length sequences database (remember to change the name accordingly in `config/config.yml`).
 
-7. Run the following command to start the workflow:
+10. Run the following command to start the workflow:
 ```bash
 sf_run
 ```

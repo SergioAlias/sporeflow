@@ -10,9 +10,9 @@
 
 proj_name: grano_TEF1                                     #-------#    Project name
 outdir: /scratch/salias/projects                          #-------#    Directory with all projects
-raw_data: /home/salias/data/cereal_bacteria               #-------#    Directory with FASTQ files
+raw_data: /home/salias/data/grano_EF_links                #-------#    Directory with FASTQ files
 metadata: /home/salias/projects/sporeflow/metadata.tsv    #-------#    Metadata file. Modify it with your experiment details (it needs to have metadata.tsv as filename)
-type: TEF1                                                #-------#    Region sequenced: 16S (bacteria), ITS (fungi) TEF1 (Fusarium: Fungi)
+type: TEF1                                                #-------#    Region sequenced: 16S (bacteria), ITS (fungi) TEF1 (fungi: Fusarium)
 
 
 ### Databases ###
@@ -24,8 +24,8 @@ db_file: fid_classifier.qza                                                #----
 ### Sequences ###
 
 end: paired    #-------#    Options: paired (single end not supported for now)
-r1_suf: R1     #-------#    Forward read suffix (DO NOT CHANGE)
-r2_suf: R2     #-------#    Reverse read suffix (DO NOT CHANGE)
+r1_suf: R1     #-------#    Forward read suffix (DO NOT CHANGE, create links to your original files matching this)
+r2_suf: R2     #-------#    Reverse read suffix (DO NOT CHANGE, create links to your original files matching this)
 
 
 ### Cutadapt ###

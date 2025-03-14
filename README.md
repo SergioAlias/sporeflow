@@ -64,9 +64,17 @@ source init_sporeflow.sh
 
    - **Bacteria:** download a SILVA classifier in QIIME 2 format from [https://resources.qiime2.org/](https://resources.qiime2.org/). We recommend using the SILVA 138 99% OTUs full-length sequences database (remember to change the name accordingly in `config/config.yml`).
 
-10. Run the following command to start the workflow:
+10. Run `sf_run` to start the workflow. You can also run it until some key steps (using `--until rule_name`) to check the results before continuing and to change parameters if necessary (recommended). For example, a possible workflow split could be:
 ```bash
-sf_run
+sf_run --until multiqc     # quality control and possible primer trimming
+sf_run --until dada2       # feature table construction
+sf_run --until taxonomy    # taxonomic classification
+sf_run                     # rest of workflow
+
+
+# Tip: add the flag -n to perform a dry-run. You will see how many jobs will be executed without actually running the workflow. Example:
+
+# sf_run --until multiqc -n
 ```
 
 ## Immediate submit and Screen

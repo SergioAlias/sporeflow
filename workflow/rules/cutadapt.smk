@@ -15,6 +15,8 @@ rule cutadapt:
         primer_r = primer_seq_r,
         revcom_f = revComplementary(primer_seq_f),
         revcom_r = revComplementary(primer_seq_r),
+        cut_f = config["cutadapt_cut_f"],
+        cut_r = config["cutadapt_cut_r"],
         nthreads = config["cutadapt_n_threads"],
         trim_3_prime = config["cutadapt_trim_3_prime"]
     shell:
@@ -30,6 +32,8 @@ rule cutadapt:
         time cutadapt \
           {input.fq_f} \
           {input.fq_r} \
+          --cut {params.cut_f} \
+          -U {params.cut_r} \
           --discard-untrimmed \
           --cores {params.nthreads} \
           --output {output.fq_trim_f} \

@@ -72,7 +72,10 @@ sf_run --until taxonomy    # taxonomic classification
 sf_run                     # rest of workflow
 
 
-# Tip: add the flag -n to perform a dry-run. You will see how many jobs will be executed without actually running the workflow. Example:
+# Tip: add the flag -n to perform a dry-run. You will see how many jobs 
+# will be executed without actually running the workflow.
+
+# Example:
 
 # sf_run --until multiqc -n
 ```

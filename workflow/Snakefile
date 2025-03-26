@@ -154,6 +154,7 @@ alloutput.append(expand(qiime2_dir("group_significances", "{bgs_method}", "{meta
 alloutput.append(expand(qiime2_dir("abundance", "{da_ref}", "{levels}_ancombc.qza"), da_ref = DA_REFS, levels = COLLAPSED_TABLES))
 alloutput.append(qiime2_dir("feature_tables", "relative_filtered_table.qza"))
 
+localrules: all
 
 rule all:
     input:

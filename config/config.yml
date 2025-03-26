@@ -18,7 +18,7 @@ type: TEF1                                                #-------#    Region se
 ### Databases ###
 
 db_dir: /scratch/salias/projects/fusariumid-q2-2024.2/qiime2/classifier    #-------#    Directory where database is stored
-db_file: fid_classifier.qza                                                #-------#    Database filename
+db_file: fid_ncbi_classifier.qza                                           #-------#    Database filename
 
 
 ### Sequences ###
@@ -32,8 +32,8 @@ r2_suf: R2     #-------#    Reverse read suffix (DO NOT CHANGE, create links to 
 
 use_cutadapt: True              #-------#    True if you want to use Cutadapt, False otherwise (the rest of Cutadapt options will be ignored then)
 cutadapt_trim_3_prime: True     #-------#    To trim (True) or not to trim (False) reverse complementary of primers in the 3' end
-cutadapt_primer_f: EFseqF350    #-------#    Forward primer name present in resources/[ITS/16S]_primers.tsv or custom sequence
-cutadapt_primer_r: EFseqR       #-------#    Reverse primer name present in resources/[ITS/16S]_primers.tsv or custom sequence
+cutadapt_primer_f: EFseqF350    #-------#    Forward primer name present in resources/[ITS/16S/TEF1]_primers.tsv or custom sequence
+cutadapt_primer_r: EFseqR       #-------#    Reverse primer name present in resources/[ITS/16S/TEF1]_primers.tsv or custom sequence
 cutadapt_cut_f: 8               #-------#    Number of bases to remove from the beginning of forward reads before primer trimming. Set to 0 to skip
 cutadapt_cut_r: 8               #-------#    Number of bases to remove from the beginning of reverse reads before primer trimming. Set to 0 to skip
 cutadapt_n_threads: 2           #cluster#    Number of threads to use for multithreaded processing

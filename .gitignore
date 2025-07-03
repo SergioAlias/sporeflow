@@ -3,4 +3,4 @@ logs
 *.pdf
 .tests
 metadata_sin_roturado.tsv
-fungi_files/*
+old_metadata/*

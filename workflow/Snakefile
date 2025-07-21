@@ -44,7 +44,8 @@ logdirs = ["default",
           "alpha_group_sign",
           "beta_group_sign",
           "taxa_collapse",
-          "abundance"]
+          "abundance",
+          "longitudinal"]
 
 for d in logdirs:
     os.makedirs(os.path.join("logs", d), exist_ok = True)
@@ -144,15 +145,37 @@ COLLAPSED_TABLES = ["filtered",
 
 BGS_METHODS = [m for m in config["diversity_beta_group_sign_method"].split(";")]
 
+## columns to exclude from beta group significance
+
+BGS_EXCLUDE = [c for c in config["diversity_beta_cols_to_exclude"].split(";")]
+BGS_INCLUDE = [c for c in META_COLS if c not in BGS_EXCLUDE]
+
+## longitudinal input
+
+alpha_vals = {"observed_features":"observed_features",
+              "shannon":"shannon_entropy",
+              "simpson":"simpson",
+              "chao1":"chao1",
+              "evenness":"pielou_evenness"}
+
+if config["longitudinal_metric"] in alpha_vals.keys():
+  longitudinal_input = qiime2_dir("diversity", config["longitudinal_metric"] + "_vector.qza")
+  metric_name = alpha_vals[config["longitudinal_metric"]]
+else:
+  longitudinal_input = qiime2_dir("feature_tables", "filtered_table.qza")
+  metric_name = config["longitudinal_metric"]
+
+
 ## output handling
 
 alloutput = list()
 alloutput.append(multiqc_dir("multiqc_report.html"))
 alloutput.append(qiime2_dir("feature_table_plots", "barplot.qzv"))
 alloutput.append(qiime2_dir("group_significances", "observed_features_group_significance.qzv"))
-alloutput.append(expand(qiime2_dir("group_significances", "{bgs_method}", "{meta_col}", "jaccard_group_significance.qzv"), meta_col = META_COLS, bgs_method = BGS_METHODS))
+alloutput.append(expand(qiime2_dir("group_significances", "{bgs_method}", "{meta_col}", "jaccard_group_significance.qzv"), meta_col = BGS_INCLUDE, bgs_method = BGS_METHODS))
 alloutput.append(expand(qiime2_dir("abundance", "{da_ref}", "{levels}_ancombc.qza"), da_ref = DA_REFS, levels = COLLAPSED_TABLES))
 alloutput.append(qiime2_dir("feature_tables", "relative_filtered_table.qza"))
+alloutput.append(qiime2_dir("longitudinal", "linear-mixed-effects.qzv"))
 
 localrules: all
 
@@ -180,3 +203,4 @@ include: "rules/alpha_group_sign.smk"
 include: "rules/beta_group_sign.smk"
 include: "rules/taxa_collapse.smk"
 include: "rules/abundance.smk"
+include: "rules/longitudinal.smk"

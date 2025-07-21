@@ -88,7 +88,7 @@ taxonomy:
 
 filter_junk:
     jobname: filter_junk
-    time: 0-00:15:00
+    time: 0-00:50:00
     ncpus: 1
     memory: 2G
     output: logs/filter_junk/filter_junk_%j.out
@@ -157,3 +157,11 @@ abundance:
     memory: 10G
     output: logs/abundance/abundance_%j.out
     error: logs/abundance/abundance_%j.err
+
+longitudinal:
+    jobname: longitudinal
+    time: 0-05:00:00
+    ncpus: 2
+    memory: 20G
+    output: logs/longitudinal/longitudinal_%j.out
+    error: logs/longitudinal/longitudinal_%j.err

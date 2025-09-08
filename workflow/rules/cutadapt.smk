@@ -17,13 +17,19 @@ rule cutadapt:
         revcom_r = revComplementary(primer_seq_r),
         cut_f = config["cutadapt_cut_f"],
         cut_r = config["cutadapt_cut_r"],
+        cut_at_start = config["cutadapt_cut_at_start"],
         nthreads = config["cutadapt_n_threads"],
         trim_3_prime = config["cutadapt_trim_3_prime"]
     shell:
         """
         adapters=()
-        adapters+=(--front Primer_F=^{params.primer_f})
-        adapters+=(-G Primer_R=^{params.primer_r})
+        if [[ {params.cut_at_start} == "True" ]]; then
+          adapters+=(--front Primer_F=^{params.primer_f})
+          adapters+=(-G Primer_R=^{params.primer_r})
+        else
+          adapters+=(--front Primer_F={params.primer_f})
+          adapters+=(-G Primer_R={params.primer_r})
+        fi
         if [[ {params.trim_3_prime} == "True" ]]; then
           adapters+=(--adapter Rev_com_primer_R={params.revcom_r})
           adapters+=(-A Rev_com_primer_F={params.revcom_f})

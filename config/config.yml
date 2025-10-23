@@ -63,12 +63,13 @@ dada2_n_threads: 60        #cluster#    Number of threads to use for multithread
 
 ### Taxonomic classification ###
 
+taxonomy_confidence: 0.7    #-------#    Confidence threshold for limiting taxonomic depth. Set to "disable" to disable confidence calculation, or 0 to calculate confidence but not apply it to limit the taxonomic depth of the assignments
 taxonomy_n_threads: 2    #cluster#    Maximum number of concurrent worker processes
 
 
 ### Filter junk ###
 
-kingdom_to_keep: d__Bacteria #-------#    All sequencies not belonging to that kingdom will be discarded. Options available: k__Fungi, d__Bacteria (note the double underscore '_')
+kingdom_to_keep: k__Fungi    #-------#    All sequencies not belonging to that kingdom will be discarded. Options available: k__Fungi, d__Bacteria (note the double underscore '_')
 min_taxa_level: c__          #-------#    All sequences without annotations at least as specific as this taxonomic level will be discarded.
 #------------------------------------#    Available levels (note the double underscore '_'):
 #------------------------------------#      d__: Domain // k__: Kingdom
@@ -91,7 +92,7 @@ filtering_prevalence: 0.04    #-------#    Minimum portion of samples that a fea
 diversity_rarefaction_steps: 20                                 #-------#    Rarefaction depths to include
 diversity_rarefaction_iterations: 10                            #-------#    Number of rarefied feature tables to compute at each step
 diversity_beta_group_sign_method: permanova;permdisp;anosim     #-------#    Group significance test(s) to be applied in beta group significance (separated by ;). Options: permanova, anosim, permdisp
-diversity_beta_cols_to_exclude: Depth;SampleType;BlankType      #-------#    Metadata column names (separated by ;) to exclude from beta diversity (usually numerical columns or columns with only one value). If you don't want to exclude any column, just write something that is not a column name
+diversity_beta_cols_to_exclude: none                            #-------#    Metadata column names (separated by ;) to exclude from beta diversity (usually numerical columns or columns with only one value). If you don't want to exclude any column, just write something that is not a column name (e.g. "none")
 diversity_beta_n_threads: 4                                     #cluster#    Number of concurrent jobs to use in performing beta methods
 
 

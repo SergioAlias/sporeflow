@@ -10,7 +10,8 @@ rule taxonomy:
         conda_qiime2
     params:
         outdir = qiime2_dir("taxonomy"),
-        nthreads = config["taxonomy_n_threads"]
+        nthreads = config["taxonomy_n_threads"],
+        confidence = config["taxonomy_confidence"]
     shell:
         """
         mkdir -p {params.outdir}
@@ -19,6 +20,7 @@ rule taxonomy:
           --i-classifier {input.classifier} \
           --i-reads {input.dada2_seqs} \
           --p-n-jobs {params.nthreads} \
+          --p-confidence {params.confidence} \
           --o-classification {output.taxonomy_qza}
         >&2 printf "\nQZV generation:\n"
         time qiime metadata tabulate \

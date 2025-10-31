@@ -2,6 +2,7 @@ rule diversity:
     input:
         table = qiime2_dir("feature_tables", "filtered_table.qza"),
         metadata = config["metadata"],
+        taxonomy = qiime2_dir("taxonomy", "taxonomy.qza"),
         freqs_json = qiime2_dir("sample_frequencies", "freqs.json")
     output:
         rarefaction = qiime2_dir("diversity", "rarefaction_curves.qzv"),
@@ -19,7 +20,11 @@ rule diversity:
         chao1_vector = qiime2_dir("diversity", "chao1_vector.qza"),
         aitchison_dist_mat = qiime2_dir("diversity", "aitchison_distance_matrix.qza"),
         aitchison_pcoa = qiime2_dir("diversity", "aitchison_pcoa_results.qza"),
-        aitchison_emperor = qiime2_dir("diversity", "aitchison_emperor.qzv")
+        aitchison_emperor = qiime2_dir("diversity", "aitchison_emperor.qzv"),
+        gemelli_dist_mat = qiime2_dir("diversity", "gemelli_distance_matrix.qza"),
+        gemelli_rpca = qiime2_dir("diversity", "gemelli_rpca_results.qza"),
+        gemelli_emperor = qiime2_dir("diversity", "gemelli_emperor.qzv")
+
     conda:
         conda_qiime2
     params:
@@ -28,6 +33,7 @@ rule diversity:
         steps = config["diversity_rarefaction_steps"],
         iterations = config["diversity_rarefaction_iterations"],
         sampling_depth = diversityGetDepth("filtered", "lowest"),
+        gemelli_nfeat = config["diversity_beta_gemelli_nfeatures"],
         nthreads = config["diversity_beta_n_threads"]
     shell:
         """
@@ -86,4 +92,21 @@ rule diversity:
           --i-pcoa {output.aitchison_pcoa} \
           --m-metadata-file {input.metadata} \
           --o-visualization {output.aitchison_emperor}
+        >&2 printf "\nBeta: Aitchison without pesudocount with Gemelli (not included in core metrics):\n"
+        time qiime gemelli rpca \
+          --i-table {input.table} \
+          --p-min-sample-count 0 \
+          --p-min-feature-count 0 \
+          --p-min-feature-frequency 0 \
+          --p-n-components 3 \
+          --p-max-iterations 5 \
+          --o-distance-matrix {output.gemelli_dist_mat} \
+          --o-biplot {output.gemelli_rpca}
+        >&2 printf "\nBeta: Aitchison (Gemelli) Emperor biplot:\n"
+        time qiime emperor biplot \
+          --i-biplot {output.gemelli_rpca} \
+          --m-sample-metadata-file {input.metadata} \
+          --m-feature-metadata-file {input.taxonomy} \
+          --p-number-of-features {params.gemelli_nfeat} \
+          --o-visualization {output.gemelli_emperor}
         """

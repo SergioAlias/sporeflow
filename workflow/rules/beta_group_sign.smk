@@ -3,11 +3,13 @@ rule beta_group_sign:
         metadata = config["metadata"],
         jaccard_dist_mat = qiime2_dir("diversity", "jaccard_distance_matrix.qza"),
         bray_curtis_dist_mat = qiime2_dir("diversity", "bray_curtis_distance_matrix.qza"),
-        aitchison_dist_mat = qiime2_dir("diversity", "aitchison_distance_matrix.qza")
+        aitchison_dist_mat = qiime2_dir("diversity", "aitchison_distance_matrix.qza"),
+        gemelli_dist_mat = qiime2_dir("diversity", "gemelli_distance_matrix.qza")
     output:
         expand(qiime2_dir("group_significances", "{{bgs_method}}", "{meta_col}", "jaccard_group_significance.qzv"), meta_col = BGS_INCLUDE),
         expand(qiime2_dir("group_significances", "{{bgs_method}}", "{meta_col}", "bray_curtis_group_significance.qzv"), meta_col = BGS_INCLUDE),
-        expand(qiime2_dir("group_significances", "{{bgs_method}}", "{meta_col}", "aitchison_group_significance.qzv"), meta_col = BGS_INCLUDE)
+        expand(qiime2_dir("group_significances", "{{bgs_method}}", "{meta_col}", "aitchison_group_significance.qzv"), meta_col = BGS_INCLUDE),
+        expand(qiime2_dir("group_significances", "{{bgs_method}}", "{meta_col}", "gemelli_group_significance.qzv"), meta_col = BGS_INCLUDE)
     conda:
         conda_qiime2
     params:
@@ -48,6 +50,14 @@ rule beta_group_sign:
               --p-method {params.beta_method} \
               --p-pairwise \
               --o-visualization "{params.outdir}/"$column"/aitchison_group_significance.qzv"
+            >&2 printf "\nBeta group significance: Gemelli\n"
+            time qiime diversity beta-group-significance \
+              --i-distance-matrix {input.gemelli_dist_mat} \
+              --m-metadata-file {input.metadata} \
+              --m-metadata-column $column \
+              --p-method {params.beta_method} \
+              --p-pairwise \
+              --o-visualization "{params.outdir}/"$column"/gemelli_group_significance.qzv"
           fi
         done
         """

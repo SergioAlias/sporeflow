@@ -29,10 +29,10 @@ rule diversity:
         conda_qiime2
     params:
         outdir = qiime2_dir("diversity"),
-        max_depth = diversityGetDepth("filtered", "highest"),
+        max_depth = diversityGetDepth("filtered", "highest", False),
         steps = config["diversity_rarefaction_steps"],
         iterations = config["diversity_rarefaction_iterations"],
-        sampling_depth = diversityGetDepth("filtered", "lowest"),
+        sampling_depth = diversityGetDepth("filtered", "lowest", True),
         gemelli_nfeat = config["diversity_beta_gemelli_nfeatures"],
         nthreads = config["diversity_beta_n_threads"]
     shell:

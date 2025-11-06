@@ -91,8 +91,11 @@ filtering_prevalence: 0.04    #-------#    Minimum portion of samples that a fea
 
 diversity_rarefaction_steps: 20                                 #-------#    Rarefaction depths to include
 diversity_rarefaction_iterations: 10                            #-------#    Number of rarefied feature tables to compute at each step
+diveristy_alpha_sampling_depth: 7000                           #-------#    Rarefaction sampling depth. If False, the frequency of the shallowest sample will be used
+diversity_beta_gemelli_nfeatures: 8                             #-------#    The number of most important features (arrows) to display in the ordination. “Importance” is calculated for each feature based on the vectors magnitude [default: 5]
 diversity_beta_group_sign_method: permanova;permdisp;anosim     #-------#    Group significance test(s) to be applied in beta group significance (separated by ;). Options: permanova, anosim, permdisp
-diversity_beta_cols_to_exclude: none                            #-------#    Metadata column names (separated by ;) to exclude from beta diversity (usually numerical columns or columns with only one value). If you don't want to exclude any column, just write something that is not a column name (e.g. "none")
+diversity_beta_cols_to_exclude: Sampling                        #-------#    Metadata column names (separated by ;) to exclude from beta diversity (usually numerical columns or columns with only one value). If you don't want to exclude any column, just write something that is not a column name (e.g. "none")
+adonis_formula: Cereal+Location+Location:Cereal                               #-------#    Model formula containing only independent terms contained in the sample metadata
 diversity_beta_n_threads: 4                                     #cluster#    Number of concurrent jobs to use in performing beta methods
 
 

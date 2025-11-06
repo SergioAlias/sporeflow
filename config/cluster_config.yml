@@ -64,7 +64,7 @@ import_fastq:
 
 itsxpress:
     jobname: itsxpress
-    time: 0-02:00:00
+    time: 0-12:00:00
     ncpus: 16 #cluster# Change itsxpress_n_threads accordingly in config.yml
     memory: 6G
     output: logs/itsxpress/itsxpress_%j.out
@@ -136,11 +136,19 @@ alpha_group_sign:
 
 beta_group_sign:
     jobname: beta_group_sign
-    time: 0-01:00:00
+    time: 0-06:00:00
     ncpus: 1
-    memory: 2G
+    memory: 3G
     output: logs/beta_group_sign/beta_group_sign_%j.out
     error: logs/beta_group_sign/beta_group_sign_%j.err
+
+adonis:
+    jobname: adonis
+    time: 0-06:00:00
+    ncpus: 1
+    memory: 3G
+    output: logs/adonis/adonis_%j.out
+    error: logs/adonis/adonis_%j.err
 
 taxa_collapse:
     jobname: taxa_collapse

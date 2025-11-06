@@ -43,6 +43,7 @@ logdirs = ["default",
           "diversity",
           "alpha_group_sign",
           "beta_group_sign",
+          "adonis",
           "taxa_collapse",
           "abundance",
           "longitudinal"]
@@ -70,8 +71,10 @@ conda_qiime2 = os.path.join(conda_env_dir, "qiime2-amplicon-2024.2-py38-linux-co
 
 ### dry-run fixes (because in a dry-run, Snakemake will evaluate the params directive in the potentially non-existing input files)
 
-def diversityGetDepth(feature_table, high_or_low):
+def diversityGetDepth(feature_table, high_or_low, check):
   try:
+    if check and config["diveristy_alpha_sampling_depth"] is not False:
+      return config["diveristy_alpha_sampling_depth"]
     return json.load(open(qiime2_dir("sample_frequencies", "freqs.json")))["{}".format(feature_table)][high_or_low].replace(",", "").split('.')[0]
   except:
     return -1
@@ -173,6 +176,7 @@ alloutput.append(multiqc_dir("multiqc_report.html"))
 alloutput.append(qiime2_dir("feature_table_plots", "barplot.qzv"))
 alloutput.append(qiime2_dir("group_significances", "observed_features_group_significance.qzv"))
 alloutput.append(expand(qiime2_dir("group_significances", "{bgs_method}", "{meta_col}", "jaccard_group_significance.qzv"), meta_col = BGS_INCLUDE, bgs_method = BGS_METHODS))
+alloutput.append(qiime2_dir("group_significances", "adonis", "Formula:" + config["adonis_formula"], "jaccard_adonis.qzv"))
 alloutput.append(expand(qiime2_dir("abundance", "{da_ref}", "{levels}_ancombc.qza"), da_ref = DA_REFS, levels = COLLAPSED_TABLES))
 alloutput.append(qiime2_dir("feature_tables", "relative_filtered_table.qza"))
 alloutput.append(qiime2_dir("longitudinal", "linear-mixed-effects.qzv"))
@@ -201,6 +205,7 @@ include: "rules/extract_freq_values.smk"
 include: "rules/diversity.smk"
 include: "rules/alpha_group_sign.smk"
 include: "rules/beta_group_sign.smk"
+include: "rules/adonis.smk"
 include: "rules/taxa_collapse.smk"
 include: "rules/abundance.smk"
 include: "rules/longitudinal.smk"
